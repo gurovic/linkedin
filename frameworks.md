@@ -1,66 +1,68 @@
 # WEB
 
-## Django
+## +Django
 
 * easiest and really versatile python web framework, has good database integration and admin web panel
 
-## NextJS
+## -NextJS
 
 * Handles most of the backend and frontend stuff  
 * Easy to use
 
-### eJS
+### -eJS
 
 * Not sure if necessary but pretty convenient
 
-### React
+### +?React
 
 * Would probably be useful, it’s basically magically creating HTML components
 
-## Express
+## -Express
 
 * More low-level but still makes everything much much easier  
 * Can be used with both eJS and React
 
-## Bootstrap
+## +Bootstrap
 
 * for css, beautiful and versatile  
 * a bit dated design but whatever
 
-## PostgreSQL
+## +PostgreSQL
 
 * for database management  
 * powerful
 
-## Apple, Google, Facebook, VK auth
+## ?Apple, Google, Facebook, VK auth
 
-## FASTAPI
+## +Letovo auth
+
+## +?FASTAPI
 
 # MOBILE
 
-## Native – Android
+## -?Native – Android
 
 - need to learn java/kotlin, most people don’t know it
 
-## Native – iOS
+## -?Native – iOS
 
 - need to have a mac, 2 people have it, and i can do most of the work
 
 SwiftUI, Alamofire, keychain, swiftdata 
 
-## Flutter 
+## ?Flutter 
 
 - ### need to learn dart, presumably no one from the group knows it
 
-## React Native
+## ?React Native
 
 - ### seems good, will need to explore more
 
 # Other
 
-## Docker
+## +?Docker
 
-## cloudflare (cdn, proxy)
+## ?cloudflare (cdn, proxy)
 
-## chatgpt api (ai hype train and all) 
+## ?chatgpt api (ai hype train and all) 
 
