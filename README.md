@@ -3,7 +3,7 @@ Letovo school alumni linkedin analogue
 
 ## [Frameworks](https://docs.google.com/document/d/1fjTTPceyY-tnjH8mqJ-nqebt-POSmDGegVRCNUSueis/edit?usp=sharing)
 
-Разделы:
+# Части сайта:
 - регистрация и права
 - профиль человека (ФИО) + изменение
 - информация об обучении человека
@@ -24,5 +24,5 @@ Letovo school alumni linkedin analogue
 - история поступления (?)
 - начальная связь
 
-Нефункциональные требования:
+# Нефункциональные требования:
 - количество пользователей (20000 и 300)
