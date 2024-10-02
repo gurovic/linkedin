@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Профиль пользователя</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">{{ user.get_full_name }}</h2>
+            <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+    </div>
+
+    <h3>Опыт работы</h3>
+    {% for experience in experiences %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4 class="card-title">{{ experience.position }} в {{ experience.company }}</h4>
+            <p class="card-text"><strong>Местоположение:</strong> {{ experience.location }}</p>
+            <p class="card-text"><strong>Период:</strong> {{ experience.start_date }} - {% if experience.end_date %}{{ experience.end_date }}{% else %}По настоящее время{% endif %}</p>
+            <p class="card-text">{{ experience.description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+    <h3>Навыки</h3>
+    <ul class="list-group">
+    {% for skill in skills %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ skill.name }}
+            <span class="badge bg-primary rounded-pill">{{ skill.get_level_display }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
