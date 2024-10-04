@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# Django stuff
+*.sqlite3
+migrations/
+
 # Distribution / packaging
 .Python
 build/
