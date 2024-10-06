@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Event list</title>
+</head>
+<body>
+    {% for event in event_list %}
+        <h1>{{ event.name }}</h1>
+        <p>{{ event.description }}</p>
+        <img src="{{ event.picture.url }}" alt="">
+        <p>{{ event.date }}</p>
+        <p>{{ event.location }}</p>
+    {% endfor %}
+</body>
