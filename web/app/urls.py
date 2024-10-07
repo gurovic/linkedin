@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import index
+from .views import friends_in_university
 
 urlpatterns = [
-    path("", index.index, name="index"),
+    path("friends", friends_in_university.get_friends, name="friends in university"),
 ]
