@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recommendations</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            /* Minimal temporary styles */
+            div.center {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            div.block {
+                background: #f7f7f7;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        {% for recommendation in recommendations %}
+            <div class="center block">
+                <p>{{ recommendation.name }}</p><br>
+                <a href="{{ recommendation.link }}">Link</a>
+            </div>
+        {% endfor %}
+    </body>
+</html>
