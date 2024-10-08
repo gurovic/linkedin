@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request</title>
+</head>
+<body>
+    {% for request in requests_list %}
+        <h1>{{ request.name }}</h1>
+        <p>{{ request.desc }}</p>
+        <p>{{ request.date }}</p>
+        <p>{{ request.right_asked }}</p>
+    {% endfor %}
+</body>
+</html>
