@@ -1,7 +1,7 @@
 import datetime
 from django.db import models
-from user import User
-from rights import Right
+from .user import User
+from .rights import Right
 
 class Request(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
