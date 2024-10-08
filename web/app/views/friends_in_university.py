@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.template import loader
 
-from ..models.Alumni import Alumni
+from ..models.alumni import Alumni
 
 def get_friends(request):
+    user = request.User
     # Как с реквестом получать id выпускника, чтобы найти его друзей?
     # А как взять только тех выпускников, которые учатся в интересном вузе? А где взять название этого вуза?
     friends = Alumni.objects.all()
