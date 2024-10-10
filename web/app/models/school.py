@@ -26,7 +26,6 @@ class MajorSubject(models.Model):
         ('MATH', 'Mathematics'),
         ('ENG', 'English'),
         ('RU', 'Russian Language'),
-        ('LAW', 'Law'),
         ('ART', 'Arts'),
         ('BIO', 'Biology'),
         ('PHY', 'Physics'),
