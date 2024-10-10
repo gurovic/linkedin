@@ -1,15 +1,12 @@
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render
 
-from ..models.alumni import Alumni
+from ..models import Friend
+from ..models import Profile
 
 def get_friends(request):
-    user = request.User
-    # Как с реквестом получать id выпускника, чтобы найти его друзей?
-    # А как взять только тех выпускников, которые учатся в интересном вузе? А где взять название этого вуза?
-    friends = Alumni.objects.all()
-    template = loader.get_template("app/friends_in_university.html")
+    user = request.user
+    edges = Friend.objects.filter(user1=user)
     context = {
-        'friends': friends,
+        'edges': edges,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, "app/friends_in_university.html", context)

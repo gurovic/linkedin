@@ -4,8 +4,8 @@
     <title>Friends, who are studying in this university</title>
 </head>
 <body>
-<h1>Friends, who are studying in this university</h1>>
-    {% for friend in friends_in_university %}
-        <h1>{{ friend.last_name }}</h1>
-    {% endfor %}
+<h1>Friends, who are studying in this university</h1>
+{% for edge in edges %}
+    <h1>{{ edge.user2 }}</h1>
+{% endfor %}
 </body>
