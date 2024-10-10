@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Школы пользователя</title>
+</head>
+<body>
+    <h1>Школы пользователя {{ username }}</h1>
+
+    {% if student_schools %}
+        <ul>
+            {% for student_school in student_schools %}
+                <li>
+                    <h2>{{ student_school.school.name }}</h2>
+                    <p>Страна: {{ student_school.school.country.name }}</p>
+                    <p>Описание: {{ student_school.school.description }}</p>
+                    <p>Год зачисления: {{ student_school.start_year }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>У этого пользователя нет школ.</p>
+    {% endif %}
+</body>
+</html>
