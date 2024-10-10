@@ -15,6 +15,12 @@ class Recommendation:
         return sum(self.weights.values())
 
 
+def recommendations_form(request):
+    context = {
+        "topics": list(Topic.objects.all())
+    }
+    return render(request, "app/recommendations_form.html", context)
+
 def recommendations(request):
     all_topics = list(Topic.objects.all())
     topic_weights = {}
