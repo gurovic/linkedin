@@ -20,5 +20,5 @@ from career import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('profile/<int:user_id>/career/', views.user_profile, name='user_profile'),
+    path('profile/<int:user_id>/', views.user_profile, name='user_profile'),
 ]
