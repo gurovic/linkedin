@@ -1,0 +1,20 @@
+{% if vacancy_list %}
+    <table>
+        <tr>
+            <th>Employer</th>
+            <th>Text</th>
+            <th>Salary per month, dollars</th>
+        </tr>
+        {% for vacancy in vacancy_list %}
+        {% if company is None or company == vacancy.author.title  %}
+            <tr>
+                <td>{{vacancy.author}}</td>
+                <td>{{vacancy.text}}</td>
+                <td>{{vacancy.salary_per_month}}</td>
+            </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No vacancies are available.</p>
+{% endif %}
