@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import Country, MajorSubject, School, StudentSchool
 
-# Register your models here.
+admin.site.register([Country, MajorSubject, School, StudentSchool])
