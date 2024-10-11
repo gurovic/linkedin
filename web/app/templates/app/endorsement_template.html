@@ -1,0 +1,17 @@
+{% for skill in user.skill_set.all %}
+    <div>
+        <p>{{ skill.name }}</p>
+        <p>Endorsements: {{ skill.endorsements.count }}</p>
+
+        {% if request.user != skill.user %}
+            <form action="{% url 'endorse_skill' skill.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">+1 Endorse</button>
+            </form>
+        {% endif %}
+
+        {% if skill.verified %}
+            <span class="verified-badge">✔️ Verified ({{ settings.SKILL_VERIFICATION_THRESHOLD }}+ endorsements)</span>
+        {% endif %}
+    </div>
+{% endfor %}
