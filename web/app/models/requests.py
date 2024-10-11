@@ -9,3 +9,6 @@ class Request(models.Model):
     right_asked = models.ForeignKey(Right, on_delete=models.CASCADE)
     name = models.CharField(max_length=120)
     desc = models.TextField()
+
+    def __str__(self):
+        return f'{self.name}\n{self.date}\n{self.right_asked}\n{self.desc}'
