@@ -1,0 +1,14 @@
+<!-- ToDo: HTML template -->
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>List of vacancies</title>
+</head>
+<body>
+    {% for vacancy in vacancy_list %}
+        <h3>{{ vacancy.title }}</h3>
+        <h4>{{ vacancy.profession }}</h4>
+        <p>{{ vacancy.description }}</p>
+        <p>{{ vacancy.date_of_creation }}</p>
+    {% endfor %}
+</body>
