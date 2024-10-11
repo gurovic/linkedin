@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Experience
+from .models import Skill
 
-admin.site.register(Experience)
+admin.site.register(Skill)
 
 
 # Register your models here.
