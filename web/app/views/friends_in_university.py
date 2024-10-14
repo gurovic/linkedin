@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from ..models import Friend
-from ..models import Profile
+from ..models import Useracc
 
 def get_friends(request):
     user = request.user
