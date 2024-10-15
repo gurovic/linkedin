@@ -1,12 +1,18 @@
 import datetime
 from django.db import models
 from .user import User
-from .rights import Right
 
 class Request(models.Model):
+    RIGHT_CHOICES = [
+        ('TW', 'To write posts'),
+        ('TC', 'To write comments'),
+        ('TE', 'To create events'),
+        ('TV', 'To create vacancies'),
+        ('TN', 'To change name')
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
-    right_asked = models.ForeignKey(Right, on_delete=models.CASCADE)
+    right_asked = models.CharField(max_length=2, choices=RIGHT_CHOICES)
     name = models.CharField(max_length=120)
     desc = models.TextField()
 
