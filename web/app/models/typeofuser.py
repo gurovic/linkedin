@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Type_of_User(models.Model):
+class TypeOfUser(models.Model):
     USER_TYPE_CHOICES = [
         ('AL', 'Alumni'),
         ('ST', 'Student'),
