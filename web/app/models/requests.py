@@ -1,6 +1,6 @@
 import datetime
 from django.db import models
-from .user import User
+from django.contrib.auth.models import User
 
 class Request(models.Model):
     RIGHT_CHOICES = [
