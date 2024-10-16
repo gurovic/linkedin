@@ -1,9 +1,9 @@
 from django import forms
-from ..models import requests
+from ..models.requests import Request
 
 class RequestForm(forms.ModelForm):
     class Meta:
-        model = requests
+        model = Request
         fields = ['name', 'desc', 'date', 'right_asked', 'user']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'name_of_request'}),

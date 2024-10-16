@@ -12,9 +12,9 @@ class Request(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
-    right_asked = models.CharField(max_length=2, choices=RIGHT_CHOICES)
+    right_asked = models.CharField(max_length=2, choices=RIGHT_CHOICES, default='TC')
     name = models.CharField(max_length=120)
-    desc = models.TextField()
+    desc = models.TextField(default='')
     answered = models.BooleanField(default=False)
 
     def __str__(self):
