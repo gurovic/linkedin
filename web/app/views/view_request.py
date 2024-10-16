@@ -1,7 +1,12 @@
-from ..models import requests
+from ..models.requests import Request
 from django.shortcuts import render
+from django.http import Http404
 
 def request_view(request):
-    requests_list = requests.objects.filter(answered=False)
-    context = {'Request': requests_list}
-    return render(request, 'linkedin/view_request.html', context)
+    try:
+        requests_list = Request.objects.filter(answered=False)
+    except Request.DoesNotExist:
+        raise Http404("Not found any open requests")
+    context = {'requests_list': requests_list}
+    print(context)
+    return render(request, 'app/requests.html', context)

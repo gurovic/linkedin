@@ -7,9 +7,9 @@
 <body>
     {% for request in requests_list %}
         <h1>{{ request.name }}</h1>
-        <p>{{ request.desc }}</p>
-        <p>{{ request.date }}</p>
-        <p>{{ request.right_asked }}</p>
+        <h3>{{ request.desc }}</h3>
+        <h3>{{ request.date }}</h3>
+        <h3>{{ request.right_asked }}</h3>
     {% endfor %}
 </body>
 </html>
