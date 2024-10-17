@@ -1,15 +1,16 @@
 from django.shortcuts import redirect, render
-from ..forms.new_request_form import RequestForm
+from ..forms.new_answer_form import AnswerForm
 from .view_request import request_view
 
 
-def create_request(request):
+def create_answer(request):
     if request.method == "POST":
-        form = RequestForm(request.POST, request.FILES)
+        form = AnswerForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             print('files')
             return redirect(request_view)
     else:
-        form = RequestForm()
-    return render(request, "app/request_form.html", {"form": form})
+        form = AnswerForm()
+
+    return render(request, "app/answer_form.html", {"form": form})
