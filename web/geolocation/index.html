@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clustered Alumni Map with Leaflet</title>
+    <title>Clustered Alumni Map with Profiles</title>
     <!-- Подключение стилей Leaflet и MarkerCluster -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <h1>Clustered Alumni Map</h1>
+    <h1>Clustered Alumni Map with Profiles</h1>
     <!-- Контейнер для карты -->
     <div id="mapid"></div>
 
@@ -26,7 +26,7 @@
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script>
         // Инициализация карты и установка начальных координат и уровня приближения
-        var mymap = L.map('mapid').setView([55.557082, 37.423071], 17);  // Координаты [Широта, Долгота]
+        var mymap = L.map('mapid').setView([51.505, -0.09], 3);  // Координаты [Широта, Долгота]
 
         // Добавление базового слоя карты OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -36,25 +36,44 @@
         // Создание группы для кластеризации маркеров
         var markers = L.markerClusterGroup();
 
-        // Пример данных о выпускниках с координатами (замените на реальные данные)
-        var alumniData = [
-            {lat: 51.505, lng: -0.09, name: 'Alumni 1'},
-            {lat: 48.8566, lng: 2.3522, name: 'Alumni 2'},  // Париж
-            {lat: 40.7128, lng: -74.0060, name: 'Alumni 3'},  // Нью-Йорк
-            {lat: 34.0522, lng: -118.2437, name: 'Alumni 4'},  // Лос-Анджелес
-            {lat: 55.7558, lng: 37.6173, name: 'Alumni 5'},  // Москва
-            {lat: 35.6895, lng: 139.6917, name: 'Alumni 6'},  // Токио
-        ];
+        // Функция для получения координат по названию университета через Nominatim API
+        async function getCoordinates(university) {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(university)}&format=json&limit=1`);
+            const data = await response.json();
+            if (data.length > 0) {
+                return {
+                    lat: data[0].lat,
+                    lon: data[0].lon
+                };
+            } else {
+                return null;  // Если координаты не найдены
+            }
+        }
 
-        // Добавление маркеров на карту с кластеризацией
-        alumniData.forEach(function(alumni) {
-            var marker = L.marker([alumni.lat, alumni.lng])
-                .bindPopup(alumni.name);  // Отображение имени выпускника при клике
-            markers.addLayer(marker);  // Добавление маркера в кластер
-        });
+        // Функция для получения данных выпускников с API
+        async function loadAlumniData() {
+            const alumniResponse = await fetch('http://127.0.0.1:8000/api/alumni/');
+            const alumni = await alumniResponse.json();
 
-        // Добавление группы кластеров на карту
-        mymap.addLayer(markers);
+            for (let person of alumni) {
+                const coordinates = await getCoordinates(person.university);
+                if (coordinates) {  
+                    // Добавляем маркер на карту с всплывающим окном
+                    const marker = L.marker([coordinates.lat, coordinates.lon]).addTo(mymap)
+                        .bindPopup(`
+                            <b>${person.first_name} ${person.last_name}</b><br>
+                            University: ${person.university}<br>
+                            Middle Name: ${person.middle_name || 'N/A'}
+                        `);
+                    markers.addLayer(marker);  // Добавление маркера в кластерную группу
+                }
+            }
+
+            mymap.addLayer(markers);  // Добавление группы кластеров на карту
+        }
+
+        // Загрузка данных и отображение на карте
+        loadAlumniData();
     </script>
 
 </body>
