@@ -1,24 +1,11 @@
-"""
-URL configuration for web project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.urls import path
 
 from .views import friends_in_university, sign_up
-
+from .views.view_request import request_view
+from .views.create_request_form import create_request
 urlpatterns = [
     path("friends", friends_in_university.get_friends, name="friends in university"),
-    path('sign_up', sign_up.sign_up, name='sign_up')
+    path('sign_up', sign_up.sign_up, name='sign_up'), 
+  path('request/', request_view, name='request'),
+    path('request_form/', create_request, name='request_form'),
 ]
