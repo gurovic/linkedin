@@ -1,1 +1,1 @@
-from .company import Country, Company, Vacancy, MajorSubject
+from .company import Company, Vacancy
