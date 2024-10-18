@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Map with Leaflet</title>
-    <!-- Подключение стилей Leaflet -->
+    <title>Clustered Alumni Map with Leaflet</title>
+    <!-- Подключение стилей Leaflet и MarkerCluster -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
     <style>
         #mapid {
             height: 500px;
@@ -15,25 +17,44 @@
 </head>
 <body>
 
-    <h1>Interactive Alumni Map</h1>
+    <h1>Clustered Alumni Map</h1>
     <!-- Контейнер для карты -->
     <div id="mapid"></div>
 
-    <!-- Подключение библиотеки Leaflet -->
+    <!-- Подключение библиотек Leaflet и MarkerCluster -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script>
         // Инициализация карты и установка начальных координат и уровня приближения
-        var mymap = L.map('mapid').setView([55.557082, 37.423071], 17);  // Координаты [Широта, Долгота]
+        var mymap = L.map('mapid').setView([51.505, -0.09], 3);  // Координаты [Широта, Долгота]
 
         // Добавление базового слоя карты OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mymap);
 
-        // Пример маркера на карте
-        L.marker([51.505, -0.09]).addTo(mymap)
-            .bindPopup('This is a marker example.<br> You can replace it with alumni data.')
-            .openPopup();
+        // Создание группы для кластеризации маркеров
+        var markers = L.markerClusterGroup();
+
+        // Пример данных о выпускниках с координатами (замените на реальные данные)
+        var alumniData = [
+            {lat: 51.505, lng: -0.09, name: 'Alumni 1'},
+            {lat: 48.8566, lng: 2.3522, name: 'Alumni 2'},  // Париж
+            {lat: 40.7128, lng: -74.0060, name: 'Alumni 3'},  // Нью-Йорк
+            {lat: 34.0522, lng: -118.2437, name: 'Alumni 4'},  // Лос-Анджелес
+            {lat: 55.7558, lng: 37.6173, name: 'Alumni 5'},  // Москва
+            {lat: 35.6895, lng: 139.6917, name: 'Alumni 6'},  // Токио
+        ];
+
+        // Добавление маркеров на карту с кластеризацией
+        alumniData.forEach(function(alumni) {
+            var marker = L.marker([alumni.lat, alumni.lng])
+                .bindPopup(alumni.name);  // Отображение имени выпускника при клике
+            markers.addLayer(marker);  // Добавление маркера в кластер
+        });
+
+        // Добавление группы кластеров на карту
+        mymap.addLayer(markers);
     </script>
 
 </body>
