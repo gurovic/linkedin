@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import friends_in_university
+from .views import friends_in_university, sign_up
 
 urlpatterns = [
     path("friends", friends_in_university.get_friends, name="friends in university"),
+    path('sign_up', sign_up.sign_up, name='sign_up')
 ]
