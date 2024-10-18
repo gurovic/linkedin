@@ -1,6 +1,6 @@
 from django.urls import path
-from .views.view_request import request_view
-from .views.create_request_form import create_request
+from .views import request_view
+from .views import create_request
 
 urlpatterns = [
     path('request/', request_view, name='request'),

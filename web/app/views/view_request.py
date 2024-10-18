@@ -1,4 +1,4 @@
-from ..models.requests import Request
+from ..models import Request
 from django.shortcuts import render
 from django.http import Http404
 

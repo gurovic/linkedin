@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from ..forms.new_request_form import RequestForm
+from ..forms import RequestForm
 from .view_request import request_view
 
 
