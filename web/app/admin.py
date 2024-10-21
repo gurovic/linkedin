@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Vacancy, MajorSubject, Company, Country
-from .models.requests import Request
+from .models import Vacancy, Company, Request, Answer
 
 # Register your models here.
-admin.site.register([Vacancy, MajorSubject, Company, Country, Request])
+admin.site.register(Vacancy)
+admin.site.register(Company)
+admin.site.register(Request)
+admin.site.register(Answer)
