@@ -1,0 +1,39 @@
+<!-- myapp/templates/myapp/company_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company List</title>
+</head>
+<body>
+    <h1>Company List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Country</th>
+                <th>Vacancies</th>
+                <th>Current Workers</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+                <tr>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.description }}</td>
+                    <td>{{ company.country }}</td>
+                    <td>{{ company.vacancies }}</td>
+                    <td>{{ company.current_workers }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No companies available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
