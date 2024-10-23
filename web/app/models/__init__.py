@@ -1,2 +1,1 @@
-from .alumni import Friend
-from .useracc import Useracc
+from .useraccount import UserAccount

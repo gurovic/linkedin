@@ -2,20 +2,17 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from .models.alumni import Friend
-from .models.useracc import Useracc
+from .models.useraccount import UserAccount
 
 
 # Register your models here.
-class UseraccResource(resources.ModelResource):
+class UserAccountResource(resources.ModelResource):
     class Meta:
-        model = Useracc
+        model = UserAccount
 
 
 class UseraccAdmin(ImportExportModelAdmin):
-    resource_classes = [UseraccResource]
+    resource_classes = [UserAccountResource]
 
 
-myModels = [Friend]
-admin.site.register(myModels)
-admin.site.register(Useracc, UseraccAdmin)
+admin.site.register(UserAccount, UseraccAdmin)
