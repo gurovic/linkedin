@@ -1,4 +1,8 @@
 from django.contrib import admin
-from .models import Vacancy,Company
+from .models import Vacancy, Company, Request, Answer
 
-admin.site.register([Vacancy,Company])
+# Register your models here.
+admin.site.register(Vacancy)
+admin.site.register(Company)
+admin.site.register(Request)
+admin.site.register(Answer)
