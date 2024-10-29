@@ -1,0 +1,14 @@
+[
+    {
+        "first_name": "John",
+        "last_name": "Doe",
+        "middle_name": "A.",
+        "university": "MIT"
+    },
+    {
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "middle_name": "B.",
+        "university": "Harvard"
+    }
+]
