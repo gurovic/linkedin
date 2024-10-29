@@ -1,24 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-
-class Country(models.Model):
-    COUNTRY_CHOICES = [
-        ('RU', 'Russian Federation'),
-        ('US', 'United States'),
-        ('CA', 'Canada'),
-        ('GB', 'United Kingdom'),
-        ('DE', 'Germany'),
-        ('FR', 'France'),
-        ('JP', 'Japan'),
-        ('CN', 'China'),
-        ('IN', 'India'),
-        ('BR', 'Brazil'),
-    ]
-    name = models.CharField(max_length=2, choices=COUNTRY_CHOICES, default='RU')
-
-    def __str__(self):
-        return self.get_name_display()
+from ..utils import *
 
 class MajorSubject(models.Model):
     MAJOR_CHOICES = [
@@ -39,9 +21,9 @@ class MajorSubject(models.Model):
 
 
 class School(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.TextField(max_length=2, choices=COUNTRY_CHOICES)
     name = models.CharField(max_length=40)
-    description = models.TextField(null=True, blank=True)
+    desc = models.TextField(null=True, blank=True)
     majors = models.ManyToManyField(MajorSubject, related_name='schools')
 
     def __str__(self):
