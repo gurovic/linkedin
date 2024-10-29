@@ -1,1 +1,0 @@
-from .person_profile_models import UserProfile
