@@ -40,4 +40,3 @@ class Vacancy(models.Model):
     description = models.TextField(null=True,blank=True)
     needed_majorsubject=models.CharField(max_length=100, default='Smth',choices = MAJOR_CHOICES)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company')
-
