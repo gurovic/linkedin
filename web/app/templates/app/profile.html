@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Профиль{% endblock %}</title>
+    <style>
+        .body { font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 20px;
+                background-color: #f4f4f4; }
+        .profile-section { padding: 20px; margin-bottom: 30px; }
+        .profile-actions { margin: 20px 0; }
+        .skill-category { margin-bottom: 20px; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag { background-color: #e0e0e0; color: #333; padding: 5px 10px; border-radius: 20px; font-size: 14px; }
+        .skill-tag.verified { background-color: #a5d6a7; }
+        .delete-tag { color: #dc3545; font-weight: bold; cursor: pointer; margin-left: 5px; }
+        .no-skills-message { padding: 20px; background: #f8f9fa; color: #6c757d; border-radius: 5px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+        <div class="profile-section">
+            <h1>Профиль {{ profile_user.username|default:"пользователя" }}</h1>
+
+            {% if user == profile_user %}
+                <div class="profile-actions">
+                    <a href="{% url 'add_tag' %}" class="btn btn-primary">Добавить навык</a>
+                </div>
+            {% endif %}
+
+            <div class="skills-section">
+                <h2>Навыки</h2>
+                {% if grouped_skills %}
+                    {% for category, skills in grouped_skills.items %}
+                        <div class="skill-category">
+                            <h3>{{ category|default:"Без категории" }}</h3>
+                            <div class="skills-list">
+                                {% for skill in skills %}
+                                    <span class="skill-tag {% if skill.verified %}verified{% endif %}">
+                                        {{ skill.name }}{% if skill.level %} - {{ skill.level }}{% endif %}
+                                    </span>
+                                    {% if user == profile_user %}
+                                        <a href="{% url 'delete_tag' skill.id %}" 
+                                           class="delete-tag" 
+                                           onclick="return confirm('Вы уверены, что хотите удалить этот навык?')">×</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <span class="verification-count">
+                                {{ skill.verification_count }} подтверждений
+                            </span>
+                            {% if user != profile_user %}
+                                <a href="{% url 'verify_skill' skill.id %}" class="btn btn-sm btn-outline-success">
+                                    {% if user in skill.verified_by.all %}
+                                        Отменить подтверждение
+                                    {% else %}
+                                        Подтвердить навык
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+                            {% if user == profile_user %}
+                                <a href="{% url 'delete_tag' skill.id %}" class="delete-tag"
+                                   onclick="return confirm('Вы уверены, что хотите удалить этот навык?')">×</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-skills-message">
+                        {% if user == profile_user %}
+                            У вас пока нет добавленных навыков. Нажмите "Добавить навык", чтобы начать заполнять профиль.
+                        {% else %}
+                            У пользователя пока нет добавленных навыков.
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+</body>
+</html>
+

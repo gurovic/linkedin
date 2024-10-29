@@ -1,2 +1,2 @@
 from .tag import Tag
-from .tag_user import TagUser
+from .skill_category import SkillCategory

@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from app.views import view_tags
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tags/', include("app.urls")),
-
+    path('profile/<int:user_id>/', view_tags.profile_view, name='user_profile'),
+    path('tags/add/', view_tags.add_tag, name='add_tag'),
+    path('tags/<int:tag_id>/delete/', view_tags.delete_tag, name='delete_tag'),
+    path('verify-skill/<int:tag_id>/', view_tags.verify_skill, name='verify_skill'),
 ]
