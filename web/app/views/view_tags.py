@@ -14,7 +14,7 @@ def add_tag_to_user(request, user_id):
         if form.is_valid():
             tag = form.cleaned_data['tag']
             user.tags.add(tag)
-            return redirect(f"/tags/{ user.id }/")  # Предполагаем, что у вас есть detail-view для Item
+            return redirect(f"/app/tags/{ user.id }/")  # Предполагаем, что у вас есть detail-view для Item
     else:
         form = AddTagForm()
 
