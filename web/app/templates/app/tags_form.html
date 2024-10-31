@@ -1,0 +1,17 @@
+<!-- add_user_tag.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить тег для {{ user.username }}</title>
+</head>
+<body>
+    <h1>Добавить тег для "{{ user.username }}"</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить тег</button>
+    </form>
+    <a href = "/app/tags/{{ user.id }}/">Назад к деталям пользователя</a>
+</body>
+</html>
