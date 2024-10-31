@@ -5,6 +5,7 @@ from .views.create_request_form import create_request
 from .views.view_tags import tags_view, add_tag_to_user
 from .views.job_experience import job_experience_view
 from .views.home_page import home, registration
+from .views.sign_up import sign_up
 
 urlpatterns = [
     path("companies/", company_list, name='company_list'),
@@ -14,5 +15,5 @@ urlpatterns = [
     path('request_form/', create_request, name='request_form'),
     path('job_experience/', job_experience_view, name='job_experience'),
     path('', home, name='home'),
-    path('registration/', registration, name='registration')
+    path('registration/', sign_up, name='sign_up'),
 ]

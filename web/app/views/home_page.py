@@ -5,4 +5,4 @@ def home(request):
     return render(request, 'app/home.html')
 
 def registration(request):
-    return render(request, 'app/registration.html')
+    return render(request, 'app/register.html')
