@@ -8,5 +8,17 @@
 <body>
     <h1>Letovo LinkedIn</h1>
     <p>We strongly recommend you to <a href="http://127.0.0.1:8000/registration/">create an account</a>.</p>
+    <h1>Job Vacancies</h1>
+    <ul>
+        {% for vacancy in vacancies %}
+            <li>
+                <h2>{{ vacancy.name }}</h2>
+                <p><strong>Company:</strong> {{ vacancy.company }}</p>
+                <p><strong>Location:</strong> {{ vacancy.location }}</p>
+                <p><strong>Description:</strong> {{ vacancy.description }}</p>
+                <p><strong>Qualifications:</strong> {{ vacancy.needed_majorsubject }}</p>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
