@@ -3,6 +3,7 @@ from .views.company_list import company_list
 from .views.view_request import request_view
 from .views.create_request_form import create_request
 from .views.view_tags import tags_view, add_tag_to_user
+from .views.job_experience import job_experience_view
 
 urlpatterns = [
     path("companies/", company_list, name='company_list'),
@@ -10,4 +11,5 @@ urlpatterns = [
     path('add_tag/<int:user_id>/', add_tag_to_user, name='adding_tags'),
     path('request/', request_view, name='request'),
     path('request_form/', create_request, name='request_form'),
+    path('job_experience/', job_experience_view, name='job_experience'),
 ]
