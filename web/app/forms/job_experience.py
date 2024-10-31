@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import JobExperience
+from ..models import JobExperience
 
 class JobExperienceForm(forms.ModelForm):
     class Meta:

@@ -1,7 +1,7 @@
 # views.py
 from django.shortcuts import render, redirect
-from .models import JobExperience
-from .forms import JobExperienceForm
+from ..models import JobExperience
+from ..forms import JobExperienceForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -18,4 +18,4 @@ def job_experience_view(request):
         form = JobExperienceForm()
 
     experiences = JobExperience.objects.filter(user=request.user)
-    return render(request, 'job_experience.html', {'form': form, 'experiences': experiences})
+    return render(request, 'app/job_experience.html', {'form': form, 'experiences': experiences})
