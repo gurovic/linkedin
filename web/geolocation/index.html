@@ -5719,10 +5719,15 @@
             for (let person of alumni) {
                 console.log(index);
                 index += 1;
-                const coordinates = await getCoordinates(person.univ);
+                //const coordinates = await getCoordinates(person.univ);
+                const coordinates = 
+                {
+                  lat: person.lat,
+                  lon: person.lon
+                }
                 if (coordinates) {
                     // Добавляем маркер на карту с всплывающим окном
-                    const marker = L.marker([coordinates.lat, coordinates.lon]).addTo(mymap)
+                    const marker = L.marker([coordinates.lat, coordinates.lon])
                         .bindPopup(`
                             <b>${person.name} ${person.surname}</b><br>
                             University: ${person.univ}<br>
