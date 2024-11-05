@@ -9,5 +9,5 @@ urlpatterns = [
     path('add_tag/<int:user_id>/', add_tag_to_user, name = 'adding_tags'),
     path('request/', request_view, name='request'),
     path('request_form/', create_request, name='request_form'),
-    path('event_list/', event_list, name='index'),
+    path('event_list/', event_list, name='event_list'),
 ]
