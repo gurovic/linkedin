@@ -4,6 +4,8 @@ from .views.company_list import company_list
 from .views.create_request_form import create_request
 from .views.create_school_form import create_school
 from .views.create_student_school_form import create_student_school
+from .views.view_tags import tags_view, add_tag_to_user
+from .views.event_list import event_list
 from .views.job_experience import job_experience_view
 from .views.student_schools import student_schools
 from .views.view_request import request_view
@@ -17,6 +19,7 @@ urlpatterns = [
     path('request_form/', create_request, name='request_form'),
     path('school_form/', create_school, name='school_form'),
     path("companies/", company_list, name='company_list'),
+    path('event_list/', event_list, name='index'),
     path('job_experience/', job_experience_view, name='job_experience'),
-    path('student_school_form/', create_student_school, name='student_school_form')
+    path('student_school_form/', create_student_school, name='student_school_form'),
 ]
