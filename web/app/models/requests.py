@@ -10,6 +10,7 @@ class Request(models.Model):
         ('TV', 'To create vacancies'),
         ('TN', 'To change name')
     ]
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
     right_asked = models.CharField(max_length=2, choices=RIGHT_CHOICES, default='TC')
