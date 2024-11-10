@@ -8,7 +8,6 @@ def create_school(request):
         form = SchoolForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            print('files')
             return redirect(request_view)
     else:
         form = SchoolForm()

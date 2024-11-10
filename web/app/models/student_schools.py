@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
-from .school import *
+from .school import School
 
 class StudentSchool(models.Model):
     OPTIONS_FOR_LEAVING = [
-        ('GR', 'Graduated'),
-        ('EX', 'Expelled'),
-        ('LE', 'Left'),
+        ('GR', 'Выпустился'),
+        ('EX', 'Исключён'),
+        ('LE', 'Ушёл по своему желанию'),
     ]
 
     student = models.ForeignKey(User, on_delete=models.CASCADE)

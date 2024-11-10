@@ -1,4 +1,4 @@
-from .school import *
+from .school import School, MajorSubject
 from .student_schools import *
 from .company import Company, Vacancy
 from .tag import Tag
