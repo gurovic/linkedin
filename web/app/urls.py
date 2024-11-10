@@ -5,6 +5,7 @@ from .views.create_request_form import create_request
 from .views.student_schools import student_schools
 from .views.create_school_form import create_school
 from .views.view_tags import tags_view, add_tag_to_user
+from .views.event_list import event_list
 from .views.job_experience import job_experience_view
 from.views.create_student_school_form import create_student_school
 
@@ -20,6 +21,7 @@ urlpatterns = [
     path('add_tag/<int:user_id>/', add_tag_to_user, name='adding_tags'),
     path('request/', request_view, name='request'),
     path('request_form/', create_request, name='request_form'),
+    path('event_list/', event_list, name='index'),
     path('job_experience/', job_experience_view, name='job_experience'),
-    path('student_school_form/', create_student_school, name='student_school_form')
+    path('student_school_form/', create_student_school, name='student_school_form'),
 ]
