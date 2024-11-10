@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student_school Form</title>
+</head>
+<body>
+<h2>Fill Students_schools form</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
