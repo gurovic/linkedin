@@ -1,3 +1,5 @@
+from .school import School, MajorSubject
+from .student_schools import StudentSchool
 from .company import Company, Vacancy
 from .tag import Tag
 from .answer import Answer
