@@ -13,6 +13,7 @@ class TestCreateStudentSchoolForm(TestCase):
         self.assertTemplateUsed(response, 'app/student_school_form.html')
         # self.assertIsInstance(response.context['form'], StudentSchoolForm)
 
+
     # def test_post_request_valid_form(self):
     #     client = Client()
     #     data = {'student': 'Иван Иванов', 'school': 'Школа №1', 'start_year': '01.01.2000', 'finish_year': '01.01.2000',

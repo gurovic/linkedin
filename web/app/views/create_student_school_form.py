@@ -5,10 +5,12 @@ from .view_request import request_view
 
 def create_student_school(request):
     if request.method == "POST":
-        form = StudentSchoolForm(request.POST, request.FILES)
+        form = StudentSchoolForm(request.POST)
         if form.is_valid():
-            form.save()
-            print('files')
+            new_form = form.save(commit=False)
+            user = request.user
+            new_form.student = user
+            new_form.save()
             return redirect(request_view)
     else:
         form = StudentSchoolForm()

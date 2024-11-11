@@ -7,13 +7,13 @@ class StudentSchool(models.Model):
     OPTIONS_FOR_LEAVING = [
         ('GR', 'Выпустился'),
         ('EX', 'Исключён'),
-        ('LE', 'Ушёл по своему желанию'),
+        ('LE', 'Ушёл по собственному желанию'),
     ]
 
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
-    start_year = models.DateField(default=datetime.date.today)
-    finish_year = models.DateField(default=datetime.date.today, null=True, blank=True)
+    start_year = models.IntegerField(default=datetime.date.today)
+    finish_year = models.IntegerField(default=datetime.date.today, null=True, blank=True)
     why_left = models.CharField(max_length=128, choices=OPTIONS_FOR_LEAVING, blank=True, null=True)
 
     def __str__(self):

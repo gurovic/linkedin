@@ -3,6 +3,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Request(models.Model):
+    ANSWER_CHOICES = [
+        ('NA', 'Not answered'),
+        ('AC', 'Accepted'),
+        ('DE', 'Declined')
+    ]
     RIGHT_CHOICES = [
         ('TW', 'To write posts'),
         ('TC', 'To write comments'),
