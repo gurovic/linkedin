@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from ..forms import StudentSchoolForm
-from .view_request import request_view
+from .index import index
 
 
 def create_student_school(request):
@@ -11,7 +11,7 @@ def create_student_school(request):
             user = request.user
             new_form.student = user
             new_form.save()
-            return redirect(request_view)
+            return redirect(index)
     else:
         form = StudentSchoolForm()
 
