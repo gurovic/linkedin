@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit University Link</title>
+</head>
+<body>
+    <h1>Edit University Link for {{ university_student.user.username }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="{% url 'student_universities' student_id=university_student.student_id.id%}">Back to University Links</a>
+</body>
+</html>
