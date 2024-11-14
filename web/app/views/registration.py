@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 
 @csrf_exempt
-def sign_up(request):
+def registration(request):
+    form = None
     if request.method == "POST" :
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -12,7 +13,9 @@ def sign_up(request):
             user.set_password(form.cleaned_data['password1'])
             user.save()
             login(request, user)
-            return redirect('home')
+            return redirect('/')
+        else:
+            print(form.errors)
     else:
         form = RegistrationForm()
     return render(request, 'app/register.html', {'form': form})
