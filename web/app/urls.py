@@ -12,7 +12,6 @@ urlpatterns = [
     path('add_tag/<int:user_id>/', add_tag_to_user, name='adding_tags'),
     path('request/', request_view, name='request'),
     path('request_form/', create_request, name='request_form'),
-    path('event_list/', event_list, name='index'),
-    path('job_experience/', job_experience_view, name='job_experience'),
     path('event_list/', event_list, name='event_list'),
+    path('job_experience/', job_experience_view, name='job_experience'),
 ]
