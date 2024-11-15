@@ -9,14 +9,6 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-<!--        <div>-->
-<!--            <label for="{{ form.username.id_for_label }}">Почта:</label>-->
-<!--            {{ form.username }}-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <label for="{{ form.password.id_for_label }}">Пароль:</label>-->
-<!--            {{ form.password }}-->
-<!--        </div>-->
         <button type="submit">Войти</button>
     </form>
     {% if form.errors %}

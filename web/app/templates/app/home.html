@@ -20,6 +20,10 @@
                 <li>Нет зарегистрированных пользователей.</li>  <!-- Handle case where there are no users -->
             {% endfor %}
         </ul>
+        <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Выйти из аккаунта</button>
+        </form>
     {% endif %}
 </body>
 </html>
