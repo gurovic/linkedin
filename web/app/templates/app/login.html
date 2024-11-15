@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Log in</title>
@@ -9,9 +9,16 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+<!--        <div>-->
+<!--            <label for="{{ form.username.id_for_label }}">Почта:</label>-->
+<!--            {{ form.username }}-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label for="{{ form.password.id_for_label }}">Пароль:</label>-->
+<!--            {{ form.password }}-->
+<!--        </div>-->
         <button type="submit">Войти</button>
     </form>
-
     {% if form.errors %}
         <ul>
             {% for field in form %}
