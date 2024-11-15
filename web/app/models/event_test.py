@@ -47,7 +47,6 @@ class EventModelTests(TestCase):
     def tearDown(self):
         if self.event_with_image.picture:
             picture_path = self.event_with_image.picture.path
-            print(picture_path)
             self.event_with_image.picture.close()
             if os.path.exists(picture_path):
                 os.remove(picture_path)
@@ -87,6 +86,7 @@ class EventModelTests(TestCase):
         self.assertEqual(img.height, target_height)
         expected_width = int(target_height * (100 / 100))
         self.assertEqual(img.width, expected_width)
+        img.close()
 
     def test_format_image_to_height_no_image(self):
         with self.assertRaises(ValueError):
