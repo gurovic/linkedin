@@ -1,6 +1,6 @@
-from ..models import Request
 from django.shortcuts import render
 from django.http import Http404
+from ..models import Request
 
 def request_view(request):
     try:
