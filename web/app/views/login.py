@@ -1,30 +1,25 @@
 from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 
-@csrf_exempt
 def user_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            # Get the username and password from the form
-            username = form.cleaned_data['username']
+            username = form.cleaned_data['username']  # This is actually the email
             password = form.cleaned_data['password']
 
-            # Authenticate the user
-            user = authenticate(username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
             if user is not None:
+                # Login the user
                 auth_login(request, user)
-                return redirect('/')  # Redirect to home or another page after login
+                return redirect('/')  # Redirect after login success
             else:
-                # If authentication fails
-                messages.error(request, "Invalid username or password.")
+                messages.error(request, 'Invalid email or password')
         else:
             messages.error(request, "Invalid form submission.")
-
     else:
         form = AuthenticationForm()
 

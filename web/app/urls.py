@@ -7,9 +7,10 @@ from .views.create_request_form import create_request
 from .views.create_school_form import create_school
 from .views.event_list import event_list
 from .views.job_experience import job_experience_view
-from .views.home import home, login
+from .views.home import home
+from .views.login import user_login
 from .views.registration import registration
-#from .views.logout import logout
+from .views.logout import logout_request
 from .views.student_schools import student_schools
 from .views.view_tags import tags_view, add_tag_to_user
 
@@ -26,8 +27,8 @@ urlpatterns = [
     path('job_experience/', job_experience_view, name='job_experience'),
     path('', home, name='home'),
     path('registration/', registration, name='registration'),
-    path('login', login, name = 'login'),
-    #path('logout/', logout, name='logout'),
+    path('login', user_login, name = 'login'),
+    path('logout/', logout_request, name='logout'),
     path('student_school_form/', create_student_school, name='student_school_form'),
     path('index/', index, name='index'),
 ]
