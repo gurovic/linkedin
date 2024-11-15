@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+    <h1>Летово LinkedIn</h1>
+    {% if not user.is_authenticated %}
+        <p>Мы настоятельно рекомендуем <a href="{% url 'registration' %}">создать аккаунт</a>.</p>
+        <p>Если у Вас уже есть аккаунт, <a href="{% url 'login' %}">войдите</a>.</p>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <h2>Список зарегистрированных пользователей:</h2>
+        <ul>
+            {% for user in users %}
+                <li>{{ user.username }}</li> <!-- Display the username of each user -->
+            {% empty %}
+                <li>Нет зарегистрированных пользователей.</li>  <!-- Handle case where there are no users -->
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
