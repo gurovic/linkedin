@@ -8,4 +8,6 @@ urlpatterns = [
     path("app/", include("app.urls")),
     path('', include('app.urls')),
     path('registration/', include('app.urls')),
+    path('login/', include('app.urls')),
+    #path('logout/', include('app.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
