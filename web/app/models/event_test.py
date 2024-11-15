@@ -1,10 +1,13 @@
+import io
+import os
+from PIL import Image
+
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth.models import User
 from django.utils import timezone
-from PIL import Image
+
 from . import Event
-import io
 
 
 class EventModelTests(TestCase):
@@ -31,16 +34,25 @@ class EventModelTests(TestCase):
         image_io = io.BytesIO()
         img.save(image_io, format = 'JPEG')
 
-        self.test_image = SimpleUploadedFile('test_image.jpg', image_io.getvalue(), content_type='image/jpeg')
         self.event_with_image = Event.objects.create(
             name = "Test Event",
-            date = "2023-01-01",
-            picture = self.test_image
+            date = timezone.make_aware(timezone.datetime(2023, 1, 1)),
+            picture = SimpleUploadedFile('test_image.jpg', image_io.getvalue(), content_type='image/jpeg')
         )
         self.event_without_image = Event.objects.create(
             name = "Event without image",
-            date = "2023-02-01"
+            date = timezone.make_aware(timezone.datetime(2023, 2, 1))
         )
+
+    def tearDown(self):
+        if self.event_with_image.picture:
+            picture_path = self.event_with_image.picture.path
+            print(picture_path)
+            self.event_with_image.picture.close()
+            if os.path.exists(picture_path):
+                os.remove(picture_path)
+            self.event_with_image.picture.delete(save = False)
+        Event.objects.all().delete()
 
     def test_event_creation(self):
         self.assertEqual(self.event.name, 'Test Event')

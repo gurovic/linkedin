@@ -1,12 +1,14 @@
+import io
+import datetime
+from PIL import Image
+
 from django.test import TestCase, Client
 from django.utils import timezone
-from ..models import Event
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
-import datetime
 from django.urls import reverse
-from PIL import Image
-import io
+
+from ..models import Event
 
 
 class EventListViewTests(TestCase):
@@ -24,6 +26,10 @@ class EventListViewTests(TestCase):
             date = timezone.now() + datetime.timedelta(days = 5),
             location = "Location 1"
         )
+
+    def tearDown(self):
+        self.event1.picture.delete(save = False)
+        Event.objects.all().delete()
 
     def test_event_list_view_status_code(self):
         response = self.client.get(reverse("event_list"))

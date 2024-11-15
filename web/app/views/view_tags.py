@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
-from ..models import Tag
 from django.shortcuts import render, get_object_or_404, redirect
 from django import forms
+from ..models import Tag
 
 class AddTagForm(forms.Form):
     tag = forms.ModelChoiceField(queryset = Tag.objects.all(), label = "Выберите тег")
