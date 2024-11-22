@@ -28,6 +28,6 @@ class CompanyListViewTests(TestCase):
         self.assertIn('companies', self.response.context)
         self.assertEqual(len(self.response.context['companies']), 2)
 
-    def test_company_list_view_contains_companies(self):
+    def test_contains_companies(self):
         self.assertContains(self.response, 'Company One')
         self.assertContains(self.response, 'Company Two')
