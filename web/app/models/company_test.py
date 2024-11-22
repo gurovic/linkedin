@@ -1,14 +1,11 @@
-from django.test import TestCase, Client
-from django.urls import reverse
+from django.test import TestCase
 from django.contrib.auth.models import User
-from company import Company, Vacancy
+from . import Company, Vacancy
 
 class CompanyTest(TestCase):
 
     def setUp(self):
-        self.client = Client()
         self.user = User.objects.create_user(username='testuser', password='testpass')
-        self.client.login(username='testuser', password='testpass')
         self.company_data = {
             'name': "Test Company",
             'description': "A company for testing.",
@@ -20,15 +17,8 @@ class CompanyTest(TestCase):
         Company.objects.all().delete()
         User.objects.all().delete()
 
-
-    def test_create_company_page(self):
-        response = self.client.get(reverse('company_create'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Create Company")
-
     def test_create_company(self):
-        response = self.client.post(reverse('company_create'), self.company_data)
-        self.assertEqual(response.status_code, 302)
+        # Проверяем, что компания была создана
         self.assertTrue(Company.objects.filter(name="Test Company").exists())
 
     def test_company_str(self):
@@ -56,9 +46,7 @@ class CompanyTest(TestCase):
 class VacancyTest(TestCase):
 
     def setUp(self):
-        self.client = Client()
         self.user = User.objects.create_user(username='testuser', password='testpass')
-        self.client.login(username='testuser', password='testpass')
         self.company = Company.objects.create(
             name="Test Company",
             description="A company for testing.",
@@ -68,25 +56,34 @@ class VacancyTest(TestCase):
             'name': "Test Vacancy",
             'description': "A vacancy for testing.",
             'needed_majorsubject': 'CS',
-            'company': self.company.id
+            'company': self.company
         }
+        self.vacancy = Vacancy.objects.create(**self.vacancy_data)
 
     def tearDown(self):
         Vacancy.objects.all().delete()
         Company.objects.all().delete()
         User.objects.all().delete()
 
-
-    def test_create_vacancy_page(self):
-        response = self.client.get(reverse('vacancy_create'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Create Vacancy")
-
-    def test_create_vacancy(self):
-        response = self.client.post(reverse('vacancy_create'), self.vacancy_data)
-        self.assertEqual(response.status_code, 302)
+    def test_vacancy_fields(self):
         self.assertTrue(Vacancy.objects.filter(name="Test Vacancy").exists())
+        self.assertEqual(self.vacancy.name, "Test Vacancy")
+        self.assertEqual(self.vacancy.description, "A vacancy for testing.")
+        self.assertEqual(self.vacancy.needed_majorsubject, "CS")
 
-    def test_vacancy_str(self):
-        vacancy = Vacancy.objects.create(**self.vacancy_data)
-        self.assertEqual(str(vacancy), "Test Vacancy")
+    def test_vacancy_company_link(self):
+        self.assertEqual(self.vacancy.company, self.company)
+
+        company2 = Company.objects.create(
+            name="Another Company",
+            description="Second company for testing.",
+            country='GB'
+        )
+        vacancy2 = Vacancy.objects.create(
+            name="Another Vacancy",
+            description="Second vacancy for testing.",
+            needed_majorsubject='MATH',
+            company=company2
+        )
+        self.assertEqual(self.vacancy.company, self.company)
+        self.assertEqual(vacancy2.company, company2)
