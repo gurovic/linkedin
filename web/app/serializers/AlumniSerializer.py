@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.models.alumni_model import Alumni
+from app.models.alumni import Alumni
 
 class AlumniSerializer(serializers.ModelSerializer):
     class Meta:
