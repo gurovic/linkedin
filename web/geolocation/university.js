@@ -26,7 +26,6 @@ async function loadAlumniData() {
             markers.addLayer(marker);  // Добавление маркера в кластерную группу
         }
     }
-
     mymap.addLayer(markers);  // Добавление группы кластеров на карту
 }
 
