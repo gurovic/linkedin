@@ -9,6 +9,6 @@ urlpatterns = [
     path("companies/", company_list, name='company_list'),
     path('request/', request_view, name='request'),
     path('request_form/', create_request, name='request_form'),
-    path('student/<int:student_id>/universities/', student_universities, name='student_universities'),
+    path('student/<int:student>/universities/', student_universities, name='student_universities'),
     path('university_student/<int:pk>/edit/', edit_university_student, name='edit_university_student'),
 ]
