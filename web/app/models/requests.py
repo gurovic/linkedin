@@ -3,18 +3,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Request(models.Model):
+    ANSWER_CHOICES = [
+        ('NA', 'Not answered'),
+        ('AC', 'Accepted'),
+        ('DE', 'Declined')
+    ]
     RIGHT_CHOICES = [
         ('TW', 'To write posts'),
         ('TC', 'To write comments'),
         ('TE', 'To create events'),
         ('TV', 'To create vacancies'),
         ('TN', 'To change name')
-    ]
-
-    ANSWER_CHOICES = [
-        ('NA', 'Not answered'),
-        ('AC', 'Accepted'),
-        ('DE', 'Declined')
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

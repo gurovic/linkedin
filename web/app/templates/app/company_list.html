@@ -24,9 +24,15 @@
                 <tr>
                     <td>{{ company.name }}</td>
                     <td>{{ company.description }}</td>
-                    <td>{{ company.country }}</td>
+                    <td>{{ company.get_country_display }}</td>
                     <td>{{ company.vacancies }}</td>
-                    <td>{{ company.current_workers }}</td>
+                    <td>{% if company.current_workers.exists %}
+                        {% for worker in company.current_workers.all %}
+                            <li>{{ worker.username }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No workers</li>
+                    {% endif %}</td>
                 </tr>
             {% empty %}
                 <tr>
