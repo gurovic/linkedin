@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from . import AlumniVerificationRequest
 
+
 class AlumniVerificationRequestTest(TestCase):
 
     def setUp(self):
@@ -16,6 +17,7 @@ class AlumniVerificationRequestTest(TestCase):
         self.assertEqual(request.name, 'Test AlumniVerificationRequest')
         self.assertEqual(request.user, self.user)
         self.assertIsNotNone(request.date)
+        self.assertEqual(request.approved, False)
 
     def test_string_representation(self):
         request = AlumniVerificationRequest.objects.create(
@@ -23,7 +25,7 @@ class AlumniVerificationRequestTest(TestCase):
             name='Test AlumniVerificationRequest',
             photo='alumni_verification_request_test/kitten.jpg'
         )
-        expected_str = f'{request.name}, {request.date}'
+        expected_str = f'{request.name}, {request.date}, {request.approved}'
         self.assertEqual(str(request), expected_str)
 
     def test_request_user_relationship(self):
@@ -35,4 +37,3 @@ class AlumniVerificationRequestTest(TestCase):
         )
         self.assertEqual(request.user.username, 'testuser')
         self.assertNotEqual(request.user.username, another_user.username)
-
