@@ -13,10 +13,6 @@ class CompanyTest(TestCase):
         }
         self.company = Company.objects.create(**self.company_data)
 
-    def tearDown(self):
-        Company.objects.all().delete()
-        User.objects.all().delete()
-
     def test_create_company(self):
         self.assertTrue(Company.objects.filter(name="Test Company").exists())
 
