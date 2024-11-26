@@ -13,6 +13,7 @@ from .views.registration import registration
 from .views.logout import logout_request
 from .views.student_schools import student_schools
 from .views.view_tags import tags_view, add_tag_to_user
+from .views.api_auth import AuthView
 
 urlpatterns = [
     path("student_schools/", student_schools, name='student_schools'),
@@ -31,4 +32,5 @@ urlpatterns = [
     path('logout/', logout_request, name='logout'),
     path('student_school_form/', create_student_school, name='student_school_form'),
     path('index/', index, name='index'),
+    path('api/auth/', AuthView.as_view(), name='api_auth')
 ]
