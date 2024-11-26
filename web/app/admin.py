@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MajorSubject, School,University,UniversityStudent, StudentSchool, Vacancy, Company, Request, Answer, Tag, JobExperience, Event
+from .models import MajorSubject, School,University, UniversityStudent, StudentSchool, Vacancy, Company, Request, Answer, Tag, JobExperience, Event
 
 admin.site.register([MajorSubject, School, StudentSchool])
 admin.site.register(Event)
