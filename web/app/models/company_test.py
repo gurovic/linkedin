@@ -18,7 +18,6 @@ class CompanyTest(TestCase):
         User.objects.all().delete()
 
     def test_create_company(self):
-        # Проверяем, что компания была создана
         self.assertTrue(Company.objects.filter(name="Test Company").exists())
 
     def test_company_str(self):
@@ -59,11 +58,6 @@ class VacancyTest(TestCase):
             'company': self.company
         }
         self.vacancy = Vacancy.objects.create(**self.vacancy_data)
-
-    def tearDown(self):
-        Vacancy.objects.all().delete()
-        Company.objects.all().delete()
-        User.objects.all().delete()
 
     def test_vacancy_fields(self):
         self.assertTrue(Vacancy.objects.filter(name="Test Vacancy").exists())

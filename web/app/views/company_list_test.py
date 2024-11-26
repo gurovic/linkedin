@@ -13,11 +13,6 @@ class CompanyListViewTests(TestCase):
 
         self.response = self.client.get(reverse('company_list'))
 
-    def tearDown(self):
-        self.company1.delete()
-        self.company2.delete()
-        self.user.delete()
-
     def test_status_code(self):
         self.assertEqual(self.response.status_code, 200)
 
