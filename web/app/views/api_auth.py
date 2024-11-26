@@ -14,5 +14,5 @@ class AuthView(APIView):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)  # Django creates the session and sets the sessionid
-            return JsonResponse({"message": "Login successful"}, status=200)
-        return JsonResponse({"error": "Invalid credentials"}, status=401)
+            return JsonResponse({"success": True, "message": "Login successful"}, status=200)
+        return JsonResponse({"success": False, "error": "Invalid credentials"}, status=401)
