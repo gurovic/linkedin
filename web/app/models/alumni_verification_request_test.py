@@ -9,31 +9,27 @@ class AlumniVerificationRequestTest(TestCase):
         self.user = User.objects.create_user(username='testuser', password='testpass')
 
     def test_create_request(self):
-        request = AlumniVerificationRequest.objects.create(
+        alumni_verification_request = AlumniVerificationRequest.objects.create(
             user=self.user,
-            name='Test AlumniVerificationRequest',
             photo='alumni_verification_request_test/kitten.jpg'
         )
-        self.assertEqual(request.name, 'Test AlumniVerificationRequest')
-        self.assertEqual(request.user, self.user)
-        self.assertIsNotNone(request.date)
-        self.assertEqual(request.approved, False)
+        self.assertEqual(alumni_verification_request.user, self.user)
+        self.assertIsNotNone(alumni_verification_request.date)
+        self.assertEqual(alumni_verification_request.approved, 'NA')
 
     def test_string_representation(self):
-        request = AlumniVerificationRequest.objects.create(
+        alumni_verification_request = AlumniVerificationRequest.objects.create(
             user=self.user,
-            name='Test AlumniVerificationRequest',
             photo='alumni_verification_request_test/kitten.jpg'
         )
-        expected_str = f'{request.name}, {request.date}, {request.approved}'
-        self.assertEqual(str(request), expected_str)
+        expected_str = f'{alumni_verification_request.user.last_name}, {alumni_verification_request.get_approved_display()}'
+        self.assertEqual(str(alumni_verification_request), expected_str)
 
     def test_request_user_relationship(self):
         another_user = User.objects.create_user(username='anotheruser', password='anotherpass')
-        request = AlumniVerificationRequest.objects.create(
+        alumni_verification_request = AlumniVerificationRequest.objects.create(
             user=self.user,
-            name='Another Test AlumniVerificationRequest',
             photo='alumni_verification_request_test/kitten.jpg'
         )
-        self.assertEqual(request.user.username, 'testuser')
-        self.assertNotEqual(request.user.username, another_user.username)
+        self.assertEqual(alumni_verification_request.user.username, 'testuser')
+        self.assertNotEqual(alumni_verification_request.user.username, another_user.username)

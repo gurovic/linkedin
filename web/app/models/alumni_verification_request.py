@@ -4,11 +4,15 @@ from django.contrib.auth.models import User
 
 
 class AlumniVerificationRequest(models.Model):
+    ANSWER_CHOICES = [
+        ('NA', 'Not answered'),
+        ('AC', 'Accepted'),
+        ('DE', 'Declined')
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
-    name = models.CharField(max_length=120)
     photo = models.ImageField()
-    approved = models.BooleanField(default=False)
+    approved = models.CharField(max_length=120, choices=ANSWER_CHOICES, default='NA')
 
     def __str__(self):
-        return f'{self.name}, {self.date}, {self.approved}'
+        return f'{self.user.last_name}, {self.get_approved_display()}'
