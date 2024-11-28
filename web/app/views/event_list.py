@@ -14,4 +14,5 @@ def event_list(request):
     context = {
         'event_list': events
     }
-    return render(request, 'app/event_list.html', context)
+    print(events, "1")
+    return render(request, 'app/home.html', context)

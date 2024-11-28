@@ -24,7 +24,6 @@ urlpatterns = [
     path('request_form/', create_request, name='request_form'),
     path('school_form/', create_school, name='school_form'),
     path("companies/", company_list, name='company_list'),
-    path('event_list/', event_list, name='event_list'),
     path('job_experience/', job_experience_view, name='job_experience'),
     path('', home, name='home'),
     path('registration/', registration, name='registration'),
@@ -32,5 +31,4 @@ urlpatterns = [
     path('logout/', logout_request, name='logout'),
     path('student_school_form/', create_student_school, name='student_school_form'),
     path('index/', index, name='index'),
-    path('', AlumniListView.as_view(), name='alumni-list'),
 ]

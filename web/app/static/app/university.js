@@ -26,7 +26,7 @@ async function getCoordinates(university) {
 // Функция для получения данных выпускников из JSON файла
 async function loadAlumniData() {
         try {
-            const response = await fetch('alumni.json');
+            const response = await fetch('/static/app/alumni.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
