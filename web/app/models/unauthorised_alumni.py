@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-class Alumni(models.Model):
+class UnauthorisedAlumni(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     university = models.CharField(max_length=20)  # then it will be replaced with ForeignKey()
     graduation_year = models.IntegerField(validators=[

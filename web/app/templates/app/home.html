@@ -21,6 +21,22 @@
                 <li>Нет зарегистрированных пользователей.</li>  <!-- Handle case where there are no users -->
             {% endfor %}
         </ul>
+        <h2>Список зарегистрированных неподтвержденных выпускников:</h2>
+        <ul>
+            {% for unauthorised_alumni in unauthorised_alumnus %}
+                <li>{{ unauthorised_alumni }}</li> <!-- Display the username of each user -->
+            {% empty %}
+                <li>Нет зарегистрированных неподтвержденных выпускников.</li>  <!-- Handle case where there are no users -->
+            {% endfor %}
+        </ul>
+        <h2>Список зарегистрированных подтвержденных выпускников:</h2>
+        <ul>
+            {% for alumni in alumnus %}
+                <li>{{ alumni }}</li> <!-- Display the username of each user -->
+            {% empty %}
+                <li>Нет зарегистрированных подтвержденных выпускников.</li>  <!-- Handle case where there are no users -->
+            {% endfor %}
+        </ul>
         <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
         <button type="submit">Выйти из аккаунта</button>

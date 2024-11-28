@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login
 @csrf_exempt
 def registration(request):
     form = None
-    if request.method == "POST" :
+    if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)

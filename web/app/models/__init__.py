@@ -7,3 +7,4 @@ from .requests import Request
 from .typeofuser import TypeOfUser
 from .event import Event
 from .job_experience import JobExperience
+from .alumni import Alumni
