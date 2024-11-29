@@ -1,0 +1,28 @@
+<!-- templates/job_experience.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Experience</title>
+</head>
+<body>
+    <h1>Add Job Experience</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Experience</button>
+    </form>
+
+    <h2>Your Job Experiences</h2>
+    <ul>
+        {% for experience in experiences %}
+            <li>
+                {{ experience.company_name }} ({{ experience.start_year }} - {{ experience.end_year }}): {{ experience.position }}
+            </li>
+        {% empty %}
+            <li>No job experiences added yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

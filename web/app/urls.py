@@ -36,4 +36,4 @@ urlpatterns = [
     path('student_school_form/', create_student_school, name='student_school_form'),
     path('index/', index, name='index'),
     path('api/universities/', university_list, name='university_list'),
-]
+
