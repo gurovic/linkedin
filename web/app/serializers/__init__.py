@@ -1,0 +1,1 @@
+from .serializator import UniversitySerializer
