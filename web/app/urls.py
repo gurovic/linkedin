@@ -16,6 +16,7 @@ from .views.logout import logout_request
 from .views.student_schools import student_schools
 from .views.view_tags import tags_view, add_tag_to_user
 from .views.university_api_view import university_list
+from .views.password_change import change_password
 urlpatterns = [
     path("student_schools/", student_schools, name='student_schools'),
     path("companies/", company_list, name='company_list'),
@@ -35,4 +36,5 @@ urlpatterns = [
     path('student_school_form/', create_student_school, name='student_school_form'),
     path('index/', index, name='index'),
     path('api/universities/', university_list, name='university_list'),
+    path('change_password/', change_password, name='change_password'),
 ]
