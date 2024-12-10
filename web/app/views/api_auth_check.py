@@ -8,7 +8,7 @@ class AuthCheckView(APIView):
 
     def get(self, request):
         if request.user.username == "":
-            return JsonResponse({ "error": "Unauthorized!" })
+            return JsonResponse({ "error": "Unauthorized!" }, status=401)
         content = {
             "user": request.user.username
         }
