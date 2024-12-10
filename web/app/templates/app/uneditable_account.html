@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.first_name }} {{ user.last_name }}</title>
+</head>
+<body>
+    <h1>Вы просматриваете аккаунт без права редактирования</h1>
+    <div>
+        <h2>Имя, Фамилия: {{ user.first_name }} {{ user.last_name }}</h2>
+        <p>Логин: {{ user.username }}</p>
+        <p>Электронная почта: {{ user.email }}</p>
+        <h3>Периоды обучения в школах</h3>
+        {% if student_schools %}
+        <ul>
+            {% for current_schoolstudent in student_schools %}
+                <li>{{ current_schoolstudent.school.name }} - {{ current_schoolstudent.start_year}},{{ current_schoolstudent.finish_year}}, ушёл, так как {{ current_schoolstudent.get_why_left_display}} </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{{ student.username }} нет сведений о периодах обучения в школах.</p>
+    {% endif %}
+        <h3>Периоды обучения в университетах</h3>
+        {% if student_universities %}
+        <ul>
+            {% for current_universitystudent in student_universities %}
+                <li>{{ current_universitystudent.university.name }} - {{ current_universitystudent.start_date}},{{ current_universitystudent.end_date}}, ушёл, так как {{ current_universitystudent.get_leave_reason_display}} </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{{ student.username }} нет сведений о периодах обучения в университетах.</p>
+    {% endif %}
+    </div>
+</body>
+</html>
