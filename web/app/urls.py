@@ -17,6 +17,8 @@ from .views.student_schools import student_schools
 from .views.view_tags import tags_view, add_tag_to_user
 from .views.university_api_view import university_list
 from .views.account import account_view
+from .views.api_auth_check import AuthCheckView
+
 urlpatterns = [
     path("student_schools/", student_schools, name='student_schools'),
     path("companies/", company_list, name='company_list'),
@@ -37,4 +39,5 @@ urlpatterns = [
     path('index/', index, name='index'),
     path('api/universities/', university_list, name='university_list'),
     path('account/<int:user_id>/', account_view, name='account'),
+    path('api/auth/check/', AuthCheckView.as_view(), name='api_auth_check')
 ]
