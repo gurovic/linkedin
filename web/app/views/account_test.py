@@ -1,9 +1,7 @@
 from http import HTTPStatus
-
 from django.test import Client, TestCase
 from django.contrib.auth.models import User
 from ..models import School, University, StudentSchool, UniversityStudent, MajorSubject
-from .account import account_view
 from django.urls import reverse
 class AccountViewTestCase(TestCase):
     def setUp(self):
