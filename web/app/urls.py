@@ -1,5 +1,5 @@
 from django.urls import path
-from .views.create_student_school_form import create_student_school
+from .views.create_student_school_form import create_or_edit_student_school
 from .views.index import index
 from .views.company_list import company_list
 from .views.view_request import request_view
@@ -16,7 +16,7 @@ from .views.logout import logout_request
 from .views.student_schools import student_schools
 from .views.view_tags import tags_view, add_tag_to_user
 from .views.university_api_view import university_list
-from .views.account import account_view
+from .views.account import uneditable_account_view, editable_account_view
 from .views.password_change import change_password
 from .views.api_auth_check import AuthCheckView
 
@@ -36,10 +36,12 @@ urlpatterns = [
     path('registration/', registration, name='registration'),
     path('login/', user_login, name='login'),
     path('logout/', logout_request, name='logout'),
-    path('student_school_form/', create_student_school, name='student_school_form'),
+    path('student_school_form/', create_or_edit_student_school, name='student_school_form'),
+    path('student_school_form/<int:pk>/', create_or_edit_student_school, name='student_school_form'),
     path('index/', index, name='index'),
     path('api/universities/', university_list, name='university_list'),
-    path('account/<int:user_id>/', account_view, name='account'),
+    path('account/<int:user_id>/', uneditable_account_view, name='uneditable_account'),
+    path('account/<int:user_id>/edit/', editable_account_view, name='editable_account'),
     path('change_password/', change_password, name='change_password'),
     path('api/auth/check/', AuthCheckView.as_view(), name='api_auth_check')
 ]
