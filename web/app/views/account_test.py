@@ -39,12 +39,18 @@ class AccountViewTestCase(TestCase):
 
     def test_account_view_for_current_user(self):
         self.client.login(username='testuser1', password='testpassword')
-        response = self.client.get(reverse("account", args=[self.user1.id]))
-        self.assertRedirects(response, reverse("index"))
+        response = self.client.get(reverse("uneditable_account", args=[self.user1.id]))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(response, self.user1.first_name)
+        self.assertContains(response, self.user1.last_name)
+        self.assertContains(response, self.user1.username)
+        self.assertContains(response, self.user1.email)
+        self.assertContains(response, 'Test School 1')
+        self.assertContains(response, 'Test University 1')
 
     def test_account_view_for_other_user(self):
         self.client.login(username='testuser1', password='testpassword')
-        response = self.client.get(reverse("account", args=[self.user2.id]))
+        response = self.client.get(reverse("uneditable_account", args=[self.user2.id]))
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, self.user2.first_name)
         self.assertContains(response, self.user2.last_name)
@@ -55,7 +61,7 @@ class AccountViewTestCase(TestCase):
 
     def test_unediatble_account_view_context(self):
         self.client.login(username='testuser1', password='testpassword')
-        response = self.client.get(reverse("account", args=[self.user2.id]))
+        response = self.client.get(reverse("uneditable_account", args=[self.user2.id]))
         self.assertEqual(response.context['user'], self.user2)
         self.assertIn(self.student_school2, response.context['student_schools'])
         self.assertIn(self.university_student2, response.context['student_universities'])
