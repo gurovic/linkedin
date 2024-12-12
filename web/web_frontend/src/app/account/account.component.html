@@ -1,0 +1,35 @@
+<div *ngIf="user">
+    <h1>Вы просматриваете аккаунт без права редактирования</h1>
+    <div>
+      <h2>Имя, Фамилия: {{ user.first_name }} {{ user.last_name }}</h2>
+      <p>Логин: {{ user.username }}</p>
+      <p>Электронная почта: {{ user.email }}</p>
+      <h3>Периоды обучения в школах</h3>
+      <ul *ngIf="studentSchools.length > 0; else noSchoolData">
+        <li *ngFor="let school of studentSchools">
+          {{ school.school.name }} - {{ school.start_year }}, {{ school.finish_year }},
+          ушёл, так как {{ school.get_why_left_display }}
+        </li>
+      </ul>
+      <ng-template #noSchoolData>
+        <p>{{ user.username }} нет сведений о периодах обучения в школах.</p>
+      </ng-template>
+  
+      <h3>Периоды обучения в университетах</h3>
+      <ul *ngIf="studentUniversities.length > 0; else noUniversityData">
+        <li *ngFor="let university of studentUniversities">
+          {{ university.university.name }} - {{ university.start_date }},
+          {{ university.end_date }}, ушёл, так как {{ university.get_leave_reason_display }}
+        </li>
+      </ul>
+      <ng-template #noUniversityData>
+        <p>{{ user.username }} нет сведений о периодах обучения в университетах.</p>
+      </ng-template>
+    </div>
+  </div>
+  
+  <!-- Error message -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+  
