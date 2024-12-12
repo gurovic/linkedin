@@ -57,5 +57,46 @@
         {% else %}
             <p>Нет доступных событий</p>
         {% endif %}
+    <h2>Список компаний</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Страна</th>
+                <th>Вакансии</th>
+                <th>Работники</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+                <tr>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.description }}</td>
+                    <td>{{ company.get_country_display }}</td>
+                    <td>
+                        {% for vacancy in company.company.all %}
+                            - {{ vacancy.name }}
+                            - Специализация: {{ vacancy.get_needed_majorsubject_display }}
+                            - Описание: {{ vacancy.description }}
+                        {% empty %}
+                            Нет доступных вакансий
+                        {% endfor %}
+                    </td>
+                    <td>{% if company.current_workers.exists %}
+                        {% for worker in company.current_workers.all %}
+                            <li>{{ worker.username }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No workers</li>
+                    {% endif %}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No companies available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
