@@ -1,21 +1,23 @@
 from django.urls import path
+
 from .views.create_student_school_form import create_or_edit_student_school
-from .views.index import index
 from .views.company_list import company_list
-from .views.view_request import request_view
 from .views.create_request_form import create_request
-from .views.displaying_universities import student_universities
-from .views.universityview import edit_university_student
 from .views.create_school_form import create_school
+from .views.displaying_universities import student_universities
 from .views.event_list import event_list
-from .views.job_experience import job_experience_view
 from .views.home import home
+from .views.index import index
+from .views.job_experience import job_experience_view
 from .views.login import user_login
-from .views.registration import registration
 from .views.logout import logout_request
+from .views.registration import registration
 from .views.student_schools import student_schools
-from .views.view_tags import tags_view, add_tag_to_user
 from .views.university_api_view import university_list
+from .views.universityview import edit_university_student
+from .views.user_api_view import UserDetailView
+from .views.view_request import request_view
+from .views.view_tags import tags_view, add_tag_to_user
 from .views.account import uneditable_account_view, editable_account_view
 from .views.password_change import change_password
 from .views.api_auth_check import AuthCheckView
@@ -40,6 +42,7 @@ urlpatterns = [
     path('student_school_form/<int:pk>/', create_or_edit_student_school, name='student_school_form'),
     path('index/', index, name='index'),
     path('api/universities/', university_list, name='university_list'),
+    path('api/user/<int:user_id>/', UserDetailView.as_view(), name='user-detail'),
     path('account/<int:user_id>/', uneditable_account_view, name='uneditable_account'),
     path('account/<int:user_id>/edit/', editable_account_view, name='editable_account'),
     path('change_password/', change_password, name='change_password'),
