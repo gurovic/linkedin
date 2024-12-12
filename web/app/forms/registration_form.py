@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from ..models.image import Image
 
 
 class RegistrationForm(UserCreationForm):
@@ -8,7 +9,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', "first_name", "last_name", 'password1', 'password2']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -17,3 +18,9 @@ class RegistrationForm(UserCreationForm):
 
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match.")
+
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ["image_path"]
