@@ -11,3 +11,4 @@ from .event import Event
 from .job_experience import JobExperience
 from .alumni_verification_request import AlumniVerificationRequest
 from .image import Image
+from .universitystudent import UniversityStudent

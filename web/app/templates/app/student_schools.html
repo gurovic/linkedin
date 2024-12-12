@@ -13,10 +13,11 @@
             {% for student_school in student_schools %}
                 <li>
                     <h2>{{ student_school.school.name }}</h2>
-                    <p>Страна: {{student_school.school.get_country_display }}</p>
+                    <p>Страна: {{ student_school.school.get_country_display }}</p>
                     <p>Описание: {{ student_school.school.desc }}</p>
                     <p>Год начала обучения: {{ student_school.start_year }}</p>
                     <p>Год окончания обучения: {{ student_school.finish_year }}</p>
+                    <a href="{% url 'student_school_form' student_school.id %}">Edit</a>
                 </li>
             {% endfor %}
         </ul>
