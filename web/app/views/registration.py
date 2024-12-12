@@ -2,6 +2,7 @@ from ..forms.registration_form import RegistrationForm, ImageForm
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
+from ..models import AlumniVerificationRequest
 
 @csrf_exempt
 def registration(request):
@@ -18,6 +19,9 @@ def registration(request):
                 profile = image_form.save(commit=False)
                 profile.user = request.user
                 profile.save()
+
+            # Create an AlumniVerificationRequest for the new user
+            AlumniVerificationRequest.objects.create(user=user)
 
             return redirect('/')
         print(user_form.errors, image_form.errors)
