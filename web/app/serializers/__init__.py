@@ -1,1 +1,2 @@
 from .serializator import UniversitySerializer
+from .user_serializator import UserDetailSerializer
