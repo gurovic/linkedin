@@ -1,11 +1,9 @@
 from django.urls import path
 
 from .views.create_student_school_form import create_or_edit_student_school
-from .views.index import index
 from .views.company_list import company_list
 from .views.create_request_form import create_request
 from .views.create_school_form import create_school
-from .views.create_student_school_form import create_student_school
 from .views.displaying_universities import student_universities
 from .views.event_list import event_list
 from .views.home import home
