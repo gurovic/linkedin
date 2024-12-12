@@ -13,7 +13,6 @@ from .views.registration import registration
 from .views.logout import logout_request
 from .views.student_schools import student_schools
 from .views.view_tags import tags_view, add_tag_to_user
-from .views.view_api import AlumniListView
 
 urlpatterns = [
     path("student_schools/", student_schools, name='student_schools'),
