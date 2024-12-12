@@ -43,5 +43,19 @@
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
         <script src="{% static 'app/university.js' %}"></script>
     {% endif %}
+    <h2>Список событий</h2>
+        {% if event_list %}
+            {% for event in event_list %}
+                <h4>{{ event.name }}</h4>
+                <p>{{ event.description }}</p>
+                {% if event.picture %}
+                    <img src="{{ event.picture.url }}" alt="Picture of {{ event.name }}" style="max-width:300px;">
+                {% endif %}
+                <p>{{ event.date }}</p>
+                <p>{{ event.location }}</p>
+            {% endfor %}
+        {% else %}
+            <p>Нет доступных событий</p>
+        {% endif %}
 </body>
 </html>
