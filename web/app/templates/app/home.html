@@ -1,9 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
+    <!-- Подключение стилей Leaflet и MarkerCluster -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <style>
+        #mapid {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <h1>Летово LinkedIn</h1>
@@ -24,6 +35,27 @@
         {% csrf_token %}
         <button type="submit">Выйти из аккаунта</button>
         </form>
+        <h2>Карта выпускников школы</h2>
+        <!-- Контейнер для карты -->
+        <div id="mapid" style="height: 400px;"></div>
+        <!-- Подключение библиотек Leaflet и MarkerCluster -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+        <script src="{% static 'app/university.js' %}"></script>
     {% endif %}
+    <h2>Список событий</h2>
+        {% if event_list %}
+            {% for event in event_list %}
+                <h4>{{ event.name }}</h4>
+                <p>{{ event.description }}</p>
+                {% if event.picture %}
+                    <img src="{{ event.picture.url }}" alt="Picture of {{ event.name }}" style="max-width:300px;">
+                {% endif %}
+                <p>{{ event.date }}</p>
+                <p>{{ event.location }}</p>
+            {% endfor %}
+        {% else %}
+            <p>Нет доступных событий</p>
+        {% endif %}
 </body>
 </html>
