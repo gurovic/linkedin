@@ -21,6 +21,7 @@ from .views.view_tags import tags_view, add_tag_to_user
 from .views.account import uneditable_account_view, editable_account_view
 from .views.password_change import change_password
 from .views.api_auth_check import AuthCheckView
+from .views.event_creation import event_creation
 
 urlpatterns = [
     path("student_schools/", student_schools, name='student_schools'),
@@ -46,5 +47,6 @@ urlpatterns = [
     path('account/<int:user_id>/', uneditable_account_view, name='uneditable_account'),
     path('account/<int:user_id>/edit/', editable_account_view, name='editable_account'),
     path('change_password/', change_password, name='change_password'),
-    path('api/auth/check/', AuthCheckView.as_view(), name='api_auth_check')
+    path('api/auth/check/', AuthCheckView.as_view(), name='api_auth_check'),
+    path("events/new/", event_creation, name="event_creation"),
 ]
