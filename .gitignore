@@ -9,7 +9,7 @@ __pycache__/
 # Django stuff
 *.sqlite3
 migrations/
-
+web/app/static/app/alumni.json
 # Distribution / packaging
 .Python
 build/
