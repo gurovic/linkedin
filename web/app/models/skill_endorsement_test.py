@@ -17,19 +17,18 @@ class SkillEndorsementTestCase(TestCase):
     def test_create_skill_endorsement(self):
         endorsement = SkillEndorsement.objects.create(
             endorser=self.user1,
-            skill=self.usertag1,
+            usertag=self.usertag1,
         )
         self.assertEqual(endorsement.endorser, self.user1)
-        self.assertEqual(endorsement.skill, self.usertag1)
+        self.assertEqual(endorsement.usertag, self.usertag1)
 
     def test_unique_endorsement_validation(self):
-        SkillEndorsement.objects.create(endorser=self.user1, skill=self.usertag1)
+        SkillEndorsement.objects.create(endorser=self.user1, usertag=self.usertag1)
         with self.assertRaises(ValidationError):
-            endorsement = SkillEndorsement(endorser=self.user1, skill=self.usertag1)
+            endorsement = SkillEndorsement(endorser=self.user1, usertag=self.usertag1)
             endorsement.full_clean()
 
     def test_self_endorsement_validation(self):
-        
         with self.assertRaises(ValidationError):
-            endorsement = SkillEndorsement(endorser=self.user1, skill=self.usertag1)
+            endorsement = SkillEndorsement(endorser=self.user1, usertag=self.usertag1)
             endorsement.full_clean()
