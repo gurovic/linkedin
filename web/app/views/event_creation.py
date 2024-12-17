@@ -12,4 +12,4 @@ def event_creation(request):
             return redirect(event_list)
     else:
         form = EventForm()
-    return render(request, "event_creation.html", {"form": form})
+    return render(request, "app/event_creation.html", {"form": form})
