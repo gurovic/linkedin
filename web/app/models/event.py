@@ -12,6 +12,7 @@ class Event(models.Model):
     date = models.DateTimeField()
     participants = models.ManyToManyField("auth.User", blank = True, related_name = "events")
     location = models.CharField(max_length = 200)
+    allowed = models.BooleanField(default = False)
 
     def already_passed(self):
         now = timezone.now()

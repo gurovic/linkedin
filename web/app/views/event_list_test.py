@@ -13,22 +13,22 @@ from ..models import Event
 
 class EventListViewTests(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username = 'testuser', password = 'password')
+        self.user = User.objects.create_user(username='testuser', password='password')
         self.client = Client()
         image_io = io.BytesIO()
-        image = Image.new('RGB', (100, 100), color = (255, 0, 0))
-        image.save(image_io, format = 'JPEG')
+        image = Image.new('RGB', (100, 100), color=(255, 0, 0))
+        image.save(image_io, format='JPEG')
         image_io.seek(0)
         self.event1 = Event.objects.create(
-            name = "Future Event",
-            description = "This is a future event.",
-            picture = SimpleUploadedFile(name = 'test_image.jpg', content = image_io.read(), content_type = 'image/jpeg'),
-            date = timezone.now() + datetime.timedelta(days = 5),
-            location = "Location 1"
+            name="Future Event",
+            description="This is a future event.",
+            picture=SimpleUploadedFile(name='test_image.jpg', content=image_io.read(), content_type='image/jpeg'),
+            date=timezone.now() + datetime.timedelta(days=5),
+            location="Location 1"
         )
 
     def tearDown(self):
-        self.event1.picture.delete(save = False)
+        self.event1.picture.delete(save=False)
         Event.objects.all().delete()
 
     def test_event_list_view_status_code(self):
@@ -45,5 +45,5 @@ class EventListViewTests(TestCase):
     def test_event_image_formatting(self):
         response = self.client.get(reverse("event_list"))
         self.assertEqual(response.status_code, 200)
-        event = Event.objects.get(id = self.event1.id)
+        event = Event.objects.get(id=self.event1.id)
         self.assertTrue(event.picture.name.startswith("events/test_image"))
