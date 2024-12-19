@@ -1,14 +1,14 @@
-from .school import School, MajorSubject
-from .student_schools import StudentSchool
-from .company import Company, Vacancy
-from .tag import Tag
+from .alumni_verification_request import AlumniVerificationRequest
 from .answer import Answer
+from .company import Company, Vacancy
+from .event import Event
+from .image import Image
+from .job_experience import JobExperience
 from .requests import Request
+from .school import MajorSubject, School
+from .skill_endorsement import SkillEndorsement
+from .student_schools import StudentSchool
+from .tag import Tag, UserTag
 from .typeofuser import TypeOfUser
 from .university import University
-from .universitystudent import UniversityStudent
-from .event import Event
-from .job_experience import JobExperience
-from .alumni_verification_request import AlumniVerificationRequest
-from .image import Image
 from .universitystudent import UniversityStudent

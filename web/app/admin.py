@@ -1,5 +1,22 @@
 from django.contrib import admin
-from .models import MajorSubject, School, University, Image, UniversityStudent, StudentSchool, Vacancy, Company, Request, Answer, Tag, JobExperience, Event, AlumniVerificationRequest
+
+from app.models import (
+    AlumniVerificationRequest,
+    Answer,
+    Company,
+    Event,
+    Image,
+    JobExperience,
+    MajorSubject,
+    Request,
+    School,
+    SkillEndorsement,
+    StudentSchool,
+    Tag,
+    University,
+    UniversityStudent,
+    Vacancy,
+)
 
 admin.site.register([MajorSubject, School, StudentSchool])
 admin.site.register(Event)
@@ -13,3 +30,4 @@ admin.site.register(UniversityStudent)
 admin.site.register(JobExperience)
 admin.site.register(AlumniVerificationRequest)
 admin.site.register(Image)
+admin.site.register(SkillEndorsement)
