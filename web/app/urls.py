@@ -22,6 +22,7 @@ from app.views.user_api_view import UserDetailView
 from app.views.view_request import request_view
 from app.views.view_tags import add_tag_to_user, tags_view
 from app.views.event_creation import event_creation
+from .views.search import user_search
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -77,4 +78,6 @@ urlpatterns = [
     ),
     path("change_password/", change_password, name="change_password"),
     path("api/auth/check/", AuthCheckView.as_view(), name="api_auth_check"),
+    path('search/', user_search, name='user_search'),
+    
 ]
