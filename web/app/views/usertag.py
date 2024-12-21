@@ -9,6 +9,7 @@ from app.serializers.usertag_serializer import UserTagSerializer
 
 
 class UserTagView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def get(self, request, user_id):
         user_tags = UserTag.objects.filter(user_id=user_id)
         serializer = UserTagSerializer(user_tags, many=True)
@@ -24,6 +25,21 @@ class UserTagView(APIView):
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
+
+
+class UserTagDeleteView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def delete(self, request, user_id, skill_id):
+        try:
+            user_tags = UserTag.objects.filter(user_id=user_id, tag_id=skill_id)
+            user_tags.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except UserTag.DoesNotExist:
+            return Response(
+                {"error": "Usertag not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
 
 
 class SkillEndorsementView(APIView):

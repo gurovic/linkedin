@@ -29,6 +29,13 @@ class UserTagViewTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(UserTag.objects.count(), 2)
 
+    def test_delete_user_tags(self):
+        url = f"/api/user/{self.user1.id}/skill/{self.tag.id}/"
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(UserTag.objects.count(), 0)
+
 
 class SkillEndorsementAPITest(APITestCase):
     def setUp(self):
