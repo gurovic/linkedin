@@ -18,6 +18,22 @@ class UserTagView(APIView):
 class SkillEndorsementView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
+    def get(self, request, user_id, skill_id):
+        try:
+            user_tag = UserTag.objects.get(user_id=user_id, id=skill_id)
+            endorsements = SkillEndorsement.objects.filter(usertag=user_tag)
+            endorsement_data = [
+                {"endorser": e.endorser.username}
+                for e in endorsements
+            ]
+
+            return Response(endorsement_data, status=status.HTTP_200_OK)
+        except UserTag.DoesNotExist:
+            return Response(
+                {"error": "User or skill not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
     def post(self, request, user_id, skill_id):
         try:
             endorser = request.user

@@ -72,7 +72,7 @@ urlpatterns = [
         name="user-skills",
     ),
     path(
-        "api/user/<int:user_id>/skill/<int:skill_id>/endorse",
+        "api/user/<int:user_id>/skill/<int:skill_id>/endorsement/",
         SkillEndorsementView.as_view(),
         name="skill-endorsement",
     ),

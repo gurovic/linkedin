@@ -34,8 +34,19 @@ class SkillEndorsementAPITest(APITestCase):
         )
         self.user_tag = UserTag.objects.create(user_id=self.user2.id, tag_id=1)
 
+    def test_list_skill_endorsements(self):
+        SkillEndorsement.objects.create(
+            endorser=self.user, usertag=self.user_tag
+        )
+        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorsement/"
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]["endorser"], "testuser")
+
     def test_endorse_skill(self):
-        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorse"
+        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorsement/"
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -45,14 +56,14 @@ class SkillEndorsementAPITest(APITestCase):
         SkillEndorsement.objects.create(
             endorser=self.user, usertag=self.user_tag
         )
-        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorse"
+        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorsement/"
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("Endorsement already exists", response.data["error"])
 
     def test_endorse_skill_invalid_user_or_skill(self):
-        url = "/api/user/999/skill/999/endorse"
+        url = "/api/user/999/skill/999/endorsement/"
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
