@@ -14,6 +14,17 @@ class UserTagView(APIView):
         serializer = UserTagSerializer(user_tags, many=True)
         return Response(serializer.data)
 
+    def post(self, request, user_id):
+        serializer = UserTagSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user_id=user_id)
+            return Response(
+                serializer.data, status=status.HTTP_201_CREATED
+            )
+        return Response(
+            serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
+
 
 class SkillEndorsementView(APIView):
     permission_classes = [permissions.IsAuthenticated]

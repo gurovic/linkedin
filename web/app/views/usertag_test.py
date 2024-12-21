@@ -11,6 +11,7 @@ class UserTagViewTest(APITestCase):
         self.client.login(username="testuser1", password="password")
 
         self.tag = Tag.objects.create(name="Test Tag")
+        self.tag2 = Tag.objects.create(name="Test Tag 2")
         self.user_tag = UserTag.objects.create(user=self.user1, tag=self.tag)
 
     def test_list_user_tags(self):
@@ -20,6 +21,13 @@ class UserTagViewTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]["tag"], 1)
+        
+    def test_create_user_tag(self):
+        url = f"/api/user/{self.user1.id}/skills/"
+        response = self.client.post(url, {"tag": 2})
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(UserTag.objects.count(), 2)
 
 
 class SkillEndorsementAPITest(APITestCase):
