@@ -68,3 +68,28 @@ class SkillEndorsementView(APIView):
                 {"error": e.message},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+    def delete(self, request, user_id, skill_id):
+        try:
+            endorser = request.user
+            user_tag = UserTag.objects.get(user_id=user_id, id=skill_id)
+
+            endorsement = SkillEndorsement.objects.get(
+                endorser=endorser, usertag=user_tag
+            )
+            endorsement.delete()
+
+            return Response(
+                {"message": "Skill endorsement deleted successfully."},
+                status=status.HTTP_200_OK,
+            )
+        except SkillEndorsement.DoesNotExist:
+            return Response(
+                {"error": "Endorsement not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+        except ValidationError as e:
+            return Response(
+                {"error": e.message},
+                status=status.HTTP_400_BAD_REQUEST,
+            )

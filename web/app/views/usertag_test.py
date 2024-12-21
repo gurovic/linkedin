@@ -21,7 +21,7 @@ class UserTagViewTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]["tag"], 1)
-        
+
     def test_create_user_tag(self):
         url = f"/api/user/{self.user1.id}/skills/"
         response = self.client.post(url, {"tag": 2})
@@ -75,3 +75,13 @@ class SkillEndorsementAPITest(APITestCase):
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_skill_endorsement(self):
+        SkillEndorsement.objects.create(
+            endorser=self.user, usertag=self.user_tag
+        )
+        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorsement/"
+        response = self.client.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(SkillEndorsement.objects.count(), 0)
