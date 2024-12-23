@@ -19,6 +19,11 @@ from app.views.student_schools import student_schools
 from app.views.university_api_view import university_list
 from app.views.universityview import edit_university_student
 from app.views.user_api_view import UserDetailView
+from app.views.usertag import (
+    SkillEndorsementView, 
+    UserTagDeleteView, 
+    UserTagView,
+)
 from app.views.view_request import request_view
 from app.views.view_tags import add_tag_to_user, tags_view
 from app.views.event_creation import event_creation
@@ -65,6 +70,21 @@ urlpatterns = [
         "api/user/<int:user_id>/",
         UserDetailView.as_view(),
         name="user-detail",
+    ),
+    path(
+        "api/user/<int:user_id>/skills/",
+        UserTagView.as_view(),
+        name="user-skills",
+    ),
+    path(
+        "api/user/<int:user_id>/skill/<int:skill_id>/",
+        UserTagDeleteView.as_view(),
+        name="user-skill",
+    ),
+    path(
+        "api/user/<int:user_id>/skill/<int:skill_id>/endorsement/",
+        SkillEndorsementView.as_view(),
+        name="skill-endorsement",
     ),
     path(
         "account/<int:user_id>/",
