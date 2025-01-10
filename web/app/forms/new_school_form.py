@@ -9,5 +9,5 @@ class SchoolForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'name_of_school'}),
             'desc': forms.Textarea(attrs={'class': 'description_of_school'}),
             'country': forms.Select(attrs={'class': 'country_of_school'}),
-            'majors': forms.CheckboxSelectMultiple(attrs={'class': 'major_of_school'}),
-        }
+            'majors_available': forms.CheckboxSelectMultiple(attrs={'class': 'major_of_school'}),
+            }
