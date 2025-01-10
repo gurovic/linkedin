@@ -1,4 +1,5 @@
 from django.urls import path
+from app.views.account import editable_account_view, uneditable_account_view
 from app.views.api_auth_check import AuthCheckView
 from app.views.company_list import company_list
 from app.views.create_request_form import create_request
@@ -26,7 +27,6 @@ from app.views.view_request import request_view
 from app.views.view_tags import add_tag_to_user, tags_view
 from app.views.event_creation import event_creation
 from .views.search import user_search
-from .views.account import user_detail_api_view
 
 
 urlpatterns = [
@@ -86,7 +86,16 @@ urlpatterns = [
         SkillEndorsementView.as_view(),
         name="skill-endorsement",
     ),
-    path('account/<int:user_id>/', user_detail_api_view, name='user-detail-api'),
+    path(
+        "account/<int:user_id>/",
+        uneditable_account_view,
+        name="uneditable_account",
+    ),
+    path(
+        "account/<int:user_id>/edit/",
+        editable_account_view,
+        name="editable_account",
+    ),
     path("change_password/", change_password, name="change_password"),
     path("api/auth/check/", AuthCheckView.as_view(), name="api_auth_check"),
     path('search/', user_search, name='user_search'),

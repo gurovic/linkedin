@@ -1,21 +1,4 @@
 from django.contrib.auth.models import User
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
-from django.contrib.auth.models import User
-from ..serializers import UserDetailSerializer
-
-@api_view(['GET'])
-def user_detail_api_view(request, user_id):
-    try:
-        user = User.objects.get(id=user_id)
-    except User.DoesNotExist:
-        return Response({"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND)
-
-    serializer = UserDetailSerializer(user)
-    return Response(serializer.data)
-
-"""
 from app.forms.edit_account import EditAccountForm
 from app.models import StudentSchool, UniversityStudent
 from django.shortcuts import redirect, render
@@ -57,4 +40,3 @@ def uneditable_account_view(request, user_id):
             "student_universities": student_universities_list,
         },
     )
-"""
