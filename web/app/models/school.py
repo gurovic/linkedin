@@ -34,7 +34,6 @@ class School(models.Model):
     country = models.TextField(max_length=2, choices=COUNTRY_CHOICES)
     name = models.CharField(max_length=40)
     desc = models.TextField(null=True, blank=True)
-    #majors = models.ManyToManyField(MajorSubject, related_name='schools')
     majors_available = MultiSelectField(max_length=100, default='Smth', choices=MAJOR_CHOICES)
 
     def __str__(self):
