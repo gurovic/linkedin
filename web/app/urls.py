@@ -7,7 +7,9 @@ from app.views.create_request_form import create_request
 from app.views.create_school_form import create_school
 from app.views.create_student_school_form import create_or_edit_student_school
 from app.views.displaying_universities import student_universities
-from app.views.event_list import event_list
+from app.views.event import EventParticipantsView, EventView
+from app.views.event_creation import event_creation
+from app.views.event_list import event_list_old
 from app.views.home import home
 from app.views.index import index
 from app.views.job_experience import job_experience_view
@@ -20,13 +22,13 @@ from app.views.university_api_view import university_list
 from app.views.universityview import edit_university_student
 from app.views.user_api_view import UserDetailView
 from app.views.usertag import (
-    SkillEndorsementView, 
-    UserTagDeleteView, 
+    SkillEndorsementView,
+    UserTagDeleteView,
     UserTagView,
 )
 from app.views.view_request import request_view
 from app.views.view_tags import add_tag_to_user, tags_view
-from app.views.event_creation import event_creation
+
 from .views.search import user_search
 
 urlpatterns = [
@@ -48,7 +50,7 @@ urlpatterns = [
     ),
     path("school_form/", create_school, name="school_form"),
     path("event/new/", event_creation, name="event_creation"),
-    path("events/", event_list, name="event_list"),
+    path("events/", event_list_old, name="event_list_old"),
     path("job_experience/", job_experience_view, name="job_experience"),
     path("", home, name="home"),
     path("registration/", registration, name="registration"),
@@ -65,6 +67,17 @@ urlpatterns = [
         name="student_school_form",
     ),
     path("index/", index, name="index"),
+    path("api/event/", EventView.as_view(), name="events"),
+    path(
+        "api/event/<int:event_id>/",
+        EventView.as_view(),
+        name="event_detail",
+    ),
+    path(
+        "api/event/<int:event_id>/participants/",
+        EventParticipantsView.as_view(),
+        name="event_participants",
+    ),
     path("api/universities/", university_list, name="university_list"),
     path(
         "api/user/<int:user_id>/",
@@ -98,6 +111,6 @@ urlpatterns = [
     ),
     path("change_password/", change_password, name="change_password"),
     path("api/auth/check/", AuthCheckView.as_view(), name="api_auth_check"),
-    path('search/', user_search, name='user_search'),
-    
+    path("search/", user_search, name="user_search"),
+
 ]
