@@ -1,2 +1,3 @@
-from .serializator import UniversitySerializer
-from .user_serializator import UserDetailSerializer
+from .university_serializer import UniversitySerializer
+from .user_serializer import UserDetailSerializer
+from .school_serializer import SchoolSerializer
