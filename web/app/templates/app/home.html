@@ -105,45 +105,45 @@
                 <script src="{% static 'app/university.js' %}"></script>
             </section>
         {% endif %}
-    </main>
 
-    <section class="col-xs-1 text-center mb-4">
-        <h2>Список компаний</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-1">Название</div>
-            <div class="col-md-1">Описание</div>
-            <div class="col-md-1">Страна</div>
-            <div class="col-md-1">Вакансии</div>
-            <div class="col-md-1">Работники</div>
-        </div>
-        {% for company in companies %}
+        <section class="text-center mb-4">
+            <h2>Список компаний</h2>
             <div class="row justify-content-center">
-                <div class="col-md-1">{{ company.name }}</div>
-                <div class="col-md-1">{{ company.description }}</div>
-                <div class="col-md-1">{{ company.get_country_display }}</div>
-                <div class="col-md-1">
-                    {% for vacancy in company.company.all %}
-                        - {{ vacancy.name }}
-                        - Специализация: {{ vacancy.get_needed_majorsubject_display }}
-                        - Описание: {{ vacancy.description }}
-                    {% empty %}
-                        Нет доступных вакансий
-                    {% endfor %}
+                <div class="col-md-1">Название</div>
+                <div class="col-md-1">Описание</div>
+                <div class="col-md-1">Страна</div>
+                <div class="col-md-1">Вакансии</div>
+                <div class="col-md-1">Работники</div>
+            </div>
+            {% for company in companies %}
+                <div class="row justify-content-center">
+                    <div class="col-md-1">{{ company.name }}</div>
+                    <div class="col-md-1">{{ company.description }}</div>
+                    <div class="col-md-1">{{ company.get_country_display }}</div>
+                    <div class="col-md-1">
+                        {% for vacancy in company.company.all %}
+                            - {{ vacancy.name }}
+                            - Специализация: {{ vacancy.get_needed_majorsubject_display }}
+                            - Описание: {{ vacancy.description }}
+                        {% empty %}
+                            Нет доступных вакансий
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-1">{% if company.current_workers.exists %}
+                        {% for worker in company.current_workers.all %}
+                            <li>{{ worker.username }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No workers</li>
+                    {% endif %}</div>
                 </div>
-                <div class="col-md-1">{% if company.current_workers.exists %}
-                    {% for worker in company.current_workers.all %}
-                        <li>{{ worker.username }}</li>
-                    {% endfor %}
-                {% else %}
-                    <li>No workers</li>
-                {% endif %}</div>
-            </div>
-        {% empty %}
-            <div class="row justify-content-center">
-                <div class="col-md-1">Компаний нет :(</div>
-            </div>
-        {% endfor %}
-    </section>
+            {% empty %}
+                <div class="row justify-content-center">
+                    <div class="col-md-1">Компаний нет :(</div>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-dark text-white text-center py-3">
