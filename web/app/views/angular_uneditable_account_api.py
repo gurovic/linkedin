@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
 from ..serializers.angular_uneditable_account_serializer import AngularUserDetailSerializer
+
+
 @api_view(['GET'])
 def user_detail_api_view(request, user_id):
     try:

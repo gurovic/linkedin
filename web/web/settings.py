@@ -138,4 +138,4 @@ STATICFILES_DIRS = [
 ]
 
 # Allow all origins (for development only)
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = DEBUG
