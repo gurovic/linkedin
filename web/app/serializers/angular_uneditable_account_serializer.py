@@ -15,15 +15,13 @@ class AngularUserDetailSerializer(serializers.ModelSerializer):
         fields = ['first_name', 'last_name', 'university', 'school']
 
     def get_university(self, obj):
-        try:
-            university_student = UniversityStudent.objects.filter(student=obj)
-            return UniversitySerializer([us.university for us in university_student], many=True).data
-        except UniversityStudent.DoesNotExist:
+        university_student = UniversityStudent.objects.filter(student=obj)
+        if not university_student:
             return None
+        return UniversitySerializer([us.university for us in university_student], many=True).data
     
     def get_school(self, obj):
-        try:
-            student_school = StudentSchool.objects.filter(student=obj)
-            return SchoolSerializer([us.school for us in student_school], many=True).data
-        except StudentSchool.DoesNotExist:
+        student_school = StudentSchool.objects.filter(student=obj)
+        if not student_school:
             return None
+        return SchoolSerializer([us.school for us in student_school], many=True).data
