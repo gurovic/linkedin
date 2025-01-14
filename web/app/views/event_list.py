@@ -2,7 +2,7 @@ from django.shortcuts import render
 from ..models import Event
 
 
-def event_list(request):
+def event_list_old(request):
     event_objects = Event.objects.all()
     events = [event for event in event_objects if not event.already_passed()]
 
