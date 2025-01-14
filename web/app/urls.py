@@ -1,5 +1,4 @@
 from django.urls import path
-
 from app.views.account import editable_account_view, uneditable_account_view
 from app.views.api_auth_check import AuthCheckView
 from app.views.company_list import company_list
@@ -30,6 +29,8 @@ from app.views.view_request import request_view
 from app.views.view_tags import add_tag_to_user, tags_view
 
 from .views.search import user_search
+from .views.angular_uneditable_account_api import user_detail_api_view
+
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -111,6 +112,7 @@ urlpatterns = [
     ),
     path("change_password/", change_password, name="change_password"),
     path("api/auth/check/", AuthCheckView.as_view(), name="api_auth_check"),
-    path("search/", user_search, name="user_search"),
-
+    path('search/', user_search, name='user_search'),
+    
+    path('angular/account/<int:user_id>/', user_detail_api_view, name='angular_uneditable_account_api')
 ]
