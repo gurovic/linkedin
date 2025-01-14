@@ -13,7 +13,7 @@ class JobExperienceTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="testuser", password="testpass")
 
-    def test_create_request(self):
+    def test_create_experience(self):
         job_experience = JobExperience.objects.create(
             user=self.user,
             company_name=self.company_name,
@@ -38,7 +38,7 @@ class JobExperienceTest(TestCase):
         expected_str = f"{self.company_name} ({self.start_year} - {self.end_year})"
         self.assertEqual(str(job_experience), expected_str)
 
-    def test_request_user_relationship(self):
+    def test_experience_user_relationship(self):
         another_user = User.objects.create_user(username="anotheruser", password="anotherpass")
         job_experience = JobExperience.objects.create(
             user=self.user,
