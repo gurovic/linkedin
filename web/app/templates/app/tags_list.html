@@ -4,7 +4,7 @@
     <title>Tags list</title>
 </head>
 <body>
-    {% for tag in tags_list %}
-        <h3>{{ tag.name }}</h3>
+    {% for usertag in usertags_list %}
+        <h3>{{ usertag.tag.name }}</h3>
     {% endfor %}
 </body>

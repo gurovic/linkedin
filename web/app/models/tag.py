@@ -9,8 +9,16 @@ class Tag(models.Model):
 
 
 class UserTag(models.Model):
-    user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        "auth.User",
+        on_delete=models.CASCADE,
+        related_name="usertags",
+    )
+    tag = models.ForeignKey(
+        Tag,
+        on_delete=models.CASCADE,
+        related_name="usertags",
+    )
 
     class Meta:
         unique_together = ("user", "tag")

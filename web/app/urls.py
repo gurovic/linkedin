@@ -35,8 +35,8 @@ from .views.angular_uneditable_account_api import user_detail_api_view
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
     path("companies/", company_list, name="company_list"),
-    path("tags/<int:user_id>/", tags_view, name="user_profile"),
-    path("add_tag/<int:user_id>/", add_tag_to_user, name="adding_tags"),
+    path("tags/<int:user_id>/", tags_view, name="user_tags_old"),
+    path("tags/add/", add_tag_to_user, name="add_tags"),
     path("request/", request_view, name="request"),
     path("request_form/", create_request, name="request_form"),
     path(
