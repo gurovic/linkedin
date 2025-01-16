@@ -1,21 +1,47 @@
-from django.contrib.admin.templatetags.admin_list import search_form
-from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.shortcuts import render
 
-from ..forms.search_form import UserSearchForm
+from app.forms.search_form import (
+    UserSearchForm,
+)
+
 
 def user_search(request):
     form = UserSearchForm(request.GET or None)
-    match = []
+    users = User.objects.all()
 
-    if form.is_valid():
-        query = form.cleaned_data.get('query')
+    if (
+        form.is_valid()
+    ):
+        query = form.cleaned_data.get("query")
+        university = form.cleaned_data.get("university")
+        school = form.cleaned_data.get("school")
 
-        users = User.objects.all()
-        if query.strip() != "":
-            for user in users:
-                if query.lower() in (user.last_name + ' ' + user.first_name).lower() or\
-                        query.lower() in (user.first_name + ' ' + user.last_name).lower():
-                    match.append(user)
+        if query:
+            users = users.filter(
+                last_name__icontains=query,
+            ) | users.filter(
+                first_name__icontains=query,
+            ) | users.filter(
+                first_name__icontains=query.split(" ")[0],
+            ) | users.filter(
+                last_name__icontains=query.split(" ")[0],
+            ) | users.filter(
+                first_name__icontains=query.split(" ")[-1],
+            ) | users.filter(
+                last_name__icontains=query.split(" ")[-1],
+            )
 
-    return render(request, 'app/user_search.html', {'form': form, 'users': match})
+        if university:
+            users = users.filter(student__university=university)
+        if school:
+            users = users.filter(schoolstudent__school=school)
+
+    return render(
+        request,
+        "app/user_search.html",
+        {
+            "form": form,
+            "users": users,
+        },
+    )
