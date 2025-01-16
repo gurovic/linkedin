@@ -11,7 +11,6 @@ from app.serializers.event_serializer import EventSerializer
 class EventView(APIView):
     """POST ALLOWS ONLY multipart/form-data"""
 
-    permission_classes = (permissions.IsAuthenticated,)
     parser_classes = (MultiPartParser,)
 
     def get(self, request, event_id=None):
