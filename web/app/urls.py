@@ -26,7 +26,7 @@ from app.views.userskill import (
     UserSkillView,
 )
 from app.views.view_request import request_view
-from app.views.view_tags import add_skill_to_user, skill_view
+from app.views.view_skills import add_skill_to_user, skills_view
 from .views.search import user_search
 from .views.filters import search_by_skills
 from .views.angular_uneditable_account_api import user_detail_api_view
@@ -35,8 +35,8 @@ from .views.angular_uneditable_account_api import user_detail_api_view
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
     path("companies/", company_list, name="company_list"),
-    path("tags/<int:user_id>/", skill_view, name="user_tags_old"),
-    path("tags/add/", add_skill_to_user, name="add_tags"),
+    path("skills/<int:user_id>/", skills_view, name="user_skills_old"),
+    path("skills/add/", add_skill_to_user, name="add_skills"),
     path("request/", request_view, name="request"),
     path("request_form/", create_request, name="request_form"),
     path(
@@ -87,12 +87,12 @@ urlpatterns = [
     ),
     path(
         "api/user/<int:user_id>/skills/",
-        UserskillView.as_view(),
+        UserSkillView.as_view(),
         name="user-skills",
     ),
     path(
         "api/user/<int:user_id>/skill/<int:skill_id>/",
-        UserskillDeleteView.as_view(),
+        UserSkillDeleteView.as_view(),
         name="user-skill",
     ),
     path(

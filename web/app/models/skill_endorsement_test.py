@@ -11,8 +11,8 @@ class SkillEndorsementTestCase(TestCase):
     def setUp(self):
         self.user1 = User.objects.create(username="user1")
         self.user2 = User.objects.create(username="user2")
-        self.tag = Skill.objects.create(name="Python")
-        self.usertag1 = UserSkill.objects.create(user=self.user1, tag=self.tag)
+        self.skill = Skill.objects.create(name="Python")
+        self.userskill1 = UserSkill.objects.create(user=self.user1, skill=self.skill)
 
     def test_create_skill_endorsement(self):
         endorsement = SkillEndorsement.objects.create(

@@ -16,8 +16,8 @@ class SearchBySkillsTests(TestCase):
         self.user2 = User.objects.create(username="user2")
 
         # Связываем пользователей с навыками
-        UserSkill.objects.create(user=self.user1, tag=self.skill_python)
-        UserSkill.objects.create(user=self.user2, tag=self.skill_django)
+        UserSkill.objects.create(user=self.user1, skill=self.skill_python)
+        UserSkill.objects.create(user=self.user2, skill=self.skill_django)
 
     def test_view_renders_correct_template(self):
         """Проверка, что представление использует правильный шаблон."""

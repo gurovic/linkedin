@@ -11,7 +11,7 @@ def search_by_skills(request):
         selected_skills = form.cleaned_data['skills']
         if selected_skills:
             # Filter users who have all selected skills
-            users = UserSkill.objects.filter(tag__in=selected_skills).values('user').distinct()
+            users = UserSkill.objects.filter(skill__in=selected_skills).values('user').distinct()
             user_ids = users.values_list('user', flat=True)
 
             user_objects = User.objects.filter(id__in=user_ids)
