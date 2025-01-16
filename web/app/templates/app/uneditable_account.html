@@ -11,7 +11,7 @@
         <p>Логин: {{ user.username }}</p>
         <p>Электронная почта: {{ user.email }}</p>
         <h3>Навыки пользователя:</h3>
-        {% for usertag in user.usertags.all %} <p>{{ usertag.tag.name }}</p> {% endfor %}
+        {% for userskill in user.userskills.all %} <p>{{ userskill.skill.name }}</p> {% endfor %}
         <h3>Периоды обучения в школах</h3>
         {% if student_schools %}
         <ul>

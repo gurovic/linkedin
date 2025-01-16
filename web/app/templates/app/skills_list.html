@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>skills list</title>
+</head>
+<body>
+    {% for userskill in userskills_list %}
+        <h3>{{ userskill.skill.name }}</h3>
+    {% endfor %}
+</body>

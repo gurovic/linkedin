@@ -20,13 +20,13 @@ from app.views.student_schools import student_schools
 from app.views.university_api_view import university_list
 from app.views.universityview import edit_university_student
 from app.views.user_api_view import UserDetailView
-from app.views.usertag import (
+from app.views.userskill import (
     SkillEndorsementView,
-    UserTagDeleteView,
-    UserTagView,
+    UserskillDeleteView,
+    UserskillView,
 )
 from app.views.view_request import request_view
-from app.views.view_tags import add_tag_to_user, tags_view
+from app.views.view_skills import add_skill_to_user, skills_view
 
 from .views.search import user_search
 from .views.angular_uneditable_account_api import user_detail_api_view
@@ -35,8 +35,8 @@ from .views.angular_uneditable_account_api import user_detail_api_view
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
     path("companies/", company_list, name="company_list"),
-    path("tags/<int:user_id>/", tags_view, name="user_tags_old"),
-    path("tags/add/", add_tag_to_user, name="add_tags"),
+    path("skills/<int:user_id>/", skills_view, name="user_skills_old"),
+    path("skills/add/", add_skill_to_user, name="add_skills"),
     path("request/", request_view, name="request"),
     path("request_form/", create_request, name="request_form"),
     path(
@@ -87,12 +87,12 @@ urlpatterns = [
     ),
     path(
         "api/user/<int:user_id>/skills/",
-        UserTagView.as_view(),
+        UserskillView.as_view(),
         name="user-skills",
     ),
     path(
         "api/user/<int:user_id>/skill/<int:skill_id>/",
-        UserTagDeleteView.as_view(),
+        UserskillDeleteView.as_view(),
         name="user-skill",
     ),
     path(
