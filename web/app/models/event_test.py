@@ -97,7 +97,7 @@ class EventModelTests(TestCase):
 
     def test_allowed_event(self):
         self.assertTrue(self.allowed_event.allowed)
-        self.assertFalse(self.not_allowed_event.not_allowed)
+        self.assertFalse(self.not_allowed_event.allowed)
 
     def test_format_image_to_height(self):
         target_height = 50
