@@ -8,7 +8,7 @@ from .requests import Request
 from .school import MajorSubject, School
 from .skill_endorsement import SkillEndorsement
 from .student_schools import StudentSchool
-from .skill import skill, Userskill
+from .skill import Skill, UserSkill
 from .typeofuser import TypeOfUser
 from .university import University
 from .universitystudent import UniversityStudent

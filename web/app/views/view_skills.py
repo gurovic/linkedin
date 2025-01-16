@@ -3,12 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 
-from app.models import skill, Userskill
+from app.models import Skill, UserSkill
 
 
 class AddskillForm(forms.Form):
     skill = forms.ModelChoiceField(
-        queryset=skill.objects.none(),
+        queryset=Skill.objects.none(),
         label="Выберите тег",
     )
 
@@ -16,7 +16,7 @@ class AddskillForm(forms.Form):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         if user:
-            self.fields['skill'].queryset = skill.objects.exclude(userskills__user=user)
+            self.fields['skill'].queryset = Skill.objects.exclude(userskills__user=user)
 
 
 @login_required
@@ -27,7 +27,7 @@ def add_skill_to_user(request):
         form = AddskillForm(request.POST, user=user)
         if form.is_valid():
             skill = form.cleaned_data["skill"]
-            userskill = Userskill(user=user, skill=skill)
+            userskill = UserSkill(user=user, skill=skill)
             userskill.save()
             return redirect("user_skills_old", user_id=user.id)
     else:

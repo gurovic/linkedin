@@ -2,17 +2,17 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from app.models import SkillEndorsement, skill, Userskill
+from app.models import SkillEndorsement, Skill, UserSkill
 
 
-class UserskillViewTest(APITestCase):
+class UserSkillViewTest(APITestCase):
     def setUp(self):
         self.user1 = User.objects.create_user(username="testuser1", password="password")
         self.client.login(username="testuser1", password="password")
 
-        self.skill = skill.objects.create(name="Test skill")
-        self.skill2 = skill.objects.create(name="Test skill 2")
-        self.user_skill = Userskill.objects.create(user=self.user1, skill=self.skill)
+        self.skill = Skill.objects.create(name="Test Tag")
+        self.skill2 = Skill.objects.create(name="Test Tag 2")
+        self.user_skill = UserSkill.objects.create(user=self.user1, skill=self.skill)
 
     def test_list_user_skills(self):
         url = f"/api/user/{self.user1.id}/skills/"
@@ -27,14 +27,14 @@ class UserskillViewTest(APITestCase):
         response = self.client.post(url, {"skill": 2})
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Userskill.objects.count(), 2)
+        self.assertEqual(UserSkill.objects.count(), 2)
 
     def test_delete_user_skills(self):
         url = f"/api/user/{self.user1.id}/skill/{self.skill.id}/"
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Userskill.objects.count(), 0)
+        self.assertEqual(UserSkill.objects.count(), 0)
 
 
 class SkillEndorsementAPITest(APITestCase):
@@ -42,12 +42,12 @@ class SkillEndorsementAPITest(APITestCase):
         self.user = User.objects.create_user(
             username="testuser", password="password"
         )
-        self.skill = skill.objects.create(name="Test skill")
+        self.skill = Skill.objects.create(name="Test Tag")
         self.client.login(username="testuser", password="password")
         self.user2 = User.objects.create_user(
             username="testuser2", password="password"
         )
-        self.user_skill = Userskill.objects.create(user_id=self.user2.id, skill_id=1)
+        self.user_skill = UserSkill.objects.create(user_id=self.user2.id, skill_id=1)
 
     def test_list_skill_endorsements(self):
         SkillEndorsement.objects.create(

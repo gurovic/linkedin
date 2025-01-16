@@ -4,19 +4,19 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app.models import SkillEndorsement, Userskill
-from app.serializers.userskill_serializer import UserskillSerializer
+from app.models import SkillEndorsement, UserSkill
+from app.serializers.userskill_serializer import UserSkillSerializer
 
 
-class UserskillView(APIView):
+class UserSkillView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, user_id):
-        user_skills = Userskill.objects.filter(user_id=user_id)
-        serializer = UserskillSerializer(user_skills, many=True)
+        user_skills = UserSkill.objects.filter(user_id=user_id)
+        serializer = UserSkillSerializer(user_skills, many=True)
         return Response(serializer.data)
 
     def post(self, request, user_id):
-        serializer = UserskillSerializer(data=request.data)
+        serializer = UserSkillSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user_id=user_id)
             return Response(
@@ -27,17 +27,17 @@ class UserskillView(APIView):
         )
 
 
-class UserskillDeleteView(APIView):
+class UserSkillDeleteView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def delete(self, request, user_id, skill_id):
         try:
-            user_skills = Userskill.objects.filter(user_id=user_id, skill_id=skill_id)
+            user_skills = UserSkill.objects.filter(user_id=user_id, skill_id=skill_id)
             user_skills.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-        except Userskill.DoesNotExist:
+        except UserSkill.DoesNotExist:
             return Response(
-                {"error": "Userskill not found."},
+                {"error": "UserSkill not found."},
                 status=status.HTTP_404_NOT_FOUND,
             )
 
@@ -47,7 +47,7 @@ class SkillEndorsementView(APIView):
 
     def get(self, request, user_id, skill_id):
         try:
-            user_skill = Userskill.objects.get(user_id=user_id, id=skill_id)
+            user_skill = UserSkill.objects.get(user_id=user_id, id=skill_id)
             endorsements = SkillEndorsement.objects.filter(userskill=user_skill)
             endorsement_data = [
                 {"endorser": e.endorser.username}
@@ -55,7 +55,7 @@ class SkillEndorsementView(APIView):
             ]
 
             return Response(endorsement_data, status=status.HTTP_200_OK)
-        except Userskill.DoesNotExist:
+        except UserSkill.DoesNotExist:
             return Response(
                 {"error": "User or skill not found."},
                 status=status.HTTP_404_NOT_FOUND,
@@ -64,7 +64,7 @@ class SkillEndorsementView(APIView):
     def post(self, request, user_id, skill_id):
         try:
             endorser = request.user
-            user_skill = Userskill.objects.get(user_id=user_id, id=skill_id)
+            user_skill = UserSkill.objects.get(user_id=user_id, id=skill_id)
 
             endorsement = SkillEndorsement(endorser=endorser, userskill=user_skill)
             endorsement.clean()
@@ -74,7 +74,7 @@ class SkillEndorsementView(APIView):
                 {"message": "Skill endorsement created successfully."},
                 status=status.HTTP_201_CREATED,
             )
-        except Userskill.DoesNotExist:
+        except UserSkill.DoesNotExist:
             return Response(
                 {"error": "User or skill not found."},
                 status=status.HTTP_404_NOT_FOUND,
@@ -88,7 +88,7 @@ class SkillEndorsementView(APIView):
     def delete(self, request, user_id, skill_id):
         try:
             endorser = request.user
-            user_skill = Userskill.objects.get(user_id=user_id, id=skill_id)
+            user_skill = UserSkill.objects.get(user_id=user_id, id=skill_id)
 
             endorsement = SkillEndorsement.objects.get(
                 endorser=endorser, userskill=user_skill

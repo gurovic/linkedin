@@ -22,13 +22,13 @@ from app.views.universityview import edit_university_student
 from app.views.user_api_view import UserDetailView
 from app.views.userskill import (
     SkillEndorsementView,
-    UserskillDeleteView,
-    UserskillView,
+    UserSkillDeleteView,
+    UserSkillView,
 )
 from app.views.view_request import request_view
 from app.views.view_skills import add_skill_to_user, skills_view
-
 from .views.search import user_search
+from .views.filters import search_by_skills
 from .views.angular_uneditable_account_api import user_detail_api_view
 
 
@@ -87,12 +87,12 @@ urlpatterns = [
     ),
     path(
         "api/user/<int:user_id>/skills/",
-        UserskillView.as_view(),
+        UserSkillView.as_view(),
         name="user-skills",
     ),
     path(
         "api/user/<int:user_id>/skill/<int:skill_id>/",
-        UserskillDeleteView.as_view(),
+        UserSkillDeleteView.as_view(),
         name="user-skill",
     ),
     path(
@@ -113,6 +113,7 @@ urlpatterns = [
     path("change_password/", change_password, name="change_password"),
     path("api/auth/check/", AuthCheckView.as_view(), name="api_auth_check"),
     path('search/', user_search, name='user_search'),
+    path('search/search_by_skills', search_by_skills, name='search_by_skills'),
     
     path('angular/account/<int:user_id>/', user_detail_api_view, name='angular_uneditable_account_api')
 ]
