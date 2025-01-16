@@ -41,7 +41,8 @@ class HomeViewTests(TestCase):
                 content_type='image/jpeg'
             ),
             date=timezone.now() + datetime.timedelta(days=10),
-            location="Future Location"
+            location="Future Location",
+            allowed=True
         )
 
         self.past_event = Event.objects.create(
@@ -49,7 +50,8 @@ class HomeViewTests(TestCase):
             description="An past event",
             picture=None,
             date=timezone.now() - datetime.timedelta(days=10),
-            location="Past Location"
+            location="Past Location",
+            allowed=True
         )
 
         self.response = self.client.get(reverse('home'))
