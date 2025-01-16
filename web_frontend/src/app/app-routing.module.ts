@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UneditableAccountComponent } from './components/uneditable-account/uneditable-account.component';
+import { BlankComponent } from './components/blank.component';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
-  { path: '', redirectTo: '/account/1', pathMatch: 'full' }, // Default route
+  { path: '**', component: BlankComponent },
 ];
 
 @NgModule({

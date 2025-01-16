@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/uneditable-account.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-uneditable-account',
+  standalone: true, 
+  imports: [CommonModule],
   templateUrl: './uneditable-account.component.html',
   styleUrls: ['./uneditable-account.component.css']
 })
