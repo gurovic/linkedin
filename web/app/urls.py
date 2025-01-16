@@ -20,7 +20,7 @@ from app.views.student_schools import student_schools
 from app.views.university_api_view import university_list
 from app.views.universityview import edit_university_student
 from app.views.user_api_view import UserDetailView
-from app.views.usertag import (
+from app.views.userskill import (
     SkillEndorsementView,
     UserSkillDeleteView,
     UserSkillView,
@@ -87,12 +87,12 @@ urlpatterns = [
     ),
     path(
         "api/user/<int:user_id>/skills/",
-        UserTagView.as_view(),
+        UserskillView.as_view(),
         name="user-skills",
     ),
     path(
         "api/user/<int:user_id>/skill/<int:skill_id>/",
-        UserTagDeleteView.as_view(),
+        UserskillDeleteView.as_view(),
         name="user-skill",
     ),
     path(

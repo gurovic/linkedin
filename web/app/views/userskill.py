@@ -8,7 +8,7 @@ from app.models import SkillEndorsement, UserSkill
 from app.serializers.usertag_serializer import UserTagSerializer
 
 
-class UserTagView(APIView):
+class UserskillView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, user_id):
         user_tags = UserSkill.objects.filter(user_id=user_id)
@@ -16,7 +16,7 @@ class UserTagView(APIView):
         return Response(serializer.data)
 
     def post(self, request, user_id):
-        serializer = UserTagSerializer(data=request.data)
+        serializer = UserskillSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user_id=user_id)
             return Response(
@@ -27,7 +27,7 @@ class UserTagView(APIView):
         )
 
 
-class UserTagDeleteView(APIView):
+class UserskillDeleteView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def delete(self, request, user_id, skill_id):
@@ -37,7 +37,7 @@ class UserTagDeleteView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except UserSkill.DoesNotExist:
             return Response(
-                {"error": "Usertag not found."},
+                {"error": "Userskill not found."},
                 status=status.HTTP_404_NOT_FOUND,
             )
 
@@ -66,7 +66,7 @@ class SkillEndorsementView(APIView):
             endorser = request.user
             user_tag = UserSkill.objects.get(user_id=user_id, id=skill_id)
 
-            endorsement = SkillEndorsement(endorser=endorser, usertag=user_tag)
+            endorsement = SkillEndorsement(endorser=endorser, userskill=user_skill)
             endorsement.clean()
             endorsement.save()
 
@@ -91,7 +91,7 @@ class SkillEndorsementView(APIView):
             user_tag = UserSkill.objects.get(user_id=user_id, id=skill_id)
 
             endorsement = SkillEndorsement.objects.get(
-                endorser=endorser, usertag=user_tag
+                endorser=endorser, userskill=user_skill
             )
             endorsement.delete()
 

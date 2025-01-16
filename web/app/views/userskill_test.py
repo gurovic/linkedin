@@ -5,7 +5,7 @@ from rest_framework.test import APITestCase
 from app.models import SkillEndorsement, Skill, UserSkill
 
 
-class UserTagViewTest(APITestCase):
+class UserskillViewTest(APITestCase):
     def setUp(self):
         self.user1 = User.objects.create_user(username="testuser1", password="password")
         self.client.login(username="testuser1", password="password")
@@ -14,23 +14,23 @@ class UserTagViewTest(APITestCase):
         self.tag2 = Skill.objects.create(name="Test Tag 2")
         self.user_tag = UserSkill.objects.create(user=self.user1, tag=self.tag)
 
-    def test_list_user_tags(self):
+    def test_list_user_skills(self):
         url = f"/api/user/{self.user1.id}/skills/"
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]["tag"], 1)
+        self.assertEqual(response.data[0]["skill"], 1)
 
-    def test_create_user_tag(self):
+    def test_create_user_skill(self):
         url = f"/api/user/{self.user1.id}/skills/"
-        response = self.client.post(url, {"tag": 2})
+        response = self.client.post(url, {"skill": 2})
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(UserSkill.objects.count(), 2)
 
-    def test_delete_user_tags(self):
-        url = f"/api/user/{self.user1.id}/skill/{self.tag.id}/"
+    def test_delete_user_skills(self):
+        url = f"/api/user/{self.user1.id}/skill/{self.skill.id}/"
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -51,9 +51,9 @@ class SkillEndorsementAPITest(APITestCase):
 
     def test_list_skill_endorsements(self):
         SkillEndorsement.objects.create(
-            endorser=self.user, usertag=self.user_tag
+            endorser=self.user, userskill=self.user_skill
         )
-        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorsement/"
+        url = f"/api/user/{self.user2.id}/skill/{self.user_skill.id}/endorsement/"
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -61,7 +61,7 @@ class SkillEndorsementAPITest(APITestCase):
         self.assertEqual(response.data[0]["endorser"], "testuser")
 
     def test_endorse_skill(self):
-        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorsement/"
+        url = f"/api/user/{self.user2.id}/skill/{self.user_skill.id}/endorsement/"
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -69,9 +69,9 @@ class SkillEndorsementAPITest(APITestCase):
 
     def test_endorse_skill_already_exists(self):
         SkillEndorsement.objects.create(
-            endorser=self.user, usertag=self.user_tag
+            endorser=self.user, userskill=self.user_skill
         )
-        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorsement/"
+        url = f"/api/user/{self.user2.id}/skill/{self.user_skill.id}/endorsement/"
         response = self.client.post(url)
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -85,9 +85,9 @@ class SkillEndorsementAPITest(APITestCase):
 
     def test_delete_skill_endorsement(self):
         SkillEndorsement.objects.create(
-            endorser=self.user, usertag=self.user_tag
+            endorser=self.user, userskill=self.user_skill
         )
-        url = f"/api/user/{self.user2.id}/skill/{self.user_tag.id}/endorsement/"
+        url = f"/api/user/{self.user2.id}/skill/{self.user_skill.id}/endorsement/"
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)

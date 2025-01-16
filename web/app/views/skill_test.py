@@ -2,18 +2,18 @@ from django.contrib.auth.models import User
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from app.models import Skill, UserSkill
+from app.models import skill, Userskill
 
 
-class TestSkillViews(TestCase):
+class TestskillViews(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user(
             username="testuser", password="testpassword"
         )
-        self.skill1 = Skill.objects.create(name="Skill1")
-        self.skill2 = Skill.objects.create(name="Skill2")
-        self.userskill = UserSkill.objects.create(user=self.user, skill=self.skill1)
+        self.skill1 = skill.objects.create(name="skill1")
+        self.skill2 = skill.objects.create(name="skill2")
+        self.userskill = Userskill.objects.create(user=self.user, skill=self.skill1)
 
     def test_add_skill_to_user_get(self):
         self.client.login(username="testuser", password="testpassword")
@@ -32,7 +32,7 @@ class TestSkillViews(TestCase):
         response = self.client.post(reverse("add_skills"), {"skill": self.skill2.id})
         self.assertEqual(response.status_code, 302)
         self.assertTrue(
-            UserSkill.objects.filter(user=self.user, skill=self.skill2).exists()
+            Userskill.objects.filter(user=self.user, skill=self.skill2).exists()
         )
 
     def test_skills_view(self):
