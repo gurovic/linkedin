@@ -15,6 +15,7 @@ from app.models import (
     Tag,
     University,
     UniversityStudent,
+    UserTag,
     Vacancy,
 )
 
@@ -31,3 +32,4 @@ admin.site.register(JobExperience)
 admin.site.register(AlumniVerificationRequest)
 admin.site.register(Image)
 admin.site.register(SkillEndorsement)
+admin.site.register(UserTag)
