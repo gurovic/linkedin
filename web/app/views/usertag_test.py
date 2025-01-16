@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from app.models import SkillEndorsement, Tag, UserTag
+from app.models import SkillEndorsement, Skill, UserSkill
 
 
 class UserTagViewTest(APITestCase):
@@ -10,9 +10,9 @@ class UserTagViewTest(APITestCase):
         self.user1 = User.objects.create_user(username="testuser1", password="password")
         self.client.login(username="testuser1", password="password")
 
-        self.tag = Tag.objects.create(name="Test Tag")
-        self.tag2 = Tag.objects.create(name="Test Tag 2")
-        self.user_tag = UserTag.objects.create(user=self.user1, tag=self.tag)
+        self.tag = Skill.objects.create(name="Test Tag")
+        self.tag2 = Skill.objects.create(name="Test Tag 2")
+        self.user_tag = UserSkill.objects.create(user=self.user1, tag=self.tag)
 
     def test_list_user_tags(self):
         url = f"/api/user/{self.user1.id}/skills/"
@@ -27,14 +27,14 @@ class UserTagViewTest(APITestCase):
         response = self.client.post(url, {"tag": 2})
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(UserTag.objects.count(), 2)
+        self.assertEqual(UserSkill.objects.count(), 2)
 
     def test_delete_user_tags(self):
         url = f"/api/user/{self.user1.id}/skill/{self.tag.id}/"
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(UserTag.objects.count(), 0)
+        self.assertEqual(UserSkill.objects.count(), 0)
 
 
 class SkillEndorsementAPITest(APITestCase):
@@ -42,12 +42,12 @@ class SkillEndorsementAPITest(APITestCase):
         self.user = User.objects.create_user(
             username="testuser", password="password"
         )
-        self.tag = Tag.objects.create(name="Test Tag")
+        self.tag = Skill.objects.create(name="Test Tag")
         self.client.login(username="testuser", password="password")
         self.user2 = User.objects.create_user(
             username="testuser2", password="password"
         )
-        self.user_tag = UserTag.objects.create(user_id=self.user2.id, tag_id=1)
+        self.user_tag = UserSkill.objects.create(user_id=self.user2.id, tag_id=1)
 
     def test_list_skill_endorsements(self):
         SkillEndorsement.objects.create(

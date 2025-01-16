@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django import forms
-from ..models import Tag
+from ..models import Skill
 
 class AddTagForm(forms.Form):
-    tag = forms.ModelChoiceField(queryset = Tag.objects.all(), label = "Выберите тег")
+    tag = forms.ModelChoiceField(queryset = Skill.objects.all(), label ="Выберите тег")
 
 def add_tag_to_user(request, user_id):
     user = get_object_or_404(User, id=user_id)

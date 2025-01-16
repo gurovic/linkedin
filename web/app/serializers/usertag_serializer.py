@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from app.models import UserTag
+from app.models import UserSkill
 
 
 class UserTagSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserTag
+        model = UserSkill
         fields = ["id", "tag"]
 

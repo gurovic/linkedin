@@ -2,17 +2,17 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
-from app.models import UserTag
+from app.models import UserSkill
 from app.models.skill_endorsement import SkillEndorsement
-from app.models.tag import Tag
+from app.models.skill import Skill
 
 
 class SkillEndorsementTestCase(TestCase):
     def setUp(self):
         self.user1 = User.objects.create(username="user1")
         self.user2 = User.objects.create(username="user2")
-        self.tag = Tag.objects.create(name="Python")
-        self.usertag1 = UserTag.objects.create(user=self.user1, tag=self.tag)
+        self.tag = Skill.objects.create(name="Python")
+        self.usertag1 = UserSkill.objects.create(user=self.user1, tag=self.tag)
 
     def test_create_skill_endorsement(self):
         endorsement = SkillEndorsement.objects.create(

@@ -1,12 +1,12 @@
 from django.db.utils import IntegrityError
 from django.test import TestCase
 
-from app.models import Tag, UserTag
+from app.models import Skill, UserSkill
 
 
 class TestTag(TestCase):
     def setUp(self):
-        self.tag = Tag(name="example")
+        self.tag = Skill(name="example")
 
     def test_tag_creation(self):
         self.assertEqual(self.tag.name, "example")
@@ -16,7 +16,7 @@ class TestTag(TestCase):
 
 class TestUserTag(TestCase):
     def setUp(self):
-        self.user_tag = UserTag(user_id=1, tag_id=1)
+        self.user_tag = UserSkill(user_id=1, tag_id=1)
 
     def test_user_tag_creation(self):
         self.assertEqual(self.user_tag.user_id, 1)
@@ -24,6 +24,6 @@ class TestUserTag(TestCase):
 
     def test_user_tag_unique(self):
         self.user_tag.save()
-        user_tag = UserTag(user_id=1, tag_id=1)
+        user_tag = UserSkill(user_id=1, tag_id=1)
         with self.assertRaises(IntegrityError):
             user_tag.save()
