@@ -8,7 +8,7 @@ def event_creation(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("event_list")
+            return redirect("event_list_old")
     else:
         form = EventForm()
     return render(request, "app/event_creation.html", {"form": form})

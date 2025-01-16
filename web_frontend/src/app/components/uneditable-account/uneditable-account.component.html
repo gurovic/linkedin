@@ -1,0 +1,28 @@
+<div *ngIf="user">
+    <h1>Вы просматриваете аккаунт без права редактирования</h1>
+    <div>
+      <h2>Имя, Фамилия: {{ user.first_name }} {{ user.last_name }}</h2>
+      <p>Логин: {{ user.username }}</p>
+      <p>Электронная почта: {{ user.email }}</p>
+  
+      <h3>Периоды обучения в школах</h3>
+      <ul *ngIf="studentSchools.length > 0; else noSchoolData">
+        <li *ngFor="let school of studentSchools">
+          {{ school.name }} - {{ school.start_year }}, {{ school.finish_year }}, ушёл, так как {{ school.leave_reason }}
+        </li>
+      </ul>
+      <ng-template #noSchoolData>
+        <p>Нет сведений о периодах обучения в школах.</p>
+      </ng-template>
+  
+      <h3>Периоды обучения в университетах</h3>
+      <ul *ngIf="studentUniversities.length > 0; else noUniversityData">
+        <li *ngFor="let university of studentUniversities">
+          {{ university.name }} - {{ university.start_date }}, {{ university.end_date }}, ушёл, так как {{ university.leave_reason }}
+        </li>
+      </ul>
+      <ng-template #noUniversityData>
+        <p>Нет сведений о периодах обучения в университетах.</p>
+      </ng-template>
+    </div>
+  </div>

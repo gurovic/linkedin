@@ -7,7 +7,7 @@ def home(request):
     users = User.objects.all()
 
     event_objects = Event.objects.all()
-    events = [event for event in event_objects if not event.already_passed()]
+    events = [event for event in event_objects if ((not event.already_passed()) and event.allowed)]
 
     companies = Company.objects.all()
 
