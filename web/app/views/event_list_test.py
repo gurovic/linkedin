@@ -24,7 +24,16 @@ class EventListViewTests(TestCase):
             description="This is a future event.",
             picture=SimpleUploadedFile(name='test_image.jpg', content=image_io.read(), content_type='image/jpeg'),
             date=timezone.now() + datetime.timedelta(days=5),
-            location="Location 1"
+            location="Location 1",
+            allowed = True
+        )
+        self.event2 = Event.objects.create(
+            name="Denied Event",
+            description="This event is not allowed.",
+            picture=SimpleUploadedFile(name='test_image2.jpg', content=image_io.read(), content_type='image/jpeg'),
+            date=timezone.now() + datetime.timedelta(days=10),
+            location="Location 2",
+            allowed=False
         )
 
     def tearDown(self):

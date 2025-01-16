@@ -9,6 +9,7 @@ class Event(models.Model):
     name = models.CharField(max_length = 200)
     description = models.TextField()
     picture = models.ImageField(upload_to = "events/", blank = True)
+
     date = models.DateTimeField()
     participants = models.ManyToManyField("auth.User", blank = True, related_name = "events")
     location = models.CharField(max_length = 200)

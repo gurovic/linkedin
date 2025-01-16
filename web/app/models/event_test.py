@@ -23,6 +23,22 @@ class EventModelTests(TestCase):
             location = 'Test Location'
         )
 
+        self.allowed_event = Event.objects.create(
+            name='Test Event',
+            description='This is a test event',
+            date=timezone.now(),
+            location='Test Location',
+            allowed=True
+        )
+
+        self.not_allowed_event = Event.objects.create(
+            name='Test Event',
+            description='This is a test event',
+            date=timezone.now(),
+            location='Test Location',
+            allowed=False
+        )
+
         self.past_event = Event.objects.create(
             name = 'Past Event',
             description = 'This event happened in the past',
@@ -78,6 +94,10 @@ class EventModelTests(TestCase):
     def test_already_passed(self):
         self.assertTrue(self.past_event.already_passed())
         self.assertFalse(self.event.already_passed())
+
+    def test_allowed_event(self):
+        self.assertTrue(self.allowed_event.allowed)
+        self.assertFalse(self.not_allowed_event.not_allowed)
 
     def test_format_image_to_height(self):
         target_height = 50
