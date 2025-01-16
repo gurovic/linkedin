@@ -1,10 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render
-
 from app.forms.edit_account import EditAccountForm
 from app.models import StudentSchool, UniversityStudent
-
+from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
 @login_required
 def editable_account_view(request, user_id):

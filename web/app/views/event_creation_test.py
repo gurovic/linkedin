@@ -29,7 +29,7 @@ class EventCreationViewTests(TestCase):
             ),
         }
         response = self.client.post(self.url, data)
-        self.assertRedirects(response, reverse("event_list"))
+        self.assertRedirects(response, reverse("event_list_old"))
         self.assertTrue(Event.objects.filter(name="Test Event").exists())
 
     def test_event_creation_post_invalid(self):

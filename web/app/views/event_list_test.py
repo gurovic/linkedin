@@ -41,18 +41,18 @@ class EventListViewTests(TestCase):
         Event.objects.all().delete()
 
     def test_event_list_view_status_code(self):
-        response = self.client.get(reverse("event_list"))
+        response = self.client.get(reverse("event_list_old"))
         self.assertEqual(response.status_code, 200)
 
     def test_event_list_view_context(self):
-        response = self.client.get(reverse("event_list"))
+        response = self.client.get(reverse("event_list_old"))
         self.assertEqual(response.status_code, 200)
         self.assertTrue('event_list' in response.context)
         self.assertEqual(len(response.context['event_list']), 1)
         self.assertEqual(response.context['event_list'][0].name, "Future Event")
 
     def test_event_image_formatting(self):
-        response = self.client.get(reverse("event_list"))
+        response = self.client.get(reverse("event_list_old"))
         self.assertEqual(response.status_code, 200)
         event = Event.objects.get(id=self.event1.id)
         self.assertTrue(event.picture.name.startswith("events/test_image"))
