@@ -10,6 +10,8 @@
         <h2>Имя, Фамилия: {{ user.first_name }} {{ user.last_name }}</h2>
         <p>Логин: {{ user.username }}</p>
         <p>Электронная почта: {{ user.email }}</p>
+        <h3>Навыки пользователя:</h3>
+        {% for userskill in user.userskills.all %} <p>{{ userskill.skill.name }}</p> {% endfor %}
         <h3>Периоды обучения в школах</h3>
         {% if student_schools %}
         <ul>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Users by Skills</title>
+</head>
+<body>
+    <h1>Search Users by Skills</h1>
+
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if userskills %}
+        <h2>Results:</h2>
+        <ul>
+            {% for userskill in userskills %}
+                <li>{{ userskill.username}}</li>
+            {% endfor %}
+        </ul>
+    {% elif userskills is not None %}
+        <p>No users found with the selected skills.</p>
+    {% endif %}
+</body>
+</html>
