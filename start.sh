@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$(realpath "$(dirname $0)")" || exit 1
+
 cleanup() {
     echo "Killing background processes..."
     kill $django_pid
