@@ -83,12 +83,12 @@ WSGI_APPLICATION = 'web.wsgi.application'
 
 DATABASES = {}
 
-if DEBUG:
-    DATABASES["default"] = {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-else:
+USE_POSTGRES = os.environ.get(
+    "DJANGO_USE_POSTGRES",
+    "false",
+).lower() in ["true", "1", "t", "y", "yes"]
+
+if USE_POSTGRES or not DEBUG:
     DATABASES["default"] = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "linkedin",
@@ -96,6 +96,11 @@ else:
         "PASSWORD": "code123",
         "HOST": "localhost",
         "PORT": 5432,
+    }
+else:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 
 # Password validation
