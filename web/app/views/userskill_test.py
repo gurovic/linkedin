@@ -8,7 +8,7 @@ from app.models import SkillEndorsement, Skill, UserSkill
 class UserSkillViewTest(APITestCase):
     def setUp(self):
         self.user1 = User.objects.create_user(username="testuser1", password="password")
-        self.client.login(username="testuser1", password="password")
+        self.client.force_authenticate(user=self.user1)
 
         self.skill = Skill.objects.create(name="Test Tag")
         self.skill2 = Skill.objects.create(name="Test Tag 2")
@@ -20,11 +20,11 @@ class UserSkillViewTest(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]["skill"], 1)
+        self.assertEqual(response.data[0]["skill"], self.skill.id)
 
     def test_create_user_skill(self):
         url = f"/api/user/{self.user1.id}/skills/"
-        response = self.client.post(url, {"skill": 2})
+        response = self.client.post(url, {"skill": self.skill2.id})
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(UserSkill.objects.count(), 2)
@@ -43,11 +43,11 @@ class SkillEndorsementAPITest(APITestCase):
             username="testuser", password="password"
         )
         self.skill = Skill.objects.create(name="Test Tag")
-        self.client.login(username="testuser", password="password")
+        self.client.force_authenticate(user=self.user)
         self.user2 = User.objects.create_user(
             username="testuser2", password="password"
         )
-        self.user_skill = UserSkill.objects.create(user_id=self.user2.id, skill_id=1)
+        self.user_skill = UserSkill.objects.create(user_id=self.user2.id, skill_id=self.skill.id)
 
     def test_list_skill_endorsements(self):
         SkillEndorsement.objects.create(
