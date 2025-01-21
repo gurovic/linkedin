@@ -30,6 +30,7 @@ from app.views.view_tags import add_tag_to_user, tags_view
 
 from .views.search import user_search
 from .views.angular_uneditable_account_api import user_detail_api_view
+from app.views.event_list_api import EventListAPIView
 
 
 urlpatterns = [
@@ -114,5 +115,6 @@ urlpatterns = [
     path("api/auth/check/", AuthCheckView.as_view(), name="api_auth_check"),
     path('search/', user_search, name='user_search'),
     
-    path('angular/account/<int:user_id>/', user_detail_api_view, name='angular_uneditable_account_api')
+    path('angular/account/<int:user_id>/', user_detail_api_view, name='angular_uneditable_account_api'),
+    path('api/event_list', EventListAPIView.as_view(), name ='events_list_api')
 ]
