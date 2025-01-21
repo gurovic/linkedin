@@ -1,14 +1,13 @@
-from django.test import Client, TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from ..models.company import Company
+from rest_framework.test import APITestCase, APIClient
 
 
-class ApiAuthCheckTests(TestCase):
+class ApiAuthCheckTests(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')
-        self.user_client = Client()
-        self.user_client.login(username='testuser', password='testpassword')
+        self.user_client = APIClient()
+        self.user_client.force_authenticate(user=self.user)
 
         self.response_unauth = self.client.get(reverse('api_auth_check'))
         self.response_auth = self.user_client.get(reverse('api_auth_check'))

@@ -12,10 +12,10 @@ from app.models import (
     School,
     SkillEndorsement,
     StudentSchool,
-    Tag,
+    Skill,
     University,
     UniversityStudent,
-    UserTag,
+    UserSkill,
     Vacancy,
 )
 
@@ -23,7 +23,7 @@ admin.site.register([MajorSubject, School, StudentSchool])
 admin.site.register(Event)
 admin.site.register(Vacancy)
 admin.site.register(Company)
-admin.site.register(Tag)
+admin.site.register(Skill)
 admin.site.register(Request)
 admin.site.register(Answer)
 admin.site.register(University)
@@ -32,4 +32,4 @@ admin.site.register(JobExperience)
 admin.site.register(AlumniVerificationRequest)
 admin.site.register(Image)
 admin.site.register(SkillEndorsement)
-admin.site.register(UserTag)
+admin.site.register(UserSkill)

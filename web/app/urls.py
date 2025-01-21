@@ -1,4 +1,6 @@
 from django.urls import path
+from knox import views as knox_views
+
 from app.views.account import editable_account_view, uneditable_account_view
 from app.views.api_auth_check import AuthCheckView
 from app.views.company_list import company_list
@@ -20,24 +22,25 @@ from app.views.student_schools import student_schools
 from app.views.university_api_view import university_list
 from app.views.universityview import edit_university_student
 from app.views.user_api_view import UserDetailView
-from app.views.usertag import (
+from app.views.userskill import (
     SkillEndorsementView,
-    UserTagDeleteView,
-    UserTagView,
+    UserSkillDeleteView,
+    UserSkillView,
 )
 from app.views.view_request import request_view
-from app.views.view_tags import add_tag_to_user, tags_view
-
+from app.views.view_skills import add_skill_to_user, skills_view
 from .views.search import user_search
+from .views.filters import search_by_skills
 from .views.angular_uneditable_account_api import user_detail_api_view
+from app.views.api_login import LoginView
 from app.views.event_list_api import EventListAPIView
 
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
     path("companies/", company_list, name="company_list"),
-    path("tags/<int:user_id>/", tags_view, name="user_tags_old"),
-    path("tags/add/", add_tag_to_user, name="add_tags"),
+    path("skills/<int:user_id>/", skills_view, name="user_skills_old"),
+    path("skills/add/", add_skill_to_user, name="add_skills"),
     path("request/", request_view, name="request"),
     path("request_form/", create_request, name="request_form"),
     path(
@@ -69,6 +72,9 @@ urlpatterns = [
         name="student_school_form",
     ),
     path("index/", index, name="index"),
+    path(r"api/auth/login/", LoginView.as_view(), name='knox_login'),
+    path(r"api/auth/logout/", knox_views.LogoutView.as_view(), name='knox_logout'),
+    path(r"api/auth/logoutall/", knox_views.LogoutAllView.as_view(), name='knox_logoutall'),
     path("api/event/", EventView.as_view(), name="events"),
     path(
         "api/event/<int:event_id>/",
@@ -88,12 +94,12 @@ urlpatterns = [
     ),
     path(
         "api/user/<int:user_id>/skills/",
-        UserTagView.as_view(),
+        UserSkillView.as_view(),
         name="user-skills",
     ),
     path(
         "api/user/<int:user_id>/skill/<int:skill_id>/",
-        UserTagDeleteView.as_view(),
+        UserSkillDeleteView.as_view(),
         name="user-skill",
     ),
     path(
@@ -114,7 +120,7 @@ urlpatterns = [
     path("change_password/", change_password, name="change_password"),
     path("api/auth/check/", AuthCheckView.as_view(), name="api_auth_check"),
     path('search/', user_search, name='user_search'),
-    
+    path('search/search_by_skills', search_by_skills, name='search_by_skills'),
     path('angular/account/<int:user_id>/', user_detail_api_view, name='angular_uneditable_account_api'),
     path('api/event_list', EventListAPIView.as_view(), name ='events_list_api')
 ]
