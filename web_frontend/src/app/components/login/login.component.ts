@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,7 @@ export class LoginComponent {
       'Authorization': 'Basic ' + btoa(username + ':' + password)
     });
 
-    this.http.post(`http://localhost:8000/api/auth/login/`, JSON.stringify({}), {headers: headers}).subscribe(
+    this.http.post(environment.apiUrl + `api/auth/login/`, JSON.stringify({}), {headers: headers}).subscribe(
       response => {
         console.log('Login successful', response);
         this.loginError = null;

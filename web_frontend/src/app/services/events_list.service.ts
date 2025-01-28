@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Event_List_Service {
-  private baseUrl = 'http://127.0.0.1:8000/api/event_list/'; // API base URL
+  private baseUrl = environment.apiUrl + 'api/event_list'; // API base URL
 
   constructor(private http: HttpClient) {}
 
