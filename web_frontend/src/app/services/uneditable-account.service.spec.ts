@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UneditableAccountService } from './uneditable-account.service';
+import { UserService } from './uneditable-account.service';
 
-describe('UneditableAccountService', () => {
-  let service: UneditableAccountService;
+describe('UserService', () => {
+  let service: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UneditableAccountService);
+    service = TestBed.inject(UserService);
   });
 
   it('should be created', () => {

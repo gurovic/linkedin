@@ -2,12 +2,12 @@
     <div *ngFor="let event of events" class="event-card">
       <h1>{{ event.name }}</h1>
       <p>{{ event.description }}</p>
-      <img *ngIf="event.picture" [src]="event.picture" alt="Picture of {{ event.name }}" style="max-width:300px;">
+      <img *ngIf="event.picture" src="{{env.mediaUrl}}{{event.picture}}" alt="Picture of {{ event.name }}" style="max-width:300px;">
       <p>Date: {{ event.date }}</p>
       <p>Location: {{ event.location }}</p>
     </div>
   </div>
-  
+
   <ng-template #noEvents>
     <p>No events available.</p>
   </ng-template>
