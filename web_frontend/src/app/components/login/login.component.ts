@@ -37,9 +37,10 @@ export class LoginComponent {
     });
 
     this.http.post(environment.apiUrl + `api/auth/login/`, JSON.stringify({}), {headers: headers}).subscribe(
-      response => {
+      (response: any) => {
         console.log('Login successful', response);
         this.loginError = null;
+        localStorage.setItem('authToken', response.token);
         this.router.navigate(['/']);
       },
       error => {
