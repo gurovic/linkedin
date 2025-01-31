@@ -11,7 +11,7 @@ class AlumniVerificationRequest(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to = "verif/", blank=True)
     approved = models.CharField(max_length=120, choices=ANSWER_CHOICES, default='NA')
 
     def __str__(self):
