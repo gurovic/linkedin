@@ -1,6 +1,6 @@
 <div *ngIf="event">
     <h1>{{ event.name }}</h1>
-    <img *ngIf="event.picture" src="http://localhost:8000/{{event.picture}}" alt="Event Picture" />
+    <img *ngIf="event.picture" src="{{env.mediaUrl}}{{event.picture}}" alt="Event Picture" />
     <p>{{ event.description }}</p>
     <p><strong>Date:</strong> {{ event.date }}</p>
     <p><strong>Location:</strong> {{ event.location }}</p>

@@ -92,11 +92,11 @@ USE_POSTGRES = os.environ.get(
 if USE_POSTGRES or not DEBUG:
     DATABASES["default"] = {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "linkedin",
-        "USER": "postgres",
-        "PASSWORD": "code123",
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": os.environ.get("DJANGO_PG_NAME", "linkedin"),
+        "USER": os.environ.get("DJANGO_PG_USER", "postgres"),
+        "PASSWORD": os.environ.get("DJANGO_PG_PASSWORD", "code123"),
+        "HOST": os.environ.get("DJANGO_PG_HOST", "localhost"),
+        "PORT": int(os.environ.get("DJANGO_PG_PORT", "5432")),
     }
 else:
     DATABASES["default"] = {

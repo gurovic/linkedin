@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event_List_Service } from '../../services/events_list.service';
 import { CommonModule } from '@angular/common'; // Import CommonModule
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-event-list',
@@ -11,6 +12,7 @@ import { CommonModule } from '@angular/common'; // Import CommonModule
 })
 export class EventListComponent implements OnInit {
   events: any[] = []; // Store event data
+  env = environment;
 
   constructor(private eventService: Event_List_Service) {}
 
