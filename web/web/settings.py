@@ -82,20 +82,27 @@ WSGI_APPLICATION = 'web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
+DATABASES = {}
+
+USE_POSTGRES = os.environ.get(
+    "DJANGO_USE_POSTGRES",
+    "false",
+).lower() in ["true", "1", "t", "y", "yes"]
+
+if USE_POSTGRES or not DEBUG:
+    DATABASES["default"] = {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "linkedin",
-        "USER": "postgres",
-        "PASSWORD": "providenxe960",
-        "HOST": "localhost",
-        "PORT": 5432,
-        "OPTIONS": {
-            "client_encoding": "UTF8",
-            "options": "-c search_path=public",
-        },
+        "NAME": os.environ.get("DJANGO_PG_NAME", "linkedin"),
+        "USER": os.environ.get("DJANGO_PG_USER", "postgres"),
+        "PASSWORD": os.environ.get("DJANGO_PG_PASSWORD", "code123"),
+        "HOST": os.environ.get("DJANGO_PG_HOST", "localhost"),
+        "PORT": int(os.environ.get("DJANGO_PG_PORT", "5432")),
     }
-}
+else:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
