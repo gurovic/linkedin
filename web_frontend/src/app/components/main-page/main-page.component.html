@@ -1,0 +1,14 @@
+<h1>Добро пожаловать на Letovo LinkedIn!</h1>
+<button (click)="showLogin = true" class="open-btn">Sign in</button>
+<div class="popup" *ngIf="showLogin">
+  <div class="popup-content">
+    <button (click)="showLogin = false" class="close-btn">x</button>
+    <app-login></app-login>
+  </div>
+</div>
+
+<app-values></app-values>
+
+<app-about-site></app-about-site>
+
+<app-footer></app-footer>

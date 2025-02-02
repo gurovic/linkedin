@@ -4,12 +4,14 @@ import { UneditableAccountComponent } from './components/uneditable-account/uned
 import { BlankComponent } from './components/blank.component';
 import { EventDetailComponent } from './components/event/event.component';
 import { EventListComponent } from './components/event-list/event-list.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
   { path: 'event/:event_id', component: EventDetailComponent },
   { path: 'events', component: EventListComponent },
+  { path: '', component: MainPageComponent },
   { path: 'logout', component: LogoutComponent },
   { path: '**', component: BlankComponent },
 ];
