@@ -18,6 +18,8 @@ from app.models import (
     UserSkill,
     Vacancy,
 )
+from app.models.language import Language
+from app.models.major import Major
 
 admin.site.register([MajorSubject, School, StudentSchool])
 admin.site.register(Event)
@@ -33,3 +35,5 @@ admin.site.register(AlumniVerificationRequest)
 admin.site.register(Image)
 admin.site.register(SkillEndorsement)
 admin.site.register(UserSkill)
+admin.site.register(Major)
+admin.site.register(Language)

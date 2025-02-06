@@ -7,3 +7,4 @@ django-rest-knox~=5.0.2
 psycopg2~=2.9.10
 python-dotenv~=1.0.1
 tzdata==2024.2
+geopy==2.4.1
