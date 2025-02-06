@@ -15,6 +15,7 @@ class LanguageTest(TestCase):
         self.assertEqual(str(self.language), "example")
 
     def test_language_uniqueness(self):
+        self.language.save()
         with self.assertRaises(IntegrityError):
             language = Language(name="example")
             language.save()
