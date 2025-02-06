@@ -12,7 +12,7 @@
         <ul>
             {% for current_universitystudent in universitystudent %}
                 <li>
-                    {{ current_universitystudent.university.name }} - {{ current_universitystudent.start_date }}, {{ current_universitystudent.end_date }}, leave reason is {{ current_universitystudent.leave_reason }}
+                    {{ current_universitystudent.university.name }} - {{ current_universitystudent.start_year }}, {{ current_universitystudent.end_year }}, leave reason is {{ current_universitystudent.leave_reason }}
                     <a href="{% url 'edit_university_student' current_universitystudent.id %}">Edit</a>
                 </li>
             {% endfor %}

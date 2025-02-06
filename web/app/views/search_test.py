@@ -31,17 +31,17 @@ class UserSearchViewTests(TestCase):
         UniversityStudent(
             university=self.university1,
             student=self.user1,
-            start_date="2025-01-01",
+            start_year="2025",
         ).save()
         UniversityStudent(
             university=self.university2,
             student=self.user2,
-            start_date="2025-01-01",
+            start_year="2025",
         ).save()
         UniversityStudent(
             university=self.university1,
             student=self.user3,
-            start_date="2025-01-01",
+            start_year="2025",
         ).save()
 
     def test_last_name(self):
