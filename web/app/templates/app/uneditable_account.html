@@ -26,7 +26,7 @@
         {% if student_universities %}
         <ul>
             {% for current_universitystudent in student_universities %}
-                <li>{{ current_universitystudent.university.name }} - {{ current_universitystudent.start_date}},{{ current_universitystudent.end_date}}, ушёл, так как {{ current_universitystudent.get_leave_reason_display}} </li>
+                <li>{{ current_universitystudent.university.name }} - {{ current_universitystudent.start_year}},{{ current_universitystudent.end_year}}, ушёл, так как {{ current_universitystudent.get_leave_reason_display}} </li>
             {% endfor %}
         </ul>
     {% else %}

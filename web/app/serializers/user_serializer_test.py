@@ -15,7 +15,7 @@ class UserDetailSerializerTests(TestCase):
         self.university = University.objects.create(name='Test University')
 
         # Create a UniversityStudent relationship
-        UniversityStudent.objects.create(student=self.user, university=self.university, start_date="2024-10-10")
+        UniversityStudent.objects.create(student=self.user, university=self.university, start_year="2024-10-10")
 
     def test_serializer_with_university(self):
         serializer = UserDetailSerializer(self.user)

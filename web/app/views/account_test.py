@@ -71,15 +71,15 @@ class AccountViewTestCase(TestCase):
         self.university_student1 = UniversityStudent.objects.create(
             student=self.user1,
             university=self.university1,
-            start_date="2020-09-01",
-            end_date="2024-06-01",
+            start_year="2020-09-01",
+            end_year="2024-06-01",
             leave_reason="GRADUATION",
         )
         self.university_student2 = UniversityStudent.objects.create(
             student=self.user2,
             university=self.university2,
-            start_date="2018-09-01",
-            end_date="2022-06-01",
+            start_year="2018-09-01",
+            end_year="2022-06-01",
             leave_reason="TRANSFER",
         )
 
@@ -197,15 +197,15 @@ class EditableAccountViewTests(TestCase):
         self.university_student1 = UniversityStudent.objects.create(
             student=self.user1,
             university=self.university1,
-            start_date="2020-09-01",
-            end_date="2024-06-01",
+            start_year="2020-09-01",
+            end_year="2024-06-01",
             leave_reason="GRADUATION",
         )
         self.university_student2 = UniversityStudent.objects.create(
             student=self.user2,
             university=self.university2,
-            start_date="2018-09-01",
-            end_date="2022-06-01",
+            start_year="2018-09-01",
+            end_year="2022-06-01",
             leave_reason="TRANSFER",
         )
 
