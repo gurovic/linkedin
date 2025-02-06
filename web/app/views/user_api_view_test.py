@@ -16,7 +16,7 @@ class UserDetailViewTests(APITestCase):
         self.university = University.objects.create(name='Test University')
 
         # Create a UniversityStudent relationship
-        UniversityStudent.objects.create(student=self.user, university=self.university, start_year="2024-10-10")
+        UniversityStudent.objects.create(student=self.user, university=self.university, start_year="2024")
 
     def test_get_user_detail(self):
         url = reverse('user-detail', args=[self.user.id])  # Adjust the URL name as necessary
