@@ -1,3 +1,5 @@
+from datetime import datetime
+
 COUNTRY_CHOICES = [
     ('RU', 'Russian Federation'),
     ('US', 'United States'),
@@ -10,3 +12,6 @@ COUNTRY_CHOICES = [
     ('IN', 'India'),
     ('BR', 'Brazil'),
 ]
+
+def get_year():
+    return datetime.now().year
