@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from .university import University
 from django.core.exceptions import ValidationError
-from django.utils.timezone import now
+from ..utils import get_year
 
 class UniversityStudent(models.Model):
     LEAVE_REASON_CHOICES = [
@@ -27,7 +27,7 @@ class UniversityStudent(models.Model):
     university = models.ForeignKey(University,on_delete=models.CASCADE, related_name='university_students')
     leave_reason = models.CharField(null=True, blank=True, max_length=20, choices=LEAVE_REASON_CHOICES)
     start_year = models.PositiveIntegerField(
-        default=now().year,
+        default=get_year,
         help_text="Select the year when the program started",
     )
     end_year = models.PositiveIntegerField(
