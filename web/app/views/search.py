@@ -35,7 +35,7 @@ def user_search(request):
         if university:
             users = users.filter(student__university=university)
         if school:
-            users = users.filter(schoolstudent__school=school)
+            users = users.filter(studentschool__school=school)
 
     return render(
         request,
