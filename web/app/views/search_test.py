@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
-from app.models import University, UniversityStudent
+from app.models import University, UniversityStudent, StudentSchool, School
 
 
 class UserSearchViewTests(TestCase):
@@ -11,6 +11,9 @@ class UserSearchViewTests(TestCase):
         self.university2 = University.objects.create(
             name="Stanford University",
         )
+
+        self.school1 = School.objects.create(country="Russian Federation", name="Letovo School")
+        self.school2 = School.objects.create(country="United States", name="Utah High School Real")
 
         self.user1 = User.objects.create_user(
             username="testuser1",
@@ -42,6 +45,22 @@ class UserSearchViewTests(TestCase):
             university=self.university1,
             student=self.user3,
             start_year="2025",
+        ).save()
+
+        StudentSchool(
+            school=self.school1,
+            student=self.user1,
+            start_year="2021"
+        ).save()
+        StudentSchool(
+            school=self.school1,
+            student=self.user2,
+            start_year="2020"
+        ).save()
+        StudentSchool(
+            school=self.school2,
+            student=self.user3,
+            start_year="2022"
         ).save()
 
     def test_last_name(self):
@@ -131,11 +150,33 @@ class UserSearchViewTests(TestCase):
         self.assertContains(response, "Kevin Durant")
         self.assertNotContains(response, "Stephen Curry")
         self.assertNotContains(response, "James LeBron")
+    
+    def test_search_by_school(self):
+        response = self.client.get(
+            reverse("user_search"),
+            {"school": self.school1.id},
+        )
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "Stephen Curry")
+        self.assertContains(response, "Kevin Durant")
+        self.assertNotContains(response, "James LeBron")
+
+    def test_search_by_school_no_results(self):
+        response = self.client.get(
+            reverse("user_search"),
+            {"school": self.school2.id},
+        )
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, "James LeBron")
+        self.assertNotContains(response, "Stephen Curry")
+        self.assertNotContains(response, "Kevin Durant")
 
     def test_combined_filters(self):
         response = self.client.get(
             reverse("user_search"),
-            {"query": "Stephen", "university": self.university1.id},
+            {"query": "Stephen", "university": self.university1.id, "school": self.school1.id},
         )
         self.assertEqual(response.status_code, 200)
 
