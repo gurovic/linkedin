@@ -12,7 +12,7 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./event.component.css'],
 })
 export class EventDetailComponent implements OnInit {
-  event: any = null; // Store event data
+  event: any = null;
   env = environment;
 
   constructor(
@@ -21,10 +21,10 @@ export class EventDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const eventId = this.route.snapshot.params['event_id']; // Get event ID from route
+    const eventId = this.route.snapshot.params['event_id'];
     this.eventService.getEventDetails(eventId).subscribe(
       (data) => {
-        this.event = data; // Assign API response to the event object
+        this.event = data;
       },
       (error) => {
         console.error('Error fetching event details:', error);

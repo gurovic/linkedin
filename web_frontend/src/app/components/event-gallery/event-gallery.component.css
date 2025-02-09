@@ -1,0 +1,6 @@
+.event-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 5 columns */
+    gap: 16px;
+    padding: 16px;
+}
