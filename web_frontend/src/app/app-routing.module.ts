@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { UneditableAccountComponent } from './components/uneditable-account/uneditable-account.component';
 import { BlankComponent } from './components/blank.component';
 import { EventDetailComponent } from './components/event/event.component';
-import { EventListComponent } from './components/event-list/event-list.component';
+import { EventGalleryComponent } from './components/event-gallery/event-gallery.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
   { path: 'event/:event_id', component: EventDetailComponent },
-  { path: 'events', component: EventListComponent },
+  { path: 'events', component: EventGalleryComponent },
   { path: '', component: MainPageComponent },
   { path: 'logout', component: LogoutComponent },
   { path: '**', component: BlankComponent },
