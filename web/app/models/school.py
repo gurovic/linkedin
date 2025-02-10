@@ -25,6 +25,8 @@ class School(models.Model):
     name = models.CharField(max_length=40)
     desc = models.TextField(null=True, blank=True)
     majors = models.ManyToManyField(MajorSubject, related_name='schools')
+    lat = models.FloatField(null=True, blank=True)
+    lon = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.name
