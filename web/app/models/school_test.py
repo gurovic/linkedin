@@ -36,7 +36,7 @@ class SchoolModelTest(TestCase):
         self.assertEqual(str(school), 'Harvard University')
         self.assertEqual(school.lat, 42.3770)
         self.assertEqual(school.lon, -71.1167)
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             school.majors.all(),
             [self.major_cs, self.major_math],
             transform=lambda x: x
