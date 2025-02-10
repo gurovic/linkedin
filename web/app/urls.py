@@ -29,6 +29,7 @@ from app.views.userskill import (
 )
 from app.views.view_request import request_view
 from app.views.view_skills import add_skill_to_user, skills_view
+from .views.company_api import CompanyView
 from .views.search import user_search
 from .views.filters import search_by_skills
 from .views.angular_uneditable_account_api import user_detail_api_view
@@ -125,4 +126,6 @@ urlpatterns = [
     path('angular/account/<int:user_id>/', user_detail_api_view, name='angular_uneditable_account_api'),
     path('api/event_list', EventListAPIView.as_view(), name ='events_list_api'),
     path('api/ans_verif/<int:request_id>', AnsVerificationView.as_view(), name="ans_verify"),
+    path("api/company/", CompanyView.as_view(), name="company"),
+    path("api/company/<int:company_id>/", CompanyView.as_view(), name="company"),
 ]
