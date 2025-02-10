@@ -8,6 +8,7 @@ class StudentSchool(models.Model):
         ('GR', 'Выпустился'),
         ('EX', 'Исключён'),
         ('LE', 'Ушёл по собственному желанию'),
+        ('ED', 'Ещё учусь'),
     ]
 
     student = models.ForeignKey(User, on_delete=models.CASCADE)
