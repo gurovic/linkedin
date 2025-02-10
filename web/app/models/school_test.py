@@ -46,7 +46,6 @@ class SchoolModelTest(TestCase):
         school = School.objects.create(
             country='GB',
             name='Oxford University'
-            # desc, lat, lon не заданы
         )
         self.assertIsNone(school.desc)
         self.assertIsNone(school.lat)
