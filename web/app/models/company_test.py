@@ -1,6 +1,9 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from . import Company, Vacancy
+from app.models.language import Language
+from app.models.major import Major
+
 
 class CompanyTest(TestCase):
 
@@ -39,7 +42,6 @@ class CompanyTest(TestCase):
 
 
 class VacancyTest(TestCase):
-
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpass')
         self.company = Company.objects.create(
@@ -47,19 +49,29 @@ class VacancyTest(TestCase):
             description="A company for testing.",
             country='FR'
         )
-        self.vacancy_data = {
-            'name': "Test Vacancy",
-            'description': "A vacancy for testing.",
-            'needed_majorsubject': 'CS',
-            'company': self.company
-        }
-        self.vacancy = Vacancy.objects.create(**self.vacancy_data)
+        self.major = Major(name="CS")
+        self.language = Language(name="English")
+        self.vacancy = Vacancy(
+            name="Test Vacancy",
+            description="A vacancy for testing.",
+            company=self.company,
+            expiration_date="2025-01-01",
+            contacts="+79123456789",
+        )
+        self.language.save()
+        self.major.save()
+        self.company.save()
+        self.vacancy.save()
+        self.vacancy.required_majors.add(self.major)
+        self.vacancy.required_language.add(self.language)
 
     def test_vacancy_fields(self):
-        self.assertTrue(Vacancy.objects.filter(name="Test Vacancy").exists())
         self.assertEqual(self.vacancy.name, "Test Vacancy")
         self.assertEqual(self.vacancy.description, "A vacancy for testing.")
-        self.assertEqual(self.vacancy.needed_majorsubject, "CS")
+        self.assertIn(self.major, self.vacancy.required_majors.all())
+        self.assertEqual(self.vacancy.expiration_date, "2025-01-01")
+        self.assertIn(self.language, self.vacancy.required_language.all())
+        self.assertEqual(self.vacancy.contacts, "+79123456789")
 
     def test_vacancy_company_link(self):
         self.assertEqual(self.vacancy.company, self.company)
@@ -70,10 +82,11 @@ class VacancyTest(TestCase):
             country='GB'
         )
         vacancy2 = Vacancy.objects.create(
-            name="Another Vacancy",
-            description="Second vacancy for testing.",
-            needed_majorsubject='MATH',
-            company=company2
+            name="Test Vacancy 2",
+            description="A vacancy for testing.",
+            company=company2,
+            expiration_date="2025-01-01",
+            contacts="+79123456789",
         )
         self.assertEqual(self.vacancy.company, self.company)
         self.assertEqual(vacancy2.company, company2)
