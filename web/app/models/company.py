@@ -26,17 +26,13 @@ class Company(models.Model):
 
 
 class Vacancy(models.Model):
-    MAJOR_CHOICES = [
-        ('CS', 'Computer Science'),
-        ('MATH', 'Mathematics'),
-        ('ENG', 'English'),
-        ('RU', 'Russian Language'),
-        ('ART', 'Arts'),
-        ('BIO', 'Biology'),
-        ('PHY', 'Physics'),
-        ('CHEM', 'Chemistry'),
-    ]
     name = models.CharField(max_length=100)
     description = models.TextField(null=True,blank=True)
-    needed_majorsubject=models.CharField(max_length=100, default='Smth',choices = MAJOR_CHOICES)
+    required_majors = models.ManyToManyField("Major", related_name="vacancies")
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company')
+    expiration_date = models.DateField()
+    required_language = models.ManyToManyField("Language")
+    contacts = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
