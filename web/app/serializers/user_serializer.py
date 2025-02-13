@@ -11,7 +11,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'university']
+        fields = ("id", 'first_name', 'last_name', 'university')
 
     def get_university(self, obj):
         try:
