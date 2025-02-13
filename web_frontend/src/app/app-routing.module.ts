@@ -6,6 +6,7 @@ import { EventDetailComponent } from './components/event/event.component';
 import { EventGalleryComponent } from './components/event-gallery/event-gallery.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { SearchUserComponent } from './components/search-user/search-user.component';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'events', component: EventGalleryComponent },
   { path: '', component: MainPageComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'search', component: SearchUserComponent},
   { path: '**', component: BlankComponent },
 ];
 
