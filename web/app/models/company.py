@@ -30,9 +30,9 @@ class Vacancy(models.Model):
     description = models.TextField(null=True,blank=True)
     required_majors = models.ManyToManyField("Major", related_name="vacancies")
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='company')
-    expiration_date = models.DateField()
+    expiration_date = models.DateField(null=True,blank=True)
     required_language = models.ManyToManyField("Language")
-    contacts = models.CharField(max_length=100)
+    contacts = models.CharField(max_length=100, null=True,blank=True)
 
     def __str__(self):
         return self.name
