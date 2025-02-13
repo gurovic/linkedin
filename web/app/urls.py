@@ -37,6 +37,7 @@ from app.views.api_login import LoginView
 from app.views.event_list_api import EventListAPIView
 from app.views.api_ans_verification import AnsVerificationView
 from app.views.search_api import UserSearchAPIView
+from app.views.api_vacancy import VacancyView
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -129,4 +130,5 @@ urlpatterns = [
     path("api/user_search/", UserSearchAPIView.as_view(), name="user_search_api"),
     path("api/company/", CompanyView.as_view(), name="company"),
     path("api/company/<int:company_id>/", CompanyView.as_view(), name="company"),
+    path("api/vacancy/<int:vacancy_id>", VacancyView.as_view(), name="vacancy"),
 ]
