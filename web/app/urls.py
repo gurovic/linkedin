@@ -36,6 +36,7 @@ from .views.angular_uneditable_account_api import user_detail_api_view
 from app.views.api_login import LoginView
 from app.views.event_list_api import EventListAPIView
 from app.views.api_ans_verification import AnsVerificationView
+from app.views.api_vacancy import VacancyView
 
 
 urlpatterns = [
@@ -128,4 +129,5 @@ urlpatterns = [
     path('api/ans_verif/<int:request_id>', AnsVerificationView.as_view(), name="ans_verify"),
     path("api/company/", CompanyView.as_view(), name="company"),
     path("api/company/<int:company_id>/", CompanyView.as_view(), name="company"),
+    path("api/vacancy/<int:vacancy_id>", VacancyView.as_view(), name="vacancy"),
 ]
