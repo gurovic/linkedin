@@ -1,0 +1,37 @@
+<div class="search-container">
+    <h2>Поиск пользователей</h2>
+    
+    <form (ngSubmit)="performSearch()">
+        <div class="form-group">
+            <label>ФИО:</label>
+            <input type="text" [(ngModel)]="query" name="query" required />
+          </div>
+          
+          <div class="form-group">
+            <label>Школа</label>
+            <input type="text" [(ngModel)]="school" name="school" />
+          </div>
+          
+          <div class="form-group">
+            <label>Университет</label>
+            <input type="text" [(ngModel)]="university" name="university" />
+          </div>
+          
+          <div class="form-group">
+            <label>Скиллы (comma-separated):</label>
+            <input type="text" [(ngModel)]="skills" name="skills" />
+          </div>          
+      <button type="submit" [disabled]="isLoading">Поиск</button>
+    </form>
+  
+    <div *ngIf="isLoading">Идет поиск...</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  
+    <div *ngIf="searchResults">
+      <h3>Результаты поиска</h3>
+      <ul>
+        <li *ngFor="let user of searchResults">{{ user.name }}</li>
+      </ul>
+    </div>
+  </div>
+  
