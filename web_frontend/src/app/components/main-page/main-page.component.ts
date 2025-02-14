@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { FooterComponent } from '../footer/footer.component';
 import { ValuesComponent } from '../values/values.component';
 import { AboutSiteComponent } from '../about-site/about-site.component';
 import { LoginComponent } from '../login/login.component';
