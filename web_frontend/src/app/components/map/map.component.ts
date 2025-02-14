@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import {forkJoin, Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 // Interfaces for type safety
 interface UniversityStudent {
@@ -64,12 +65,12 @@ export class MapComponent implements AfterViewInit {
   }
 
   private fetchUserMarkers(): void {
-    const currentStudentsUrl = 'http://localhost:8000/api/universitystudent/current';
+    const currentStudentsUrl = environment.apiUrl + 'api/universitystudent/current';
 
     this.http.get<UniversityStudent[]>(currentStudentsUrl).subscribe(
       (students: UniversityStudent[]) => {
         const userRequests: Observable<User>[] = students.map(student =>
-          this.http.get<User>(`http://localhost:8000/api/user/${student.student}/`)
+          this.http.get<User>(environment.apiUrl + `api/user/${student.student}/`)
         );
 
         forkJoin(userRequests).subscribe(
