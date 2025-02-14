@@ -1,6 +1,21 @@
+.gallery-header {
+    text-align: center; 
+    font-size: 2rem; 
+    margin-bottom: 20px; 
+    color: #333; 
+    font-weight: bold; 
+  }
+  
 .event-gallery {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 5 columns */
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px; 
     padding: 16px;
+}
+  
+
+@media (max-width: 768px) {
+    .event-gallery {
+      grid-template-columns: 1fr;
+    }
 }
