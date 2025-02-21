@@ -1,25 +1,14 @@
-from django.db import models
 from django.contrib.auth.models import User
-from django import forms
+from django.db import models
+from django_countries.fields import CountryField
+
 
 class Company(models.Model):
-    COUNTRY_CHOICES = [
-        ('RU', 'Russian Federation'),
-        ('US', 'United States'),
-        ('CA', 'Canada'),
-        ('GB', 'United Kingdom'),
-        ('DE', 'Germany'),
-        ('FR', 'France'),
-        ('JP', 'Japan'),
-        ('CN', 'China'),
-        ('IN', 'India'),
-        ('BR', 'Brazil'),
-    ]
-
     name = models.CharField(max_length=100)
     description = models.TextField(null=True,blank=True)
-    country = models.CharField(max_length=100,default='Smth',choices = COUNTRY_CHOICES)
+    country = CountryField()
     current_workers = models.ManyToManyField(User, related_name='workers')
+    website = models.URLField("company website url")
 
     def __str__(self):
         return self.name
