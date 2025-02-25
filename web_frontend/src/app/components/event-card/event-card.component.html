@@ -1,4 +1,4 @@
-<div *ngIf="event; else loading" class="event-card">
+<div *ngIf="event; else loading" class="event-card" (click)="goToEventDetails()">
   <h1>{{ event.name }}</h1>
   <img *ngIf="event.picture" [src]="env.mediaUrl + event.picture" alt="Event Picture" />
   <p>{{ event.description }}</p>

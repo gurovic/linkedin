@@ -4,21 +4,30 @@
     padding: 16px;
     text-align: center;
     background-color: #f9f9f9;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   }
-  
-  .event-card img {
+
+.event-card img {
     width: 100%;
     height: auto;
     max-height: 300px; /* Adjust as needed */
     object-fit: cover; /* Ensures the image covers the area */
     border-radius: 8px;
-  }
+}
   
-  .event-card h1 {
+.event-card h1 {
     font-size: 1.5rem;
     margin: 0 0 10px 0;
-  }
+}
   
-  .event-card p {
+.event-card p {
     margin: 5px 0;
-  }
+}
+  
+.event-card:hover {
+    background-color: #d3d3d3; /* Darker background on hover */
+    transform: scale(1.05); /* Slightly increase size */
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* Increase shadow for a floating effect */
+}
