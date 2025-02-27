@@ -8,7 +8,7 @@ class Company(models.Model):
     description = models.TextField(null=True,blank=True)
     country = CountryField()
     current_workers = models.ManyToManyField(User, related_name='workers')
-    website = models.URLField("company website url")
+    website = models.URLField("company website url", null=True,blank=True)
 
     def __str__(self):
         return self.name

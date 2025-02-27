@@ -1,0 +1,13 @@
+<div *ngIf="company">
+    <h2>{{ company.name }}</h2>
+    <p>{{ company.description }}</p>
+    <p><strong>Country:</strong> {{ company.country }}</p>
+    <p><strong>Website:</strong> <a [href]="company.website" target="_blank">{{ company.website }}</a></p>
+    <h3>Current Workers</h3>
+    <ul>
+        <li *ngFor="let worker of company.current_workers">
+          {{ worker.full_name }}
+        </li>
+      </ul>
+  </div>
+  
