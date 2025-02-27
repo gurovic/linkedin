@@ -12,3 +12,10 @@ class VacancyView(APIView):
         vacancy = Vacancy.objects.get(id=vacancy_id)
         serializer = VacancySerializer(vacancy)
         return Response(serializer.data)
+
+
+class AllVacanciesView(APIView):
+    def get(self, request):
+        vacancies = Vacancy.objects.all()
+        serializer = VacancySerializer(vacancies, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
