@@ -32,7 +32,6 @@ class University(models.Model):
     majors_availible = MultiSelectField(max_length=100, default='Smth', choices=MAJOR_CHOICES)
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)
-    country = models.CharField(max_length=100, blank=True)
 
     '''The script country_from_coords is required for the code to work properly
 
