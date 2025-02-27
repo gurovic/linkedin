@@ -8,6 +8,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { SearchUserComponent } from './components/search-user/search-user.component';
 import { CompanyComponent } from './components/company/company.component';
+import { VacancyComponent } from './components/vacancy/vacancy.component';
+import { VacancyGalleryComponent } from './components/vacancy-gallery/vacancy-gallery.component';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
@@ -17,6 +19,8 @@ export const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'search', component: SearchUserComponent},
   { path: 'company/:id', component: CompanyComponent},
+  { path: 'vacancy/:vacancy_id', component: VacancyComponent},
+  { path: 'vacancies', component: VacancyGalleryComponent},
   { path: '**', component: BlankComponent },
 ];
 

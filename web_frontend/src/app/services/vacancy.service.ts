@@ -12,6 +12,6 @@ export class VacancyService {
   constructor(private http: HttpClient) {}
 
   getVacancyDetails(vacancy_id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}${vacancy_id}/`);
+    return this.http.get(`${this.baseUrl}${vacancy_id}`);
   }
 }
