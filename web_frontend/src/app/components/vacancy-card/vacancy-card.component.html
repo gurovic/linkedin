@@ -1,0 +1,10 @@
+<a (click)="navigateToVacancy()" class="vacancy-card-link">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="card-title text-primary">{{ vacancy.name }}</h5>
+        <p class="card-text text-muted">{{ vacancy.description | slice:0:150 }}...</p>
+        <p class="card-text text-dark"><strong>Компания:</strong> {{ vacancy.company.name }}</p>
+      </div>
+    </div>
+</a>
+  
