@@ -1,13 +1,19 @@
-<div *ngIf="company">
-    <h2>{{ company.name }}</h2>
-    <p>{{ company.description }}</p>
-    <p><strong>Country:</strong> {{ company.country }}</p>
-    <p><strong>Website:</strong> <a [href]="company.website" target="_blank">{{ company.website }}</a></p>
-    <h3>Current Workers</h3>
-    <ul>
-        <li *ngFor="let worker of company.current_workers">
-          {{ worker.full_name }}
-        </li>
-      </ul>
-  </div>
-  
+<div *ngIf="company" class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{ company.name }}</h2>
+            <p class="card-text">{{ company.description }}</p>
+            <p class="card-text"><strong>Country:</strong> {{ company.country }}</p>
+            <p class="card-text">
+                <strong>Website: </strong> 
+                <a [href]="company.website" target="_blank" class="card-link">{{ company.website }}</a>
+            </p>
+            <h4 class="mt-4">Current Workers</h4>
+            <ul class="list-group">
+                <li *ngFor="let worker of company.current_workers" class="list-group-item">
+                    {{ worker.full_name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
