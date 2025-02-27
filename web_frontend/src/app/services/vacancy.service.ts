@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VacancyService {
-  private apiUrl = 'http://localhost:8000/api/vacancy/'; // URL API
+  private baseUrl = environment.apiUrl + 'api/vacancy/'; // Use environment variable for API URL
 
   constructor(private http: HttpClient) {}
 
   // Получение одной вакансии по ID
-  getVacancy(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}${id}/`);
+  getVacancyDetails(vacancy_id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}${vacancy_id}/`);
   }
 }
