@@ -1,28 +1,72 @@
-<!-- templates/job_experience.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Experience</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Стили для фиксации плашки внизу экрана */
+        body {
+            padding-bottom: 50px; /* Отступ снизу для предотвращения перекрытия футером */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Add Job Experience</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Add Experience</button>
-    </form>
 
-    <h2>Your Job Experiences</h2>
-    <ul>
-        {% for experience in experiences %}
-            <li>
-                {{ experience.company_name }} ({{ experience.start_year }} - {{ experience.end_year }}): {{ experience.position }}
-            </li>
-        {% empty %}
-            <li>No job experiences added yet.</li>
-        {% endfor %}
-    </ul>
+    <!-- Верхняя панель -->
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="h4 mb-0">Летово Linkedin</h1>
+            <div>
+                <a href="/" class="btn btn-outline-light">На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Добавление опыта работы -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Add Job Experience</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Add Experience</button>
+        </form>
+
+        <h2 class="mt-5">Your Job Experiences</h2>
+        {% if experiences %}
+            <ul class="list-group">
+                {% for experience in experiences %}
+                    <li class="list-group-item">
+                        <strong>{{ experience.company_name }}</strong> 
+                        ({{ experience.start_year }} - {{ experience.end_year }}): {{ experience.position }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No job experiences added yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <p class="mb-0">&copy; 2024 Летово Linkedin. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключаем Bootstrap JS через CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
