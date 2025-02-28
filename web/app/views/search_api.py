@@ -11,6 +11,7 @@ class UserSearchAPIView(APIView):
         query = request.GET.get("query", None)
         university = request.GET.get("university", None)
         school = request.GET.get("school", None)
+        skills = request.GET.get("skills", None)
 
         users = User.objects.all()
 
@@ -40,6 +41,9 @@ class UserSearchAPIView(APIView):
             users = users.filter(student__university=university)
         if school:
             users = users.filter(studentschool__school=school)
+        if skills:
+            for skill in skills.split(","):
+                users = users.filter(userskills__skill__name=skill)
 
         serializer = UserDetailSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

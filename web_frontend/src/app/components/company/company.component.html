@@ -1,14 +1,1 @@
-<!-- company.component.html -->
-<div *ngIf="company" class="container mt-5">
-  <h2 class="text-center">{{ company.name }}</h2>
-  <p class="lead text-center">{{ company.description }}</p>
-  <p><strong>Country:</strong> {{ company.country }}</p>
-  <p><strong>Website:</strong> <a [href]="company.website" target="_blank" class="text-decoration-none">{{ company.website }}</a></p>
 
-  <h3 class="mt-4">Current Workers</h3>
-  <ul class="list-group">
-    <li *ngFor="let worker of company.current_workers" class="list-group-item">
-      {{ worker.full_name }}
-    </li>
-  </ul>
-</div>

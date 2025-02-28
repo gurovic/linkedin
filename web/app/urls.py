@@ -33,6 +33,8 @@ from .views.company_api import CompanyView
 from .views.search import user_search
 from .views.filters import search_by_skills
 from .views.angular_uneditable_account_api import user_detail_api_view
+from .views.api_verification_list import VerificationRequestView
+from .views.api_verification_description import VerificationDescriptionView
 from app.views.api_login import LoginView
 from app.views.event_list_api import EventListAPIView
 from app.views.api_ans_verification import AnsVerificationView
@@ -113,6 +115,16 @@ urlpatterns = [
         "api/user/<int:user_id>/skill/<int:skill_id>/endorsement/",
         SkillEndorsementView.as_view(),
         name="skill-endorsement",
+    ),
+    path(
+        "api/verification_requests/",
+        VerificationRequestView.as_view(),
+        name="verification_requests"
+    ),
+    path(
+        "api_verification_description/<int:request_id>/",
+        VerificationDescriptionView.as_view(),
+        name="verification_description"
     ),
     path(
         "account/<int:user_id>/",
