@@ -1,15 +1,10 @@
-<!-- event-gallery.component.html -->
-<h1 class="gallery-header text-center mb-4">Горизонт событий</h1>
-<div class="event-gallery row">
+<h1 class="gallery-header">Горизонт событий</h1>
+<div class="event-gallery">
   <ng-container *ngIf="events && events.length > 0; else noEvents">
-    <div class="col-md-4 mb-4" *ngFor="let event of events">
-      <app-event-card [event]="event"></app-event-card>
-    </div>
+    <app-event-card *ngFor="let event of events" [event]="event"></app-event-card>
   </ng-container>
 </div>
 
 <ng-template #noEvents>
-  <div class="text-center">
-    <p>Нет доступных событий.</p>
-  </div>
+  <p>Нет доступных событий.</p>
 </ng-template>
