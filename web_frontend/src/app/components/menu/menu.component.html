@@ -1,14 +1,19 @@
-<nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" routerLink="/" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/events" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">События</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/search" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Поиск</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/vacancies" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Вакансии</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/events" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">События</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/search" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Поиск</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/vacancies" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Вакансии</a>
+      </li>
+    </ul>
+  </div>
 </nav>

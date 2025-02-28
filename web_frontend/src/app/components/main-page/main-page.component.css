@@ -1,0 +1,159 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif, 'Helvetica Neue', Helvetica;
+    background-color: #f4f7fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* Стили для форм */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form .form-group {
+    margin-bottom: 15px;
+}
+
+form label {
+    font-weight: bold;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для заголовков */
+h1, h2, h3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Стили для списков */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #f9f9f9;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+ul li a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для панели */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Стили для ошибок */
+.alert {
+    padding: 15px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 4px;
+    margin-top: 20px;
+    display: none;
+}
+
+.alert.active {
+    display: block;
+}
+
+/* Мобильная адаптация */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 200px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    header, footer {
+        padding: 8px 15px;
+    }
+
+    h1, h2, h3 {
+        font-size: 18px;
+    }
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.rounded-circle {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+#mapid {
+  height: 400px;
+}

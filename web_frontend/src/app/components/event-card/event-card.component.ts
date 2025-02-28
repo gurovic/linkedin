@@ -4,7 +4,6 @@ import { environment } from '../../../environments/environment';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-event-card',
   standalone: true,
@@ -21,8 +20,8 @@ export class EventCardComponent {
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
-    const formattedDate = this.datePipe.transform(date, 'dd.MM.yyyy HH:mm'); 
-    return formattedDate || dateString; 
+    const formattedDate = this.datePipe.transform(date, 'dd.MM.yyyy HH:mm');
+    return formattedDate || dateString;
   }
 
   goToEventDetails(): void {

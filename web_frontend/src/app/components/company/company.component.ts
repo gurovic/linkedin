@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { CompanyService } from '../../services/company.service';
 import { CommonModule } from '@angular/common';
 
-
 interface Worker {
   first_name: string;
   last_name: string;
@@ -14,7 +13,7 @@ interface Worker {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './company.component.html',
-  styleUrl: './company.component.css',
+  styleUrls: ['./company.component.css'],
   providers: [CompanyService]
 })
 export class CompanyComponent implements OnInit {

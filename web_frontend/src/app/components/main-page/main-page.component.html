@@ -1,14 +1,88 @@
 <h1>Добро пожаловать на Letovo LinkedIn!</h1>
-<button (click)="showLogin = true" class="open-btn">Sign in</button>
+
+<!-- Кнопка входа -->
+<button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
+
+<!-- Всплывающее окно входа -->
 <div class="popup" *ngIf="showLogin">
   <div class="popup-content">
-    <button (click)="showLogin = false" class="close-btn">x</button>
+    <button (click)="showLogin = false" class="btn-close"></button>
     <app-login></app-login>
   </div>
 </div>
 
-<app-values></app-values>
+<!-- Основной контент -->
+<section class="container mt-5">
+  <section class="text-center mb-5">
+    <h2 class="mb-3">Платформа для общения, обмена опытом и поиска возможностей</h2>
+    <p class="lead">
+      Объединяем выпускников Летово, учеников и компании для взаимной пользы.
+    </p>
+  </section>
 
-<app-about-site></app-about-site>
+  <!-- Раздел "Общайтесь - Развивайтесь - Помогайте" -->
+  <section class="row text-center">
+    <div class="col-md-4 mb-4">
+      <img src="../../assets/images/Community.jpg" alt="Network" class="img-fluid rounded-circle mb-3">
+      <h3 class="h5">Общайтесь</h3>
+      <p>Не теряйте связь с друзьями даже после выпуска</p>
+    </div>
 
-<app-map></app-map>
+    <div class="col-md-4 mb-4">
+      <img src="../../assets/images/Alumni.jpg" alt="Career Growth" class="img-fluid rounded-circle mb-3">
+      <h3 class="h5">Развивайтесь</h3>
+      <p>Добавляйте информацию про себя и получайте приглашения от компаний</p>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <img src="../../assets/images/Friends.jpg" alt="Projects" class="img-fluid rounded-circle mb-3">
+      <h3 class="h5">Помогайте</h3>
+      <p>Делитесь опытом и помогайте ученикам Летово находить себя</p>
+    </div>
+  </section>
+
+  <!-- Блоки с картой и инфой о сайте -->
+  <app-map *ngIf="isAuthenticated"></app-map>
+  <app-values></app-values>
+  <app-about-site></app-about-site>
+
+  <!-- Список компаний -->
+  <section class="text-center mb-4">
+    <h2>Список компаний</h2>
+    <div class="row justify-content-center fw-bold">
+      <div class="col-md-2">Название</div>
+      <div class="col-md-3">Описание</div>
+      <div class="col-md-2">Страна</div>
+      <div class="col-md-2">Вакансии</div>
+      <div class="col-md-3">Работники</div>
+    </div>
+
+    <ng-container *ngIf="companies.length; else noCompanies">
+      <div class="row justify-content-center" *ngFor="let company of companies">
+        <div class="col-md-2">{{ company.name }}</div>
+        <div class="col-md-3">{{ company.description }}</div>
+        <div class="col-md-2">{{ company.country }}</div>
+        <div class="col-md-2">
+          <ul *ngIf="company.vacancies.length; else noVacancies">
+            <li *ngFor="let vacancy of company.vacancies">
+              {{ vacancy.name }} ({{ vacancy.specialization }})
+            </li>
+          </ul>
+          <ng-template #noVacancies>Нет доступных вакансий</ng-template>
+        </div>
+        <div class="col-md-3">
+          <ul *ngIf="company.workers.length; else noWorkers">
+            <li *ngFor="let worker of company.workers">{{ worker.username }}</li>
+          </ul>
+          <ng-template #noWorkers>Нет работников</ng-template>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noCompanies>
+      <div class="row justify-content-center">
+        <div class="col-md-12">Компаний пока нет :(</div>
+      </div>
+    </ng-template>
+  </section>
+</section>
