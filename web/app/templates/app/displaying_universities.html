@@ -2,23 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ student.username }}'s Universities</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Стили для фиксации плашки внизу экрана */
+        body {
+            padding-bottom: 50px; /* Отступ снизу для предотвращения перекрытия футером */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Universities of {{ student.username }}</h1>
 
-    <h2>Associated Universities</h2>
-    {% if universities %}
-        <ul>
-            {% for current_universitystudent in universitystudent %}
-                <li>
-                    {{ current_universitystudent.university.name }} - {{ current_universitystudent.start_year }}, {{ current_universitystudent.end_year }}, leave reason is {{ current_universitystudent.leave_reason }}
-                    <a href="{% url 'edit_university_student' current_universitystudent.id %}">Edit</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>{{ student.username }} is not associated with any universities.</p>
-    {% endif %}
+    <!-- Верхняя панель -->
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="h4 mb-0">Летово Linkedin</h1>
+            <div>
+                <a href="/" class="btn btn-outline-light">На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Университеты студента -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Universities of {{ student.username }}</h2>
+
+        <h3 class="mb-3">Associated Universities</h3>
+        {% if universities %}
+            <ul class="list-group">
+                {% for current_universitystudent in universitystudent %}
+                    <li class="list-group-item">
+                        {{ current_universitystudent.university.name }} - 
+                        {{ current_universitystudent.start_year }}, 
+                        {{ current_universitystudent.end_year }}, 
+                        leave reason is {{ current_universitystudent.leave_reason }}
+                        <a href="{% url 'edit_university_student' current_universitystudent.id %}" class="btn btn-secondary btn-sm ml-3">Edit</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{{ student.username }} is not associated with any universities.</p>
+        {% endif %}
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <p class="mb-0">&copy; 2024 Летово Linkedin. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключаем Bootstrap JS через CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

@@ -4,25 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Школы пользователя</title>
+    
+    <!-- Подключаем Bootstrap через CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Фиксированный подвал */
+        body {
+            padding-bottom: 60px; /* Отступ для предотвращения перекрытия футером */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Школы пользователя {{ username }}</h1>
 
-    {% if student_schools %}
-        <ul>
-            {% for student_school in student_schools %}
-                <li>
-                    <h2>{{ student_school.school.name }}</h2>
-                    <p>Страна: {{ student_school.school.get_country_display }}</p>
-                    <p>Описание: {{ student_school.school.desc }}</p>
-                    <p>Год начала обучения: {{ student_school.start_year }}</p>
-                    <p>Год окончания обучения: {{ student_school.finish_year }}</p>
-                    <a href="{% url 'student_school_form' student_school.id %}">Edit</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>У этого пользователя остутствует информация о школах</p>
-    {% endif %}
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Летово Linkedin</a>
+            <div class="ms-auto">
+                <a href="/" class="btn btn-light">На главную</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Контент -->
+    <div class="container mt-4">
+        <h1 class="text-center">Школы пользователя {{ username }}</h1>
+
+        {% if student_schools %}
+            <div class="row">
+                {% for student_school in student_schools %}
+                    <div class="col-md-6">
+                        <div class="card mb-4 shadow-sm">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ student_school.school.name }}</h2>
+                                <p><strong>Страна:</strong> {{ student_school.school.get_country_display }}</p>
+                                <p><strong>Описание:</strong> {{ student_school.school.desc }}</p>
+                                <p><strong>Год начала:</strong> {{ student_school.start_year }}</p>
+                                
+                                {% if student_school.finish_year %}
+                                    <p><strong>Год окончания:</strong> {{ student_school.finish_year }}</p>
+                                {% endif %}
+
+                                <a href="{% url 'student_school_form' student_school.id %}" class="btn btn-warning w-100">
+                                    Редактировать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning text-center mt-4">
+                У этого пользователя отсутствует информация о школах
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <p class="mb-0">© 2024 Летово Linkedin. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключаем Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

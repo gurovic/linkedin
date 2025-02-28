@@ -1,5 +1,17 @@
-<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+<header class="d-flex flex-column w-100">
+  <!-- Синяя панель сверху -->
+  <div class="bg-primary text-white p-2">
+    <div class="container">
+      <span>Летово Linkedin</span>
+    </div>
+  </div>
+
+  <!-- Панель меню -->
   <app-menu></app-menu>
 </header>
+
+<!-- Контент -->
 <router-outlet></router-outlet>
+
+<!-- Подвал -->
 <app-footer></app-footer>

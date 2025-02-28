@@ -5,10 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-user',
-  standalone: true, 
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './search-user.component.html',
-  styleUrl: './search-user.component.css',
+  styleUrls: ['./search-user.component.css'],
   providers: [SearchUserService]
 })
 export class SearchUserComponent {
@@ -39,7 +39,7 @@ export class SearchUserComponent {
         this.isLoading = false;
       },
       (error) => {
-        this.errorMessage = 'Error fetching search results. Please try again.';
+        this.errorMessage = 'Ошибка при получении результатов поиска. Попробуйте снова.';
         console.error(error);
         this.isLoading = false;
       }

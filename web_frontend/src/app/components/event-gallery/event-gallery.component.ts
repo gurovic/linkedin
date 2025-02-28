@@ -11,9 +11,8 @@ import { EventCardComponent } from '../event-card/event-card.component';
   templateUrl: './event-gallery.component.html',
   styleUrls: ['./event-gallery.component.css'],
 })
-
 export class EventGalleryComponent implements OnInit {
-  events: any[] = []; 
+  events: any[] = [];
   env = environment;
 
   constructor(private eventService: Event_List_Service) {}

@@ -1,28 +1,33 @@
-<div *ngIf="user">
-    <h1>Вы просматриваете аккаунт без права редактирования</h1>
-    <div>
-      <h2>Имя, Фамилия: {{ user.first_name }} {{ user.last_name }}</h2>
-      <p>Логин: {{ user.username }}</p>
-      <p>Электронная почта: {{ user.email }}</p>
-  
+<div *ngIf="user" class="container mt-4">
+  <h1 class="mb-4">Вы просматриваете аккаунт без права редактирования</h1>
+
+  <div>
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    <p><strong>Логин:</strong> {{ user.username }}</p>
+    <p><strong>Электронная почта:</strong> {{ user.email }}</p>
+
+    <div class="mt-4">
       <h3>Периоды обучения в школах</h3>
-      <ul *ngIf="studentSchools.length > 0; else noSchoolData">
-        <li *ngFor="let school of studentSchools">
-          {{ school.name }} - {{ school.start_year }}, {{ school.finish_year }}, ушёл, так как {{ school.leave_reason }}
+      <ul *ngIf="studentSchools.length > 0; else noSchoolData" class="list-group">
+        <li *ngFor="let school of studentSchools" class="list-group-item">
+          <strong>{{ school.name }}</strong> - {{ school.start_year }} - {{ school.finish_year }}
+          <br /> Ушёл, так как {{ school.leave_reason }}
         </li>
       </ul>
       <ng-template #noSchoolData>
-        <p>Нет сведений о периодах обучения в школах.</p>
+        <p class="text-muted">Нет сведений о периодах обучения в школах.</p>
       </ng-template>
-  
-      <h3>Периоды обучения в университетах</h3>
-      <ul *ngIf="studentUniversities.length > 0; else noUniversityData">
-        <li *ngFor="let university of studentUniversities">
-          {{ university.name }} - {{ university.start_year }}, {{ university.end_year }}, ушёл, так как {{ university.leave_reason }}
+
+      <h3 class="mt-4">Периоды обучения в университетах</h3>
+      <ul *ngIf="studentUniversities.length > 0; else noUniversityData" class="list-group">
+        <li *ngFor="let university of studentUniversities" class="list-group-item">
+          <strong>{{ university.name }}</strong> - {{ university.start_year }} - {{ university.end_year }}
+          <br /> Ушёл, так как {{ university.leave_reason }}
         </li>
       </ul>
       <ng-template #noUniversityData>
-        <p>Нет сведений о периодах обучения в университетах.</p>
+        <p class="text-muted">Нет сведений о периодах обучения в университетах.</p>
       </ng-template>
     </div>
   </div>
+</div>

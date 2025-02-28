@@ -1,17 +1,61 @@
-<!-- add_user_skill.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавить тег для {{ user.username }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Стили для фиксации плашки внизу экрана */
+        body {
+            padding-bottom: 60px; /* Отступ снизу для предотвращения перекрытия футером */
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Добавить тег для "{{ user.username }}"</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Добавить тег</button>
-    </form>
-    <a href = "/app/skills/{{ user.id }}/">Назад к деталям пользователя</a>
+
+    <!-- Верхняя панель -->
+    <header class="bg-primary text-white py-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="h4 mb-0">Летово Linkedin"</h1>
+            <div>
+                <a href="/" class="btn btn-outline-light">На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Форма добавления тега -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Добавить тег</h2>
+        <form method="post" class="mb-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Добавить тег</button>
+        </form>
+        <div class="text-center">
+            <a href="/app/skills/{{ user.id }}/" class="btn btn-secondary">Назад к деталям пользователя</a>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <p class="mb-0">&copy; 2024 Летово Linkedin. Все права защищены.</p>
+    </footer>
+
+    <!-- Подключение Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

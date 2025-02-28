@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-uneditable-account',
-  standalone: true, 
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './uneditable-account.component.html',
   styleUrls: ['./uneditable-account.component.css']
