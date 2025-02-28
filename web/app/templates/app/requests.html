@@ -2,60 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Стили для фиксации плашки внизу экрана */
-        body {
-            padding-bottom: 50px; /* Отступ снизу для предотвращения перекрытия футером */
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #343a40;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-    </style>
 </head>
 <body>
-
-    <!-- Верхняя панель -->
-    <header class="bg-primary text-white py-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <h1 class="h4 mb-0">Летово Linkedin</h1>
-            <div>
-                <a href="/" class="btn btn-outline-light">На главную</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Список запросов -->
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Requests</h2>
-        {% for request in requests_list %}
-            <div class="mb-4">
-                <h3>{{ request.name }}</h3>
-                <p><strong>Description:</strong> {{ request.desc }}</p>
-                <p><strong>Date:</strong> {{ request.date }}</p>
-                <p><strong>Right Asked:</strong> {{ request.right_asked }}</p>
-            </div>
-        {% empty %}
-            <p>No requests available.</p>
-        {% endfor %}
-    </div>
-
-    <!-- Подвал -->
-    <footer>
-        <p class="mb-0">&copy; 2024 Летово Linkedin. Все права защищены.</p>
-    </footer>
-
-    <!-- Подключаем Bootstrap JS через CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    {% for request in requests_list %}
+        <h1>{{ request.name }}</h1>
+        <h3>{{ request.desc }}</h3>
+        <h3>{{ request.date }}</h3>
+        <h3>{{ request.right_asked }}</h3>
+    {% endfor %}
 </body>
 </html>
