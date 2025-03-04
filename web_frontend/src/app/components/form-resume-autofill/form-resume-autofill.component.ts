@@ -15,7 +15,13 @@ export class FormResumeAutofillComponent {
   constructor(private http: HttpClient) {}
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    const file = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      this.selectedFile = file;
+    } else {
+      alert('Пожалуйста, выберите PDF файл.');
+      this.selectedFile = null;
+    }
   }
 
   uploadFile() {
@@ -26,15 +32,30 @@ export class FormResumeAutofillComponent {
 
     this.http.post(this.backendUrl, formData).subscribe({
       next: () => this.showModal('successModal'),
-      error: () => this.showModal('errorModal'),
+      error: (error) => {
+        console.error('Upload error:', error);
+        let errorMessage = 'Ошибка загрузки файла. Попробуйте еще раз.';
+        if (error.status === 413) {
+          errorMessage = 'Файл слишком большой. Пожалуйста, загрузите файл меньшего размера.';
+        } else if (error.status === 500) {
+          errorMessage = 'Ошибка сервера при загрузке файла. Попробуйте позже.';
+        }
+        this.showModal('errorModal', errorMessage);
+      },
     });
   }
 
-  showModal(modalId: string) {
+  showModal(modalId: string, message?: string) {
     const modalElement = document.getElementById(modalId);
     if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
+        const modal = new bootstrap.Modal(modalElement);
+        if (message) {
+            const modalBody = modalElement.querySelector('.modal-body');
+            if (modalBody) {
+                modalBody.textContent = message;
+            }
+        }
+        modal.show();
     }
   }
 }

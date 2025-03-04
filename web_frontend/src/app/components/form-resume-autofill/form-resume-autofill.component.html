@@ -1,6 +1,6 @@
 <div class="upload-container">
     
-    <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
+    <input type="file" (change)="onFileSelected($event)" accept=".pdf" (change)="validateFile($event)" />
     
     <button (click)="uploadFile()" [disabled]="!selectedFile">
       Загрузить резюме
@@ -8,7 +8,7 @@
 </div>
 
 
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" aria-modal="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -26,19 +26,19 @@
   </div>
   
 
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true" aria-modal="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="errorModalLabel">Error</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Ошибка
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ок</button>
+            </div>
         </div>
-        <div class="modal-body">
-          Ошибка загрузки файла. Попробуйте еще раз.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Ок</button>
-        </div>
-      </div>
     </div>
 </div>
