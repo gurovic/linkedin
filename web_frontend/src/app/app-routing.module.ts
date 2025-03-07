@@ -10,6 +10,7 @@ import { SearchUserComponent } from './components/search-user/search-user.compon
 import { CompanyComponent } from './components/company/company.component';
 import { VacancyComponent } from './components/vacancy/vacancy.component';
 import { VacancyGalleryComponent } from './components/vacancy-gallery/vacancy-gallery.component';
+import { GorodComponent } from './components/gorod/gorod.component';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'company/:id', component: CompanyComponent},
   { path: 'vacancy/:vacancy_id', component: VacancyComponent},
   { path: 'vacancies', component: VacancyGalleryComponent},
+  { path: 'gorod', component: GorodComponent},
   { path: '**', component: BlankComponent },
 ];
 
