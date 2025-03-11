@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class UserService {
-  private baseUrl = environment.apiUrl + 'angular/account/';
+  private baseUrl = environment.apiUrl + 'api/account/';
 
   constructor(private http: HttpClient) {}
 
