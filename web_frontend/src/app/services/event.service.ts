@@ -7,11 +7,16 @@ import {environment} from '../../environments/environment';
   providedIn: 'root',
 })
 export class EventService {
-  private baseUrl = environment.apiUrl + 'api/event/';
+  private baseUrlEventDetails = environment.apiUrl + 'api/event/';
+  private baseUrlEventList = environment.apiUrl + 'api/event_list_last/';
 
   constructor(private http: HttpClient) {}
 
   getEventDetails(eventId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}${eventId}/`);
+    return this.http.get(`${this.baseUrlEventDetails}${eventId}/`);
+  }
+
+  getLastEvents(): Observable<any> {
+    return this.http.get(this.baseUrlEventList);
   }
 }

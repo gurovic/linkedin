@@ -44,6 +44,7 @@ from app.views.universitystudent_api import (
     CurrentUniversityStudentView,
     UniversityStudentView,
 )
+from app.views.event_list_last_api import EventListLastAPIView
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -142,6 +143,7 @@ urlpatterns = [
     path('search/search_by_skills', search_by_skills, name='search_by_skills'),
     path('api/account/<int:user_id>/', user_detail_api_view, name='uneditable_account_api'),
     path('api/event_list', EventListAPIView.as_view(), name ='events_list_api'),
+    path('api/event_list_last', EventListLastAPIView.as_view(), name ='events_list_last_api'),
     path('api/ans_verif/<int:request_id>', AnsVerificationView.as_view(), name="ans_verify"),
     path("api/user_search/", UserSearchAPIView.as_view(), name="user_search_api"),
     path("api/company/", CompanyView.as_view(), name="company"),
