@@ -1,0 +1,12 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Существующие</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let company of companies">
+            <app-company-card [company]="company"></app-company-card>
+        </div>
+    </div>
+
+    <div *ngIf="companies.length === 0" class="alert alert-warning text-center mt-4">
+        Не существует компаний.
+    </div>
+</div>
