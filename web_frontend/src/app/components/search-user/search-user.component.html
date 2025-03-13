@@ -27,7 +27,7 @@
     <div *ngIf="isLoading">Идет поиск...</div>
     <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
-    <div *ngIf="searchResults && searchResults.length > 0 && ! errorMessage">
+    <div *ngIf="searchResults && searchResults.length > 0">
         <h3>Результаты поиска</h3>
         <ul>
             <li *ngFor="let user of searchResults">
@@ -35,7 +35,7 @@
             </li>
         </ul>
     </div>
-    <div *ngIf="searchResults && searchResults.length === 0 && ! errorMessage">
+    <div *ngIf="searchResults && searchResults.length === 0">
         <p>Пользователи не найдены.</p>
     </div>
 </div>
