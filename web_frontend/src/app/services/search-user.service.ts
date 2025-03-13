@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
 })
 
 export class SearchUserService {
-  private baseUrl = environment.apiUrl + 'api/user_search';
+  private baseUrl = environment.apiUrl + 'api/user_search/';
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class SearchUserService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    
+
     return this.http.post<any>(this.baseUrl, payload, { headers });
   }
 }
