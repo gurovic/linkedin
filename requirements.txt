@@ -11,3 +11,5 @@ tzdata==2024.2
 geopy==2.4.1
 selenium==4.29.0
 webdriver-manager==4.0.2
+pdfminer.six==
+requests==2.31.0
