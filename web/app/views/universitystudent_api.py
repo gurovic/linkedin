@@ -1,7 +1,9 @@
 import datetime
 
 from rest_framework.response import Response
+from rest_framework.exceptions import bad_request
 from rest_framework.views import APIView
+from rest_framework.status import HTTP_201_CREATED
 
 from app.models import UniversityStudent
 from app.serializers.universitystudent_serializer import (
@@ -31,3 +33,13 @@ class CurrentUniversityStudentView(APIView):
             many=True,
         )
         return Response(serializer.data)
+
+
+class UniversityStudentCreateView(APIView):
+    def post(self, request):
+        serializer = UniversityStudentSerializer(data=request.data)
+        if not serializer.is_valid():
+            raise bad_request(request, Exception("Invalid university-student relation representation!"))
+        serializer.save()
+        return Response(serializer.data, status=HTTP_201_CREATED)
+    

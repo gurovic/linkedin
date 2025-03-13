@@ -43,6 +43,7 @@ from app.views.api_vacancy import VacancyView, AllVacanciesView
 from app.views.universitystudent_api import (
     CurrentUniversityStudentView,
     UniversityStudentView,
+    UniversityStudentCreateView,
 )
 from app.views.event_list_last_api import EventListLastAPIView
 
@@ -159,5 +160,10 @@ urlpatterns = [
         "api/universitystudent/current/",
         CurrentUniversityStudentView.as_view(),
         name="current_universitystudent",
+    ),
+    path(
+        "api/universitystudent/create/",
+        UniversityStudentCreateView.as_view(),
+        name="universitystudent_create",
     ),
 ]
