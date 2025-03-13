@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
 import { SearchUserService } from '../../services/search-user.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { UneditableAccountComponent } from '../uneditable-account/uneditable-account.component';
 
 @Component({
   selector: 'app-search-user',
-  standalone: true, 
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule
+  ],
   templateUrl: './search-user.component.html',
   styleUrl: './search-user.component.css',
   providers: [SearchUserService]
