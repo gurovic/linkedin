@@ -45,7 +45,11 @@ export class SearchUserComponent {
         this.isLoading = false;
       },
       (error) => {
-        this.errorMessage = 'Error fetching search results. Please try again.';
+        if (error.status === 400 && error.error.error) {
+          this.errorMessage = error.error.error;
+        } else {
+          this.errorMessage = 'Error fetching search results. Please try again.';
+        }
         console.error(error);
         this.isLoading = false;
       }
