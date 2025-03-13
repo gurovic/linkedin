@@ -39,7 +39,7 @@ class UniversityStudentCreateView(APIView):
     def post(self, request):
         serializer = UniversityStudentSerializer(data=request.data)
         if not serializer.is_valid():
-            raise bad_request(request, Exception("Invalid university-student relation representation!"))
+            raise bad_request(request, Exception(serializer.errors))
         serializer.save()
         return Response(serializer.data, status=HTTP_201_CREATED)
     
