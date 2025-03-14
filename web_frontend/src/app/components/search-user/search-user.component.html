@@ -31,7 +31,7 @@
         <h3>Результаты поиска</h3>
         <ul>
             <li *ngFor="let user of searchResults">
-                {{ user.first_name }} {{ user.last_name }}
+                <a [routerLink]="['/account', user.id]">{{ user.first_name }} {{ user.last_name }}</a>
             </li>
         </ul>
     </div>
