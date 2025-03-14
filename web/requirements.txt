@@ -11,7 +11,7 @@ django-rest-knox==5.0.2
 djangorestframework==3.15.2
 geographiclib==2.0
 geopy==2.4.1
-gunicorn~=23.0.0
+gunicorn==23.0.0
 idna==3.10
 pdfminer==20191125
 pdfminer.six==20240706
