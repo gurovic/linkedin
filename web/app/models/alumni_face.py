@@ -3,6 +3,9 @@ from django.db import models
 
 
 class AlumniFace(models.Model):
-    image_path = models.ImageField(
-        upload_to="alumnus_faces_photo/",
-    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image_path = models.ImageField(upload_to="alumni_faces")
+    x = models.IntegerField()
+    y = models.IntegerField()
+    w = models.IntegerField()
+    h = models.IntegerField()
