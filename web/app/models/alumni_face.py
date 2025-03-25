@@ -9,3 +9,4 @@ class AlumniFace(models.Model):
     y = models.IntegerField()
     w = models.IntegerField()
     h = models.IntegerField()
+
