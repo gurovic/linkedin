@@ -17,6 +17,8 @@ import { environment } from '../../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+/* Logic component */
+
 export class LoginComponent {
   loginForm = new FormGroup({
     username: new FormControl(''),

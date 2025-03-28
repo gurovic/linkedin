@@ -24,7 +24,7 @@ export class MainPageComponent {
     { username: 'Виктория' }
   ];
 
-  // Пример списка компаний
+  // companies example
   companies = [
     {
       name: 'Летово.Джуниор',

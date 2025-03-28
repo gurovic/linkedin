@@ -1,9 +1,9 @@
 <h1>Добро пожаловать на Letovo LinkedIn!</h1>
 
-<!-- Кнопка входа -->
+<!-- sign in buttom -->
 <button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
 
-<!-- Всплывающее окно входа -->
+<!-- sign in option -->
 <div class="popup" *ngIf="showLogin">
   <div class="popup-content">
     <button (click)="showLogin = false" class="btn-close"></button>
@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<!-- Основной контент -->
+<!-- Main component -->
 <section class="container mt-5">
   <section class="text-center mb-5">
     <h2 class="mb-3">Платформа для общения, обмена опытом и поиска возможностей</h2>
@@ -20,7 +20,7 @@
     </p>
   </section>
 
-  <!-- Раздел "Общайтесь - Развивайтесь - Помогайте" -->
+  <!-- main 3 images -->
   <section class="row text-center">
     <div class="col-md-4 mb-4">
       <img src="assets/Community.jpg" alt="Network" class="img-fluid rounded-circle mb-3">

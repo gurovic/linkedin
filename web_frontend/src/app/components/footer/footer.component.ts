@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-  // Дополнительная логика футера (если необходимо) может быть добавлена здесь.
+  // Additional functions or logic realisation
 }

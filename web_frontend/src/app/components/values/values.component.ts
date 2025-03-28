@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./values.component.css']
 })
 export class ValuesComponent {
-  // Пример добавления свойств для динамического контента
+  // example of dynamic content
   values = [
     {
       title: 'Объединение учеников и выпускников',
