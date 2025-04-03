@@ -1,8 +1,7 @@
-# app/views.py
-
 from django.http import JsonResponse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 from app.services.resume.pdf_parser import parse_pdf
 from app.services.resume.analyzer import analyze_resume
 

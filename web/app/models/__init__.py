@@ -12,3 +12,4 @@ from .skill import Skill, UserSkill
 from .typeofuser import TypeOfUser
 from .university import University
 from .universitystudent import UniversityStudent
+from .alumni_face import AlumniFace

@@ -1,5 +1,3 @@
-# app/services/resume/analyzer.py
-
 import requests
 import json
 import os

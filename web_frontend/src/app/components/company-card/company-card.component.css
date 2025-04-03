@@ -1,0 +1,19 @@
+.company-card-link {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.company-card-link:hover .card {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.card-body {
+    padding: 20px;
+}
