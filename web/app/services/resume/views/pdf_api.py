@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from app.services.resume.pdf_parser import parse_pdf
-from app.services.resume.analyzer import analyze_resume
+from app.services.resume.resume_analyzer import analyze_resume
 
 from app.models import UniversityStudent, University
 from app.models.job_experience import JobExperience
