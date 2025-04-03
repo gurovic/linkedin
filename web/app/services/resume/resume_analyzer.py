@@ -7,30 +7,36 @@ DEEPSEEK_API_KEY = os.environ.get('DEEPSEEK_API_KEY')
 
 def analyze_resume(text):
     """
-    Sends resume text to DeepSeek API and retrieves university education details.
-    Returns a list of dictionaries like:
-    [
-        {
-            "university": "Harvard University",
-            "start_year": 2015,
-            "end_year": 2019
-        },
-        ...
-    ]
+    Отправляет текст резюме в DeepSeek API.
+    Возвращает JSON с образованием, опытом работы и навыками.
     """
     prompt = f"""
 You are an information extraction assistant. 
-Given the following resume text, extract a list of universities where the person studied, along with start_year and end_year of study.
+Given the following resume text, extract the following structured information:
 
-Return the data strictly in JSON format like:
-[
-  {{
-    "university": "University Name",
-    "start_year": 2015,
-    "end_year": 2019
-  }},
-  ...
-]
+1. Education: A list of universities the person studied at, with start_year and end_year.
+2. Work Experience: A list of jobs with fields "company", "position", "start_year", "end_year".
+3. Skills: A list of technical or professional skills.
+
+Return strictly in JSON format like:
+{{
+  "education": [
+    {{
+      "university": "University Name",
+      "start_year": 2015,
+      "end_year": 2019
+    }}
+  ],
+  "work_experience": [
+    {{
+      "company": "Company Name",
+      "position": "Job Title",
+      "start_year": 2020,
+      "end_year": 2022
+    }}
+  ],
+  "skills": ["Python", "Public Speaking"]
+}}
 
 Only return the JSON. Do not include any extra text.
 
@@ -59,9 +65,7 @@ Resume text:
         response.raise_for_status()
 
         content = response.json()["choices"][0]["message"]["content"]
-
-        result = json.loads(content)
-        return result
+        return json.loads(content)
 
     except requests.exceptions.RequestException as e:
         print(f"Request error: {e}")
