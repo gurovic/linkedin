@@ -12,7 +12,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev
 
-FROM deps AS build
+FROM deps AS final
 
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
@@ -21,16 +21,6 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 COPY . .
 
-RUN npm run build
-
-FROM nginx:alpine AS final
-
-RUN rm -rf /usr/share/nginx/html/*
-
-COPY --from=build /usr/src/app/dist/web_frontend/browser /usr/share/nginx/html
-
-COPY nginx.conf /etc/nginx/nginx.conf
-
 EXPOSE 8080
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD npx ng serve --host 0.0.0.0 --port 8080
