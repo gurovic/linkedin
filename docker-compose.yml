@@ -20,11 +20,12 @@ services:
         - "8000"
     volumes:
       - web_media:/app/media
+    restart: on-failure
   db:
     image: postgres:17.4
     environment:
       POSTGRES_USER: ${DJANGO_PG_USER:-postgres}
-      POSTGRES_PASSWORD: ${DJANGO_PG_PASSWORD:-password}
+      POSTGRES_PASSWORD: ${DJANGO_PG_PASSWORD:-code123}
       POSTGRES_DB: ${DJANGO_PG_NAME:-linkedin}
     container_name: linkedin-db
     ports:
