@@ -1,0 +1,9 @@
+<a (click)="navigateToCompany()" class="company-card-link">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="card-title text-primary">{{ company.name }}</h5>
+        <p class="card-text text-muted">{{ company.description | slice:0:150 }}...</p>
+        <p class="card-text text-dark"><strong>Расположение:</strong> {{ company.country }}</p>
+      </div>
+    </div>
+</a>

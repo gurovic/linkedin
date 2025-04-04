@@ -39,11 +39,14 @@ from app.views.api_login import LoginView
 from app.views.event_list_api import EventListAPIView
 from app.views.api_ans_verification import AnsVerificationView
 from app.views.search_api import UserSearchAPIView
-from app.views.api_vacancy import VacancyView
+from app.views.api_vacancy import VacancyView, AllVacanciesView
 from app.views.universitystudent_api import (
     CurrentUniversityStudentView,
     UniversityStudentView,
+    UniversityStudentCreateView,
 )
+from app.views.event_list_last_api import EventListLastAPIView
+from app.services.resume.views.pdf_api import PDFUploadView
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -140,13 +143,15 @@ urlpatterns = [
     path("api/auth/check/", AuthCheckView.as_view(), name="api_auth_check"),
     path('search/', user_search, name='user_search'),
     path('search/search_by_skills', search_by_skills, name='search_by_skills'),
-    path('angular/account/<int:user_id>/', user_detail_api_view, name='angular_uneditable_account_api'),
+    path('api/account/<int:user_id>/', user_detail_api_view, name='uneditable_account_api'),
     path('api/event_list', EventListAPIView.as_view(), name ='events_list_api'),
+    path('api/event_list_last', EventListLastAPIView.as_view(), name ='events_list_last_api'),
     path('api/ans_verif/<int:request_id>', AnsVerificationView.as_view(), name="ans_verify"),
     path("api/user_search/", UserSearchAPIView.as_view(), name="user_search_api"),
     path("api/company/", CompanyView.as_view(), name="company"),
     path("api/company/<int:company_id>/", CompanyView.as_view(), name="company"),
     path("api/vacancy/<int:vacancy_id>", VacancyView.as_view(), name="vacancy"),
+    path("api/vacancys/", AllVacanciesView.as_view(), name="all_vacancies"),
     path(
         "api/universitystudent/",
          UniversityStudentView.as_view(),
@@ -157,4 +162,10 @@ urlpatterns = [
         CurrentUniversityStudentView.as_view(),
         name="current_universitystudent",
     ),
+    path(
+        "api/universitystudent/create/",
+        UniversityStudentCreateView.as_view(),
+        name="universitystudent_create",
+    ),
+    path("cvautofill/", PDFUploadView.as_view(), name="cvautofill"),
 ]

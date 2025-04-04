@@ -1,12 +1,9 @@
 <h1>Добро пожаловать на Letovo LinkedIn!</h1>
-
 <!-- sign in buttom -->
 <button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
-
-<!-- sign in option -->
 <div class="popup" *ngIf="showLogin">
   <div class="popup-content">
-    <button (click)="showLogin = false" class="btn-close"></button>
+    <button (click)="showLogin = false" class="close-btn">x</button>
     <app-login></app-login>
   </div>
 </div>
@@ -40,6 +37,8 @@
       <p>Делитесь опытом и помогайте ученикам Летово находить себя</p>
     </div>
   </section>
+  
+  <app-values></app-values>
 
   <!-- Блоки с картой и инфой о сайте -->
   <app-map *ngIf="isAuthenticated"></app-map>
@@ -57,32 +56,6 @@
       <div class="col-md-3">Работники</div>
     </div>
 
-    <ng-container *ngIf="companies.length; else noCompanies">
-      <div class="row justify-content-center" *ngFor="let company of companies">
-        <div class="col-md-2">{{ company.name }}</div>
-        <div class="col-md-3">{{ company.description }}</div>
-        <div class="col-md-2">{{ company.country }}</div>
-        <div class="col-md-2">
-          <ul *ngIf="company.vacancies.length; else noVacancies">
-            <li *ngFor="let vacancy of company.vacancies">
-              {{ vacancy.name }} ({{ vacancy.specialization }})
-            </li>
-          </ul>
-          <ng-template #noVacancies>Нет доступных вакансий</ng-template>
-        </div>
-        <div class="col-md-3">
-          <ul *ngIf="company.workers.length; else noWorkers">
-            <li *ngFor="let worker of company.workers">{{ worker.username }}</li>
-          </ul>
-          <ng-template #noWorkers>Нет работников</ng-template>
-        </div>
-      </div>
-    </ng-container>
+<app-about-site></app-about-site>
 
-    <ng-template #noCompanies>
-      <div class="row justify-content-center">
-        <div class="col-md-12">Компаний пока нет :(</div>
-      </div>
-    </ng-template>
-  </section>
-</section>
+<app-map></app-map>

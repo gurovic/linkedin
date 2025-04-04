@@ -60,7 +60,7 @@ export class MapComponent implements AfterViewInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(this.map);
-
+    this.map.attributionControl.setPrefix('')
     this.fetchUserMarkers();
   }
 

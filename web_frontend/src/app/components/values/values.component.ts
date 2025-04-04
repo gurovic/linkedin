@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './values.component.html',
-  styleUrls: ['./values.component.css']
+  styleUrl: './values.component.css'
 })
 export class ValuesComponent {
   // example of dynamic content

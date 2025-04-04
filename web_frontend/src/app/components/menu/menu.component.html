@@ -1,9 +1,13 @@
 <!-- Navigation bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
   <a class="navbar-brand" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
+  
+  <!-- Кнопка-бургер для мобильных устройств -->
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+  <!-- Навигационные ссылки -->
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -14,6 +18,12 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/vacancies" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Вакансии</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/gorod" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Город</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/companies" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Компании</a>
       </li>
     </ul>
   </div>
