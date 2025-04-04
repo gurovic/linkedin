@@ -20,7 +20,7 @@ services:
         - "8000"
     volumes:
       - web_media:/app/media
-    restart: on-failure
+    restart: unless-stopped
   db:
     image: postgres:17.4
     environment:
@@ -34,6 +34,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     env_file:
       - ./web/.env
+    restart: unless-stopped
   frontend:
     build: ./web_frontend
     container_name: linkedin-ng
@@ -41,6 +42,7 @@ services:
       - "127.0.0.1:8080:8080"
     depends_on:
       - backend
+    restart: unless-stopped
 volumes:
   postgres_data:
   web_media:
