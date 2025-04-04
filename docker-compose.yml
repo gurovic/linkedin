@@ -17,26 +17,32 @@ services:
     env_file:
       - ./web/.env
     ports:
-        - "8000:8000"
+        - "8000"
+    volumes:
+      - web_media:/app/media
+    restart: unless-stopped
   db:
     image: postgres:17.4
     environment:
       POSTGRES_USER: ${DJANGO_PG_USER:-postgres}
-      POSTGRES_PASSWORD: ${DJANGO_PG_PASSWORD:-password}
+      POSTGRES_PASSWORD: ${DJANGO_PG_PASSWORD:-code123}
       POSTGRES_DB: ${DJANGO_PG_NAME:-linkedin}
     container_name: linkedin-db
     ports:
-      - "5432:5432"
+      - "5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file:
       - ./web/.env
+    restart: unless-stopped
   frontend:
     build: ./web_frontend
     container_name: linkedin-ng
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     depends_on:
       - backend
+    restart: unless-stopped
 volumes:
   postgres_data:
+  web_media:

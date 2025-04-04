@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'https://linkedin.veconomics.ru/',
   mediaUrl: 'https://linkedin.veconomics.ru/',
 };
