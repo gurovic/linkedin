@@ -23,4 +23,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD npx ng serve --host 0.0.0.0 --port 8080
+CMD npx ng serve --host 0.0.0.0 --port 8080 --configuration docker
