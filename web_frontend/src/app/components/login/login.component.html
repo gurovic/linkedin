@@ -1,8 +1,15 @@
+<!-- login component -->
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="container mt-5">
+  <div class="mb-3">
+    <label for="username" class="form-label">Username:</label>
+    <input formControlName="username" id="username" name="username" required type="text" class="form-control">
+  </div>
+  
 <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
   <label for="username">Username:</label>
   <input formControlName="username" id="username" name="username" required
          type="text">
-
+  
   <label for="password">Password:</label>
   <input formControlName="password" id="password" name="password"
          required type="password">
