@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "http://linkedin-django:8000",
+    "secure": false
+  },
+  "/angular": {
+    "target": "http://linkedin-django:8000",
+    "secure": false
+  }
+}
