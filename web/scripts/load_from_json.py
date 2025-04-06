@@ -105,7 +105,7 @@ def transfer():
     )
     letovo_school.majors.set(majors)
 
-    # Creating uiniversities
+    # Creating universities
     for university in universities:
         print(f"start creating uni {university["name"]}...", end="", flush=True)
         if University.objects.filter(name=university["name"]).exists():
