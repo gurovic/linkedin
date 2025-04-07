@@ -37,7 +37,7 @@ describe('VacancyService', () => {
       contacts: 'contact@example.com'
     };
 
-    service.getVacancy(1).subscribe(vacancy => {
+    service.getVacancyDetails(1).subscribe(vacancy => {
       expect(vacancy).toEqual(mockVacancy);
     });
 
@@ -47,7 +47,7 @@ describe('VacancyService', () => {
   });
 
   it('должен корректно обрабатывать ошибку 404', () => {
-    service.getVacancy(999).subscribe(
+    service.getVacancyDetails(999).subscribe(
       () => fail('Ожидалась ошибка, но сервис вернул успешный ответ'),
       (error) => {
         expect(error.status).toBe(404);

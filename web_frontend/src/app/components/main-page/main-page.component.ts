@@ -14,32 +14,5 @@ import {MapComponent} from '../map/map.component';
 })
 export class MainPageComponent {
   showLogin = false;
+  isAuthenticated = false;
 }
-
-isAuthenticated = false;
- //Моки
- users = [
-    { username: 'Екатерина' },
-    { username: 'Павел' },
-    { username: 'Виктория' }
-  ];
-
- // companies example
- companies = [
-    {
-      name: 'Летово.Джуниор',
-      description: 'Образовательная компания',
-      country: 'Россия',
-      vacancies: [
-        { name: 'Разработчик', specialization: 'Frontend', description: 'Работа с Angular' }
-      ],
-      workers: [{ username: 'Павел' }]
-    },
-    {
-      name: 'Русагро',
-      description: 'Агрохолдинг',
-      country: 'Россия',
-      vacancies: [],
-      workers: [{ username: 'Виктория' }]
-    }
- ];
