@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {environment} from '../../../environments/environment';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent {
   });
   loginError: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
   }
 
   onSubmit() {
@@ -39,6 +40,7 @@ export class LoginComponent {
     this.http.post(environment.apiUrl + `api/auth/login/`, JSON.stringify({}), {headers: headers}).subscribe(
       (response: any) => {
         console.log('Login successful', response);
+        this.authService.login(response.token);
         this.loginError = null;
         localStorage.setItem('authToken', response.token);
         this.router.navigate(['/']);
