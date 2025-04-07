@@ -1,15 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { VacancyService } from './vacancy.service';
+import {environment} from '../../environments/environment';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('VacancyService', () => {
   let service: VacancyService;
   let httpMock: HttpTestingController;
-  const apiUrl = 'http://localhost:8000/api/vacancy/';
+  const apiUrl = environment.apiUrl + 'api/vacancy/';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [VacancyService]
     });
 
@@ -41,7 +43,7 @@ describe('VacancyService', () => {
       expect(vacancy).toEqual(mockVacancy);
     });
 
-    const req = httpMock.expectOne(`${apiUrl}1/`);
+    const req = httpMock.expectOne(`${apiUrl}1`);
     expect(req.request.method).toBe('GET');
     req.flush(mockVacancy); // Отправляем мок-ответ
   });
@@ -54,7 +56,7 @@ describe('VacancyService', () => {
       }
     );
 
-    const req = httpMock.expectOne(`${apiUrl}999/`);
+    const req = httpMock.expectOne(`${apiUrl}999`);
     req.flush('Вакансия не найдена', { status: 404, statusText: 'Not Found' });
   });
 });

@@ -3,8 +3,8 @@
     <h1>Вы просматриваете аккаунт без права редактирования</h1>
     <div>
       <h2>Имя, Фамилия: {{ user.first_name }} {{ user.last_name }}</h2>
-      <p><strong>Логин: {{ user.username }}</p>
-      <p><strong>Электронная почта: {{ user.email }}</p>
+      <p><strong>Логин: {{ user.username }}</strong>></p>
+      <p><strong>Электронная почта: {{ user.email }}</strong>></p>
 
       <h3>Периоды обучения в школах</h3>
       <ul *ngIf="studentSchools.length > 0; else noSchoolData">
@@ -15,7 +15,7 @@
       <ng-template #noSchoolData>
         <p>Нет сведений о периодах обучения в школах.</p>
       </ng-template>
-  
+
       <h3>Периоды обучения в университетах</h3>
       <ul *ngIf="studentUniversities.length > 0; else noUniversityData">
         <li *ngFor="let university of studentUniversities">
