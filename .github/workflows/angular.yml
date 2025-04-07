@@ -17,8 +17,8 @@ jobs:
         node-version: [22.x]
 
     steps:
-      - run: cd web_frontend
       - uses: actions/checkout@v4
+      - run: cd web_frontend
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
