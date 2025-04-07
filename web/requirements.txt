@@ -1,4 +1,4 @@
-﻿asgiref==3.8.1
+asgiref==3.8.1
 certifi==2025.1.31
 cffi==1.17.1
 charset-normalizer==3.4.1
@@ -11,11 +11,12 @@ django-rest-knox==5.0.2
 djangorestframework==3.15.2
 geographiclib==2.0
 geopy==2.4.1
+gunicorn==23.0.0
 idna==3.10
 pdfminer==20191125
 pdfminer.six==20240706
 pillow==10.4.0
-psycopg2==2.9.10
+psycopg2-binary==2.9.10
 pycparser==2.22
 pycryptodome==3.21.0
 python-dotenv==1.0.1
