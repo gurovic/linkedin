@@ -45,6 +45,10 @@
             "scripts": [
               "node_modules/leaflet/dist/leaflet.js",
               "node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "leaflet.markercluster",
+              "leaflet"
             ]
           },
           "configurations": {
@@ -73,6 +77,17 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "server": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.docker.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -85,9 +100,16 @@
             },
             "development": {
               "buildTarget": "web_frontend:build:development"
+            },
+            "docker": {
+              "buildTarget": "web_frontend:build:server"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "src/proxy.conf.json",
+            "buildTarget": "web_frontend:build"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

@@ -242,3 +242,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Private JSON files
+/web/universities.json
+# why "alumnus" btw?
+/web/alumnus.json
+
+# Output JSON with usernames and passwords
+/web/users.json

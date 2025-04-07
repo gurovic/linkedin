@@ -18,6 +18,8 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+/* Logic component */
+
 export class LoginComponent {
   loginForm = new FormGroup({
     username: new FormControl(''),

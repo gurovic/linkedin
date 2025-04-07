@@ -1,0 +1,48 @@
+services:
+  backend:
+    build: ./web
+    container_name: linkedin-django
+    depends_on:
+      - db
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-secret}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-False}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-*}
+      DJANGO_USE_POSTGRES: ${DJANGO_USE_POSTGRES:-True}
+      DJANGO_PG_NAME: ${DJANGO_PG_NAME:-linkedin}
+      DJANGO_PG_USER: ${DJANGO_PG_USER:-postgres}
+      DJANGO_PG_PASSWORD: ${DJANGO_PG_PASSWORD:-code123}
+      DJANGO_PG_HOST: ${DJANGO_PG_HOST:-linkedin-db}
+      DJANGO_PG_PORT: ${DJANGO_PG_PORT:-5432}
+    env_file:
+      - ./web/.env
+    ports:
+        - "8000"
+    volumes:
+      - web_media:/app/media
+    restart: unless-stopped
+  db:
+    image: postgres:17.4
+    environment:
+      POSTGRES_USER: ${DJANGO_PG_USER:-postgres}
+      POSTGRES_PASSWORD: ${DJANGO_PG_PASSWORD:-code123}
+      POSTGRES_DB: ${DJANGO_PG_NAME:-linkedin}
+    container_name: linkedin-db
+    ports:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./web/.env
+    restart: unless-stopped
+  frontend:
+    build: ./web_frontend
+    container_name: linkedin-ng
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - backend
+    restart: unless-stopped
+volumes:
+  postgres_data:
+  web_media:
