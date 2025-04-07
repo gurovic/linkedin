@@ -3,7 +3,8 @@ import { NgIf } from '@angular/common';
 import { ValuesComponent } from '../values/values.component';
 import { AboutSiteComponent } from '../about-site/about-site.component';
 import { LoginComponent } from '../login/login.component';
-import {MapComponent} from '../map/map.component';
+import { MapComponent } from '../map/map.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-page',
@@ -14,32 +15,12 @@ import {MapComponent} from '../map/map.component';
 })
 export class MainPageComponent {
   showLogin = false;
+
+  isAuthenticated: boolean = false;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.isAuthenticated = this.authService.isLoggedIn();
+  }
 }
-
-isAuthenticated = false;
- //Моки
- users = [
-    { username: 'Екатерина' },
-    { username: 'Павел' },
-    { username: 'Виктория' }
-  ];
-
- // companies example
- companies = [
-    {
-      name: 'Летово.Джуниор',
-      description: 'Образовательная компания',
-      country: 'Россия',
-      vacancies: [
-        { name: 'Разработчик', specialization: 'Frontend', description: 'Работа с Angular' }
-      ],
-      workers: [{ username: 'Павел' }]
-    },
-    {
-      name: 'Русагро',
-      description: 'Агрохолдинг',
-      country: 'Россия',
-      vacancies: [],
-      workers: [{ username: 'Виктория' }]
-    }
- ];
