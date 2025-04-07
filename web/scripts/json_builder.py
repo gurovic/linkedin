@@ -6,8 +6,15 @@ class JsonBuilder:
     def __init__(self, alumnus_path, univ_path):
         self.alumnus_path = alumnus_path
         self.univ_path = univ_path
-        with open(alumnus_path, "r", encoding="utf-8") as json_file:
-            self.data = json.load(json_file)
+        try:
+            with open(alumnus_path, "r", encoding="utf-8") as json_file:
+                self.data = json.load(json_file)
+        except FileNotFoundError:
+            print(f"Error: File {alumnus_path} not found.")
+            self.data = [] # setting default value to avoid errors
+        except json.JSONDecodeError:
+            print(f"Error: File {alumnus_path} is not a valid JSON file.")
+            self.data = [] # setting default value to avoid errors
 
     def delete_replications(self):
         for i in range(len(self.data)):
