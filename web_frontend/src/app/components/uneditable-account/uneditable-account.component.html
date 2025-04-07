@@ -4,7 +4,7 @@
     <div>
       <h2>Имя, Фамилия: {{ user.first_name }} {{ user.last_name }}</h2>
       <p><strong>Логин: {{ user.username }}</strong></p>
-      <p><strong>Электронная почта: {{ user.email }}</strong>></p>
+      <p><strong>Электронная почта: {{ user.email }}</strong></p>
 
       <h3>Периоды обучения в школах</h3>
       <ul *ngIf="studentSchools.length > 0; else noSchoolData">
