@@ -14,6 +14,8 @@ describe('СompanyCardComponent', () => {
 
     fixture = TestBed.createComponent(CompanyCardComponent);
     component = fixture.componentInstance;
+    component.company = { name: 'Test Company', description: 'This is a test company.', country: 'DE'};
+    fixture.detectChanges();
     fixture.detectChanges();
   });
 

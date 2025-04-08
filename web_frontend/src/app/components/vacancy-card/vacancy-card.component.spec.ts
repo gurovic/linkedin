@@ -14,6 +14,7 @@ describe('VacancyCardComponent', () => {
 
     fixture = TestBed.createComponent(VacancyCardComponent);
     component = fixture.componentInstance;
+    component.vacancy = { name: 'Test Vacancy', description: 'This is a test vacancy.', company: 1};
     fixture.detectChanges();
   });
 
