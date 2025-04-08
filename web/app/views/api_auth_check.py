@@ -10,6 +10,8 @@ class AuthCheckView(APIView):
         if request.user.username == "":
             return Response({ "error": "Unauthorized!" }, status=401)
         content = {
-            "user": request.user.username
+            "user" : request.user.username,
+            "name" : request.first_name,
+            "surname" : request.last_name,
         }
         return Response(content)
