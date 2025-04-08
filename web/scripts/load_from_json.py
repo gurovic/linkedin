@@ -51,7 +51,7 @@ transliteration = {
 }
 
 def transliterate(s: str):
-    return "".join(list(map(lambda x: transliteration[x] if x in transliteration.keys() else "x", list(s.lower()))))
+    return "".join([transliteration[char] if char in transliteration else "x" for char in s.lower()])
 
 import json
 import logging
@@ -106,7 +106,7 @@ def transfer():
     )
     letovo_school.majors.set(majors)
 
-    # Creating uiniversities
+    # Creating universities
     for university in universities:
         print(f"start creating uni {university["name"]}...", end="", flush=True)
         if University.objects.filter(name=university["name"]).exists():
