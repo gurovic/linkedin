@@ -3,8 +3,7 @@ import { NgIf } from '@angular/common';
 import { ValuesComponent } from '../values/values.component';
 import { AboutSiteComponent } from '../about-site/about-site.component';
 import { LoginComponent } from '../login/login.component';
-import { MapComponent } from '../map/map.component';
-import { AuthService } from '../../services/auth.service';
+import {MapComponent} from '../map/map.component';
 
 @Component({
   selector: 'app-main-page',
@@ -15,12 +14,5 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MainPageComponent {
   showLogin = false;
-
-  isAuthenticated: boolean = false;
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.isAuthenticated = this.authService.isLoggedIn();
-  }
+  isAuthenticated = false;
 }
