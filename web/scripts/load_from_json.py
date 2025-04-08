@@ -14,6 +14,11 @@ Type "Yes, do as I say!" and press Enter in order to continue.
 > Yes, do as I say!
 """
 
+# CONFIG
+alumni_path = "alumnus.json"
+universities_path = "universities.json"
+out_path = "users.json"
+
 transliteration = {
     "а": "a",
     "б": "b",
@@ -69,13 +74,13 @@ from .country_from_coords import get_country_from_coordinates
 universities, alumnis = {}, {}
 
 try:
-    f_universities = open("universities.json")
+    f_universities = open(universities_path)
     universities = json.load(f_universities)
     f_universities.close()
 except FileNotFoundError:
     logging.error("universities.json not found! please save the file to /web/universities.json")
 try:
-    f_alumnis = open("alumnus.json")
+    f_alumnis = open(alumni_path)
     alumnis = json.load(f_alumnis)
     f_alumnis.close()
 except FileNotFoundError:
@@ -83,6 +88,7 @@ except FileNotFoundError:
 
 def transfer():
     print("THIS SCRIPT WILL DELETE ALL MAJORS, SCHOOLS AND STUDENTS.")
+    print("Additionally, the old password list will be replaced.")
     print("Type \"Yes, do as I say!\" and press Enter in order to continue.")
     if input("> ") != "Yes, do as I say!":
         return 2
@@ -115,7 +121,7 @@ def transfer():
         University.objects.create(
             name=university["name"],
             description=university["description"],
-            country=get_country_from_coordinates(university["lat"] or 0, university["lon"] or 0) or "",
+            country=university["country"] or "Неизвестно",
             lat=university["lat"] or 0,
             lon=university["lon"] or 0
         )
@@ -129,8 +135,10 @@ def transfer():
         username = f"{alumni["year"]}_{transliterate(alumni["name"])}_{transliterate(alumni["surname"])}"
         old_user = User.objects.filter(username=username)
         if old_user.exists():
-            print("removed old,", end="", flush=True)
-            old_user.get().delete()
+            # print("removed old,", end="", flush=True)
+            # old_user.get().delete()
+            print("already exists")
+            continue
         user = User.objects.create_user(username=username, password=password, first_name=alumni["name"], last_name=alumni["surname"])
         passwords[username] = password
 
@@ -148,6 +156,6 @@ def transfer():
         )
         print("done")
     
-    users_file = open("users.json", "w")
+    users_file = open(out_path, "w")
     json.dump(passwords, users_file)
     users_file.close()
