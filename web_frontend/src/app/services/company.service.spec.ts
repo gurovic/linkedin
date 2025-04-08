@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http/testing';
 import { CompanyService } from './company.service';
 import {provideHttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 describe('CompanyService', () => {
   let service: CompanyService;
@@ -40,7 +41,7 @@ describe('CompanyService', () => {
       expect(details).toEqual(dummyCompanyDetails);
     });
 
-    const req = httpMock.expectOne('http://localhost:8000/api/company/1/');
+    const req = httpMock.expectOne(environment.apiUrl + 'api/company/1/');
     expect(req.request.method).toBe('GET');
     req.flush(dummyCompanyDetails);
   });

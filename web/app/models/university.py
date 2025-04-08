@@ -4,18 +4,18 @@ from django.core.exceptions import ValidationError
 
 
 class University(models.Model):
-    COUNTRY_CHOICES = [
-        ('RU', 'Russian Federation'),
-        ('US', 'United States'),
-        ('CA', 'Canada'),
-        ('GB', 'United Kingdom'),
-        ('DE', 'Germany'),
-        ('FR', 'France'),
-        ('JP', 'Japan'),
-        ('CN', 'China'),
-        ('IN', 'India'),
-        ('BR', 'Brazil'),
-    ]
+    # COUNTRY_CHOICES = [
+    #     ('RU', 'Russian Federation'),
+    #     ('US', 'United States'),
+    #     ('CA', 'Canada'),
+    #     ('GB', 'United Kingdom'),
+    #     ('DE', 'Germany'),
+    #     ('FR', 'France'),
+    #     ('JP', 'Japan'),
+    #     ('CN', 'China'),
+    #     ('IN', 'India'),
+    #     ('BR', 'Brazil'),
+    # ]
     MAJOR_CHOICES = [
         ('CS', 'Computer Science'),
         ('MATH', 'Mathematics'),
@@ -28,7 +28,8 @@ class University(models.Model):
     ]
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    country = models.CharField(max_length=100, default='Smth', choices=COUNTRY_CHOICES)
+    # country = models.CharField(max_length=100, default='Smth', choices=COUNTRY_CHOICES)
+    country = models.CharField(max_length=100, default='Smth')
     majors_availible = MultiSelectField(max_length=100, default='Smth', choices=MAJOR_CHOICES)
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)

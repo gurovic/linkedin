@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { Router } from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -19,8 +20,7 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
         FormsModule,
         LoginComponent
-      ],
-      declarations: []
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
@@ -40,7 +40,7 @@ describe('LoginComponent', () => {
 
     component.onSubmit();
 
-    const req = httpMock.expectOne('http://localhost:8000/api/auth/login/');
+    const req = httpMock.expectOne(environment.apiUrl + 'api/auth/login/');
     expect(req.request.method).toBe('POST');
     expect(req.request.headers.get('Authorization')).toBe('Basic ' + btoa('testuser:testpass'));
 
@@ -57,7 +57,7 @@ describe('LoginComponent', () => {
 
     component.onSubmit();
 
-    const req = httpMock.expectOne('http://localhost:8000/api/auth/login/');
+    const req = httpMock.expectOne(environment.apiUrl + 'api/auth/login/');
     req.flush('Login failed', { status: 401, statusText: 'Unauthorized' });
 
     expect(component.loginError).toBe('Invalid username or password');

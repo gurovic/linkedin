@@ -15,7 +15,7 @@
       <ng-template #noSchoolData>
         <p>Нет сведений о периодах обучения в школах.</p>
       </ng-template>
-  
+
       <h3>Периоды обучения в университетах</h3>
       <ul *ngIf="studentUniversities.length > 0; else noUniversityData">
         <li *ngFor="let university of studentUniversities">
