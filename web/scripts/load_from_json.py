@@ -14,6 +14,11 @@ Type "Yes, do as I say!" and press Enter in order to continue.
 > Yes, do as I say!
 """
 
+# CONFIG
+alumni_path = "alumnus.json"
+universities_path = "universities.json"
+out_path = "users.json"
+
 transliteration = {
     "а": "a",
     "б": "b",
@@ -69,13 +74,13 @@ from .country_from_coords import get_country_from_coordinates
 universities, alumnis = {}, {}
 
 try:
-    f_universities = open("universities.json")
+    f_universities = open(universities_path)
     universities = json.load(f_universities)
     f_universities.close()
 except FileNotFoundError:
     logging.error("universities.json not found! please save the file to /web/universities.json")
 try:
-    f_alumnis = open("alumnus.json")
+    f_alumnis = open(alumni_path)
     alumnis = json.load(f_alumnis)
     f_alumnis.close()
 except FileNotFoundError:
@@ -151,6 +156,6 @@ def transfer():
         )
         print("done")
     
-    users_file = open("users.json", "w")
+    users_file = open(out_path, "w")
     json.dump(passwords, users_file)
     users_file.close()
