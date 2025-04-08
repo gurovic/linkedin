@@ -26,6 +26,8 @@ export const routes: Routes = [
   { path: 'gorod', component: GorodComponent},
   { path: 'companies', component: CompanyGalleryComponent},
   { path: '**', component: BlankComponent },
+  { path: 'university', component: UniversityGalleryComponent},
+  { path: 'university/:id', component: UniversityComponent}
 ];
 
 @NgModule({
