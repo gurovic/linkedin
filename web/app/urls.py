@@ -40,12 +40,14 @@ from app.views.event_list_api import EventListAPIView
 from app.views.api_ans_verification import AnsVerificationView
 from app.views.search_api import UserSearchAPIView
 from app.views.api_vacancy import VacancyView
+from app.views.api_verification_description import VerificationDescriptionView
 from app.views.universitystudent_api import (
     CurrentUniversityStudentView,
     UniversityStudentView,
 )
 
 urlpatterns = [
+    path('api/verify-description', VerificationDescriptionView.as_view(), name='verify-description'),
     path("student_schools/", student_schools, name="student_schools"),
     path("companies/", company_list, name="company_list"),
     path("skills/<int:user_id>/", skills_view, name="user_skills_old"),

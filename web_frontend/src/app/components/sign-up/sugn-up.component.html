@@ -1,0 +1,19 @@
+<button (click)="toggleForm()"> Sign up </button>
+
+<div *ngIf="showForm" class="form-container">
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <label>ФИО:</label>
+    <input type="text" name="fullName" [(ngModel)]="formData.fullName" required />
+
+    <label>Email:</label>
+    <input type="email" name="email" [(ngModel)]="formData.email" required />
+
+    <label>Фотография:</label>
+    <input type="file" (change)="onFileSelected($event)" />
+
+    <label>Университет:</label>
+    <input type="text" name="university" [(ngModel)]="formData.university" required />
+
+    <button type="submit" [disabled]="!userForm.form.valid">Отправить</button>
+  </form>
+</div>
