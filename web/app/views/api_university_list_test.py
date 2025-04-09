@@ -8,7 +8,7 @@ from ..views.api_university_list import UniversityListView
 from ..models import University
 
 
-class VerificationRequestViewTests(APITestCase):
+class UniversityListTests(APITestCase):
     def setUp(self):
         self.api = UniversityListView()
 
