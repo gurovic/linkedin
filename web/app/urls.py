@@ -35,6 +35,7 @@ from .views.filters import search_by_skills
 from .views.angular_uneditable_account_api import user_detail_api_view
 from .views.api_verification_list import VerificationRequestView
 from .views.api_verification_description import VerificationDescriptionView
+from .views.api_university_list import UniversityListView
 from app.views.api_login import LoginView
 from app.views.event_list_api import EventListAPIView
 from app.views.api_ans_verification import AnsVerificationView
@@ -99,6 +100,7 @@ urlpatterns = [
         name="event_participants",
     ),
     path("api/universities/", university_list, name="university_list"),
+    path("api/universities/small", UniversityListView.as_view(), name="university_list_small"),
     path(
         "api/user/<int:user_id>/",
         UserDetailView.as_view(),
