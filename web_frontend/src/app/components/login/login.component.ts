@@ -1,4 +1,9 @@
-import {Component} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewContainerRef
+} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {
@@ -18,16 +23,21 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-/* Logic component */
-
 export class LoginComponent {
+  @Output() closeLoginPopup = new EventEmitter<void>();
+
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl('')
   });
   loginError: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private viewContainerRef: ViewContainerRef,
+    private authService: AuthService
+  ) {
   }
 
   onSubmit() {
@@ -45,7 +55,8 @@ export class LoginComponent {
         this.authService.login(response.token);
         this.loginError = null;
         localStorage.setItem('authToken', response.token);
-        this.router.navigate(['/']);
+        this.closeLoginPopup.emit();
+        this.router.navigate(['/']).then(r => null);
       },
       error => {
         this.loginError = 'Invalid username or password';

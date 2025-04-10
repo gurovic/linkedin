@@ -4,6 +4,7 @@ import { ValuesComponent } from '../values/values.component';
 import { AboutSiteComponent } from '../about-site/about-site.component';
 import { LoginComponent } from '../login/login.component';
 import {MapComponent} from '../map/map.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-page',
@@ -14,5 +15,6 @@ import {MapComponent} from '../map/map.component';
 })
 export class MainPageComponent {
   showLogin = false;
-  isAuthenticated = false;
+  auth_service = new AuthService;
+  isAuthenticated = this.auth_service.isLoggedIn();
 }
