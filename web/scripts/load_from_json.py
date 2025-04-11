@@ -145,7 +145,8 @@ def transfer():
         UniversityStudent.objects.create(
             student=user,
             university=University.objects.filter(name=alumni["univ"]).get(),
-            start_year=alumni["year"]
+            start_year=alumni["year"],
+            faculty=alumni["faculty"] or ""
         )
         StudentSchool.objects.create(
             student=user,

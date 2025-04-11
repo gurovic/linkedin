@@ -13,4 +13,5 @@ class UniversityStudentSerializer(serializers.ModelSerializer):
             "leave_reason",
             "start_year",
             "end_year",
+            "faculty",
         )
