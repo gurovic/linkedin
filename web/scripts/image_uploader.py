@@ -57,9 +57,12 @@ class ImageUploader:
         for name, (top_left, bottom_right) in rectangles:
             img_copy = image.copy()
             user = UserSearch.user_search(self, query=name).first()
-            cv2.rectangle(img_copy, top_left, bottom_right, color=(0, 255, 0), thickness=2)
-            english_username = transliterate(user.username)
-
+            if user:
+                cv2.rectangle(img_copy, top_left, bottom_right, color=(0, 255, 0), thickness=2)
+                english_username = transliterate(user.username)
+            else:
+                print(f"No user found for name: {name}")
+                continue
             output_filename = f"{base_name}_{english_username}.jpg"
             output_path = os.path.join(self.upload_dir,  output_filename)
             cv2.imwrite(output_path, img_copy)
