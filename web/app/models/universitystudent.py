@@ -26,6 +26,7 @@ class UniversityStudent(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student')
     university = models.ForeignKey(University,on_delete=models.CASCADE, related_name='university_students')
     leave_reason = models.CharField(null=True, blank=True, max_length=20, choices=LEAVE_REASON_CHOICES)
+    faculty = models.CharField(null=True, blank=True, max_length=100)
     start_year = models.PositiveIntegerField(
         default=get_year,
         help_text="Select the year when the program started",
