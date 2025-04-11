@@ -5,17 +5,10 @@ class UserSearch:
     def user_search(self, query: str):
         users = User.objects.all()
         if query:
-            users = users.filter(
-                last_name__icontains=query,
-            ) | users.filter(
-                first_name__icontains=query,
-            ) | users.filter(
-                first_name__icontains=query.split(" ")[0],
-            ) | users.filter(
-                last_name__icontains=query.split(" ")[0],
-            ) | users.filter(
-                first_name__icontains=query.split(" ")[-1],
-            ) | users.filter(
-                last_name__icontains=query.split(" ")[-1],
-            )
+            from django.db.models import Q
+            q = Q(last_name__icontains=query) | Q(first_name__icontains=query)
+            for term in query.split():
+                q |= Q(first_name__icontains=term) | Q(last_name__icontains=term)
+            users = users.filter(q)
+
         return users

@@ -9,13 +9,16 @@ from .load_from_json import transliterate
 class ImageUploader:
 
     def __init__(self,
-                 upload_dir: str = r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\media\faces",
-                 photos_dir: str = r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\photos",
-                 json_path: str = r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\faces.json",
+                 upload_dir: str = None,
+                 photos_dir: str = None,
+                 json_path: str = None
                  ):
-        self.upload_dir = upload_dir
-        self.photos_dir = photos_dir
-        self.json_path = json_path
+        self.upload_dir = upload_dir or os.environ.get('UPLOAD_DIR',
+                                                       r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\media\faces")
+        self.photos_dir = photos_dir or os.environ.get('PHOTOS_DIR',
+                                                       r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\photos")
+        self.json_path = json_path or os.environ.get('JSON_PATH',
+                                                     r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\faces.json")
 
 
     def image_from_json(self, json_path: str):
