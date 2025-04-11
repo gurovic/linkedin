@@ -146,6 +146,7 @@ urlpatterns = [
     path('search/', user_search, name='user_search'),
     path('search/search_by_skills', search_by_skills, name='search_by_skills'),
     path('api/account/<int:user_id>/', user_detail_api_view, name='uneditable_account_api'),
+    path('api/account/', user_detail_api_view, name='uneditable_account_api'),
     path('api/event_list', EventListAPIView.as_view(), name ='events_list_api'),
     path('api/event_list_last', EventListLastAPIView.as_view(), name ='events_list_last_api'),
     path('api/ans_verif/<int:request_id>', AnsVerificationView.as_view(), name="ans_verify"),
