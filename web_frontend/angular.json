@@ -107,7 +107,10 @@
           },
           "defaultConfiguration": "development",
           "options": {
+<<<<<<< Updated upstream
             "proxyConfig": "src/proxy.conf.json",
+=======
+>>>>>>> Stashed changes
             "buildTarget": "web_frontend:build"
           }
         },

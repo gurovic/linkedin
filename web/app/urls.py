@@ -170,4 +170,7 @@ urlpatterns = [
         name="universitystudent_create",
     ),
     path("cvautofill/", PDFUploadView.as_view(), name="cvautofill"),
+    path("api/alumni-verification-request/", VerificationDescriptionView.as_view(), name="alumni_verification_request"),
+    path("api_verification_description/<int:request_id>/", VerificationDescriptionView.as_view(), name="verification_description")
+
 ]

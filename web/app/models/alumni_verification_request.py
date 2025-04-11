@@ -2,7 +2,6 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-
 class AlumniVerificationRequest(models.Model):
     ANSWER_CHOICES = [
         ('NA', 'Not answered'),
@@ -10,8 +9,10 @@ class AlumniVerificationRequest(models.Model):
         ('DE', 'Declined')
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField()
+    university = models.CharField(max_length=255)
     date = models.DateField(default=datetime.date.today)
-    photo = models.ImageField(upload_to = "verif/", blank=True)
+    photo = models.ImageField(upload_to="verif/", blank=True)
     approved = models.CharField(max_length=120, choices=ANSWER_CHOICES, default='NA')
 
     def __str__(self):

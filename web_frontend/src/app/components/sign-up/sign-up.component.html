@@ -1,0 +1,22 @@
+<div class="container mt-5">
+    <h2>Регистрация выпускника</h2>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" formControlName="email" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="university" class="form-label">ВУЗ:</label>
+            <input type="text" id="university" formControlName="university" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="photo" class="form-label">Фотография:</label>
+            <input type="file" id="photo" (change)="onFileSelected($event)" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="signupForm.invalid">Отправить заявку</button>
+    </form>
+</div>

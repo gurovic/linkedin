@@ -1,5 +1,5 @@
 <h1>Добро пожаловать на Letovo LinkedIn!</h1>
-<!-- sign in buttom -->
+<button (click)="showSignup = true" class="btn btn-outline-primary">Sign up</button>
 <button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
 <div class="popup" *ngIf="showLogin">
   <div class="popup-content">
@@ -37,10 +37,17 @@
       <p>Делитесь опытом и помогайте ученикам Летово находить себя</p>
     </div>
   </section>
-  
-  <app-values></app-values>
 
-  <!-- Блоки с картой и инфой о сайте -->
+
+
+  <!-- Список компаний -->
+  <section class="text-center mb-4">
+<div class="popup" *ngIf="showSignup">
+  <div class="popup-content">
+    <button (click)="showSignup = false" class="close-btn">x</button>
+    <app-sign-up></app-sign-up>
+  </div>
+</div>
   <app-map *ngIf="isAuthenticated"></app-map>
   <app-values></app-values>
   <app-about-site></app-about-site>
@@ -55,7 +62,5 @@
       <div class="col-md-2">Вакансии</div>
       <div class="col-md-3">Работники</div>
     </div>
-
-<app-about-site></app-about-site>
-
-<app-map></app-map>
+  </section>
+</section>

@@ -13,6 +13,8 @@ import { VacancyGalleryComponent } from './components/vacancy-gallery/vacancy-ga
 import { GorodComponent } from './components/gorod/gorod.component';
 import { CompanyGalleryComponent} from './components/company-gallery/company-gallery.component';
 import { AuthGuard } from './guards/auth.guard';
+import {SignupComponent} from "./components/sign-up/sign-up.component";
+import {LoginComponent} from "./components/login/login.component";
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
@@ -24,12 +26,14 @@ export const routes: Routes = [
   { path: 'company/:id', component: CompanyComponent},
   { path: 'vacancy/:vacancy_id', component: VacancyComponent},
   { path: 'vacancies', component: VacancyGalleryComponent},
-  { 
-    path: 'gorod', 
+  {
+    path: 'gorod',
     component: GorodComponent,
     canActivate: [AuthGuard]
   },
   { path: 'companies', component: CompanyGalleryComponent},
+  { path: 'sign-up', component: SignupComponent},
+  { path: 'login', component: SignupComponent},
   { path: '**', component: BlankComponent },
 ];
 
