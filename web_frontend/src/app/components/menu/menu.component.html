@@ -21,8 +21,19 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/gorod" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Город</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/account" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Профиль</a>
     </ng-container>
+  </ul>
+
+  <ul class="navbar-nav ms-auto d-flex align-items-center" *ngIf="authService.isLoggedIn$ | async">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/account">
+        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+          <i class="bi bi-person"></i>
+        </div>
+      </a>
+    </li>
+    <li class="nav-item ms-2">
+      <button class="btn btn-outline-danger btn-sm" (click)="authService.logout()">Выйти</button>
+    </li>
   </ul>
 </nav>
