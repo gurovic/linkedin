@@ -11,7 +11,7 @@ class UserDetailViewTests(APITestCase):
         # Create a user
         self.user = User.objects.create_user(username='testuser', password='testpass', first_name='Test',
                                              last_name='User')
-        self.client.force_authenticate(user=self.user1)
+        self.client.force_authenticate(user=self.user)
 
         # Create a university
         self.university = University.objects.create(name='Test University')
