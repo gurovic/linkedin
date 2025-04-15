@@ -56,7 +56,7 @@ export class LoginComponent {
         this.loginError = null;
         localStorage.setItem('authToken', response.token);
         this.closeLoginPopup.emit();
-        this.router.navigate(['/']).then(r => null);
+        this.router.navigate(['/']);
       },
       error => {
         this.loginError = 'Invalid username or password';

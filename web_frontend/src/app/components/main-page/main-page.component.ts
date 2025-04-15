@@ -15,6 +15,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MainPageComponent {
   showLogin = false;
-  auth_service = new AuthService;
-  isAuthenticated = this.auth_service.isLoggedIn();
+  isAuthenticated: boolean;
+
+  constructor(
+    private authService: AuthService
+  ) {
+    this.isAuthenticated = this.authService.isLoggedIn();
+  }
 }
