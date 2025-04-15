@@ -8,7 +8,7 @@ class University(models.Model):
     description = models.TextField(null=True, blank=True)
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)
-    photo = models.ImageField(blank=True)
+    photo = models.ImageField(upload_to='university_photo', null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -12,6 +12,8 @@ import { VacancyComponent } from './components/vacancy/vacancy.component';
 import { VacancyGalleryComponent } from './components/vacancy-gallery/vacancy-gallery.component';
 import { GorodComponent } from './components/gorod/gorod.component';
 import { CompanyGalleryComponent} from './components/company-gallery/company-gallery.component';
+import { UniversityComponent } from './components/university/university.component';
+import { UniversityGalleryComponent } from './components/university-gallery/university-gallery.component';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
@@ -26,7 +28,7 @@ export const routes: Routes = [
   { path: 'gorod', component: GorodComponent},
   { path: 'companies', component: CompanyGalleryComponent},
   { path: '**', component: BlankComponent },
-  { path: 'university', component: UniversityGalleryComponent},
+  { path: 'universities', component: UniversityGalleryComponent},
   { path: 'university/:id', component: UniversityComponent}
 ];
 
