@@ -38,6 +38,7 @@ export class UniversityComponent implements OnInit {
     this.universityService.getUniversityDetails(id).subscribe(
       (data) => {
         this.university = {
+          ...data,
           UniversityName: data.name,
           UniversityDescription: data.description,
           UniversityLan: data.lat,
