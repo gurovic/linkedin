@@ -11,33 +11,40 @@ import {environment} from '../../../environments/environment';
     templateUrl: './sign-up.component.html'
 })
 export class SignupComponent {
-    signupForm: FormGroup;
+  entryForm: FormGroup;
 
-    constructor(private fb: FormBuilder, private http: HttpClient) {
-        this.signupForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email]],
-            university: ['', Validators.required],
-            photo: [null, Validators.required]
-        });
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.entryForm = this.fb.group({
+      surname: ['', Validators.required],
+      firstName: ['', Validators.required],
+      middleName: [''],
+      email: ['', [Validators.required, Validators.email]],
+      institution: ['', Validators.required],
+      photo: [null, Validators.required]
+    });
+  }
+
+  onFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement)?.files?.[0];
+    if (file) {
+      this.entryForm.patchValue({ photo: file });
     }
+  }
 
-    onFileSelected(event: Event): void {
-        const file = (event.target as HTMLInputElement)?.files?.[0];
-        if (file) {
-            this.signupForm.patchValue({ photo: file });
-        }
-    }
+  onSubmit(): void {
+    if (this.entryForm.invalid) return;
 
-    onSubmit(): void {
-        if (this.signupForm.invalid) return;
+    const fd = new FormData();
+    fd.append('surname', this.entryForm.value.surname);
+    fd.append('firstName', this.entryForm.value.firstName);
+    fd.append('middleName', this.entryForm.value.middleName);
+    fd.append('email', this.entryForm.value.email);
+    fd.append('university', this.entryForm.value.institution);
+    fd.append('photo', this.entryForm.value.photo);
 
-        const formData = new FormData();
-        formData.append('email', this.signupForm.value.email);
-        formData.append('university', this.signupForm.value.university);
-        formData.append('photo', this.signupForm.value.photo);
-        this.http.post(environment.apiUrl + `api/alumni-verification-request/`, formData).subscribe({
-            next: () => alert('Заявка успешно отправлена!'),
-            error: (err) => alert('Ошибка при отправке: ' + err.message)
-        });
-    }
+    this.http.post(environment.apiUrl + `api/alumni-verification-request/`, fd).subscribe({
+      next: () => alert('Анкета отправлена!'),
+      error: (err) => alert('Ошибка: ' + err.message)
+    });
+  }
 }

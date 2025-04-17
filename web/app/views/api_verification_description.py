@@ -19,23 +19,27 @@ class VerificationDescriptionView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        surname = request.data.get('surname')
+        first_name = request.data.get('firstName')
+        middle_name = request.data.get('middleName')
         email = request.data.get('email')
         university = request.data.get('university')
         photo = request.data.get('photo')
 
-        user = request.user if request.user.is_authenticated else User.objects.first()
-
-        if not (email and university and photo):
+        if not (surname and first_name and email and university and photo):
             return Response({'error': 'Missing fields'}, status=status.HTTP_400_BAD_REQUEST)
 
         AlumniVerificationRequest.objects.create(
-            user=user,
+            surname=surname,
+            first_name=first_name,
+            middle_name=middle_name,
             email=email,
             university=university,
             photo=photo
         )
 
         return Response({'status': 'ok'}, status=status.HTTP_201_CREATED)
+
 
     def patch(self, request, request_id):
         verification = get_object_or_404(AlumniVerificationRequest, id=request_id)

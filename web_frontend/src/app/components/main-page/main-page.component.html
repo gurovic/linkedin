@@ -8,6 +8,13 @@
   </div>
 </div>
 
+<div class="popup" *ngIf="showSignup">
+  <div class="popup-content">
+    <button (click)="showSignup = false" class="close-btn">x</button>
+    <app-sign-up></app-sign-up>
+  </div>
+</div>
+
 <!-- Main component -->
 <section class="container mt-5">
   <section class="text-center mb-5">
@@ -42,12 +49,6 @@
 
   <!-- Список компаний -->
   <section class="text-center mb-4">
-<div class="popup" *ngIf="showSignup">
-  <div class="popup-content">
-    <button (click)="showSignup = false" class="close-btn">x</button>
-    <app-sign-up></app-sign-up>
-  </div>
-</div>
   <app-map *ngIf="isAuthenticated"></app-map>
   <app-values></app-values>
   <app-about-site></app-about-site>

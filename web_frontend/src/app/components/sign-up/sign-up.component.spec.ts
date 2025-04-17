@@ -22,15 +22,18 @@ describe('SignupComponent', () => {
     });
 
     it('should invalidate the form when empty', () => {
-        expect(component.signupForm.valid).toBeFalsy();
+        expect(component.entryForm.valid).toBeFalsy();
     });
 
     it('should validate form with correct data', () => {
-        component.signupForm.setValue({
+        component.entryForm.setValue({
+            surname: 'Ivanov',
+            firstName: 'Ivan',
+            middleName: 'Ivanovich',
             email: 'test@example.com',
             university: 'Test University',
             photo: new File([], 'photo.jpg')
         });
-        expect(component.signupForm.valid).toBeTruthy();
+        expect(component.entryForm.valid).toBeTruthy();
     });
 });
