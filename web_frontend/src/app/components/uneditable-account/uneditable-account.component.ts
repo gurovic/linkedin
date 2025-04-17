@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-uneditable-account',
-  standalone: true, 
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './uneditable-account.component.html',
   styleUrls: ['./uneditable-account.component.css']
@@ -21,6 +21,19 @@ export class UneditableAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this.route.snapshot.params['id']) {
+      this.userService.getOwnDetails().subscribe(
+        (data) => {
+          this.user = data;
+          this.studentSchools = data.school || [];
+          this.studentUniversities = data.university || [];
+        },
+        (error) => {
+          console.error('Error fetching user details:', error);
+        }
+      );
+      return;
+    }
     const userId = this.route.snapshot.params['id']; // Get user ID from route
     this.userService.getUserDetails(userId).subscribe(
       (data) => {

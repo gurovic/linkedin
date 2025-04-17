@@ -1,17 +1,24 @@
 <h1>Добро пожаловать на Letovo LinkedIn!</h1>
-<button (click)="showSignup = true" class="btn btn-outline-primary">Sign up</button>
-<button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
-<div class="popup" *ngIf="showLogin">
-  <div class="popup-content">
-    <button (click)="showLogin = false" class="close-btn">x</button>
-    <app-login></app-login>
-  </div>
-</div>
 
-<div class="popup" *ngIf="showSignup">
-  <div class="popup-content">
-    <button (click)="showSignup = false" class="close-btn">x</button>
-    <app-sign-up></app-sign-up>
+<!-- Sign Up и Sign In кнопки -->
+<div id="sign-in" *ngIf="!isAuthenticated">
+  <button (click)="showSignup = true" class="btn btn-outline-primary">Sign up</button>
+  <button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
+
+  <!-- Всплывающее окно входа -->
+  <div class="popup" *ngIf="showLogin">
+    <div class="popup-content">
+      <button (click)="showLogin = false" class="close-btn">x</button>
+      <app-login (closeLoginPopup)="isAuthenticated = true"></app-login>
+    </div>
+  </div>
+
+  <!-- Всплывающее окно регистрации -->
+  <div class="popup" *ngIf="showSignup">
+    <div class="popup-content">
+      <button (click)="showSignup = false" class="close-btn">x</button>
+      <app-sign-up></app-sign-up>
+    </div>
   </div>
 </div>
 
@@ -45,16 +52,12 @@
     </div>
   </section>
 
-
-
   <!-- Список компаний -->
   <section class="text-center mb-4">
-  <app-map *ngIf="isAuthenticated"></app-map>
-  <app-values></app-values>
-  <app-about-site></app-about-site>
+    <app-map *ngIf="isAuthenticated"></app-map>
+    <app-values></app-values>
+    <app-about-site></app-about-site>
 
-  <!-- Список компаний -->
-  <section class="text-center mb-4">
     <h2>Список компаний</h2>
     <div class="row justify-content-center fw-bold">
       <div class="col-md-2">Название</div>

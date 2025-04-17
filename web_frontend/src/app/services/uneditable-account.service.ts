@@ -15,4 +15,8 @@ export class UserService {
   getUserDetails(userId: number): Observable<any> {
     return this.http.get(`${this.baseUrl}${userId}/`);
   }
+
+  getOwnDetails(): Observable<any> {
+    return this.http.get(`${this.baseUrl}`);
+  }
 }

@@ -16,5 +16,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
+  auth_service = new AuthService;
+  isAuthenticated = this.auth_service.isLoggedIn();
   constructor(public authService: AuthService) {}
 }
