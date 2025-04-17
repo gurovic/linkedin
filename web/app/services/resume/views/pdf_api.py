@@ -85,4 +85,4 @@ class PDFUploadView(LoginRequiredMixin, View):
             "saved_universities": saved_universities,
             "saved_work_experience": saved_jobs,
             "saved_skills": saved_skills
-        }, status=200)
+        }, status=200, json_dumps_params={'ensure_ascii': False}, content_type="application/json; charset=utf-8")

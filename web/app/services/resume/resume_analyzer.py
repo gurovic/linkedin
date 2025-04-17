@@ -3,7 +3,8 @@ import json
 import os
 
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
-DEEPSEEK_API_KEY = os.environ.get('DEEPSEEK_API_KEY')
+DEEPSEEK_API_KEY = ""
+
 
 def analyze_resume(text):
     """
@@ -64,7 +65,29 @@ Resume text:
         response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload)
         response.raise_for_status()
 
-        content = response.json()["choices"][0]["message"]["content"]
+        # 🔍 Печатаем реальный ответ, чтобы понять, что возвращает DeepSeek
+        print("=== ОТВЕТ ОТ DEEPSEEK ===")
+        print(response.text)
+
+        data = response.json()
+
+        # ✅ Подстраиваемся под разные форматы ошибок
+        if "error" in data:
+            return {"error": f"DeepSeek error: {data['error']}"}
+        if "detail" in data:
+            return {"error": f"DeepSeek says: {data['detail']}"}
+
+        # ✅ Пытаемся получить нужный контент
+        content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+        if not content:
+            return {"error": "Empty content from DeepSeek"}
+
+        # ✅ Убираем Markdown-обёртку ```json ... ```
+        if content.startswith("```json"):
+            content = content.strip("` \n")  # удаляет ```json и ```
+            content = content.replace("json", "", 1).strip()
+
+        # ✅ Преобразуем текст в JSON
         return json.loads(content)
 
     except requests.exceptions.RequestException as e:
