@@ -1,4 +1,9 @@
-import {Component} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewContainerRef
+} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {
@@ -9,6 +14,7 @@ import {
 } from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {environment} from '../../../environments/environment';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +23,21 @@ import {environment} from '../../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-/* Logic component */
-
 export class LoginComponent {
+  @Output() closeLoginPopup = new EventEmitter<void>();
+
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl('')
   });
   loginError: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private viewContainerRef: ViewContainerRef,
+    private authService: AuthService
+  ) {
   }
 
   onSubmit() {
@@ -41,8 +52,10 @@ export class LoginComponent {
     this.http.post(environment.apiUrl + `api/auth/login/`, JSON.stringify({}), {headers: headers}).subscribe(
       (response: any) => {
         console.log('Login successful', response);
+        this.authService.login(response.token);
         this.loginError = null;
         localStorage.setItem('authToken', response.token);
+        this.closeLoginPopup.emit();
         this.router.navigate(['/']);
       },
       error => {

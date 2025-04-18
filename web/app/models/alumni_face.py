@@ -5,8 +5,7 @@ from django.db import models
 class AlumniFace(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image_path = models.ImageField(upload_to="alumni_faces/")
-    x = models.IntegerField()
-    y = models.IntegerField()
-    w = models.IntegerField()
-    h = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.user.username} - {self.image_path}"
 

@@ -1,33 +1,42 @@
 <!-- Navigation bar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
-  <a class="navbar-brand" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
-
-  <!-- Кнопка-бургер для мобильных устройств -->
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <!-- Навигационные ссылки -->
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/events" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">События</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/search" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Поиск</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/vacancies" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Вакансии</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/gorod" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Город</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/companies" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Компании</a>
-      </li>
-      <li class="nav_item">
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" routerLink="/" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
+  <ul class="nav">
+    <!-- Always visible -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/search" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Поиск</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/events" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">События</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/vacancies" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Вакансии</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/companies" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Компании</a>
+    </li>
+    <li class="nav_item">
         <a class="nav-link" routerLink="/universities" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Университеты</a>
+    </li>
+
+    <!-- Only visible if logged in -->
+    <ng-container *ngIf="authService.isLoggedIn$ | async">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/gorod" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Город</a>
       </li>
-    </ul>
-  </div>
+    </ng-container>
+  </ul>
+
+  <ul class="navbar-nav ms-auto d-flex align-items-center" *ngIf="authService.isLoggedIn$ | async">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/account">
+        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+          <i class="bi bi-person"></i>
+        </div>
+      </a>
+    </li>
+    <li class="nav-item ms-2">
+      <button class="btn btn-outline-danger btn-sm" (click)="authService.logout()">Выйти</button>
+    </li>
+  </ul>
 </nav>

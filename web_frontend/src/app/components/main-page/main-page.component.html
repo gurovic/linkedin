@@ -1,13 +1,13 @@
 <h1>Добро пожаловать на Letovo LinkedIn!</h1>
-<!-- sign in buttom -->
+<div id="sign-in" *ngIf="!isAuthenticated">
 <button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
-<div class="popup" *ngIf="showLogin">
-  <div class="popup-content">
-    <button (click)="showLogin = false" class="close-btn">x</button>
-    <app-login></app-login>
+  <div class="popup" *ngIf="showLogin">
+    <div class="popup-content">
+      <button (click)="showLogin = false" class="close-btn">x</button>
+      <app-login (closeLoginPopup)="isAuthenticated = true"></app-login>
+    </div>
   </div>
 </div>
-
 <!-- Main component -->
 <section class="container mt-5">
   <section class="text-center mb-5">
@@ -37,8 +37,6 @@
       <p>Делитесь опытом и помогайте ученикам Летово находить себя</p>
     </div>
   </section>
-  
-  <app-values></app-values>
 
   <!-- Блоки с картой и инфой о сайте -->
   <app-map *ngIf="isAuthenticated"></app-map>
@@ -55,7 +53,5 @@
       <div class="col-md-2">Вакансии</div>
       <div class="col-md-3">Работники</div>
     </div>
-
-<app-about-site></app-about-site>
-
-<app-map></app-map>
+  </section>
+</section>

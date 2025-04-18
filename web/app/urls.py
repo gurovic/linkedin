@@ -32,9 +32,10 @@ from app.views.view_skills import add_skill_to_user, skills_view
 from .views.company_api import CompanyView
 from .views.search import user_search
 from .views.filters import search_by_skills
-from .views.angular_uneditable_account_api import user_detail_api_view
+from .views.angular_uneditable_account_api import user_detail_api_view, self_detail_api_view
 from .views.api_verification_list import VerificationRequestView
 from .views.api_verification_description import VerificationDescriptionView
+from .views.api_university_list import UniversityListView
 from app.views.api_login import LoginView
 from app.views.event_list_api import EventListAPIView
 from app.views.api_ans_verification import AnsVerificationView
@@ -47,6 +48,8 @@ from app.views.universitystudent_api import (
 )
 from app.views.event_list_last_api import EventListLastAPIView
 from app.services.resume.views.pdf_api import PDFUploadView
+from .views.api_alumni_faces import AlumniFacesListView
+from app.views.skill_api import SkillView
 from .views.api_university import UniversityView
 
 urlpatterns = [
@@ -145,6 +148,7 @@ urlpatterns = [
     path('search/', user_search, name='user_search'),
     path('search/search_by_skills', search_by_skills, name='search_by_skills'),
     path('api/account/<int:user_id>/', user_detail_api_view, name='uneditable_account_api'),
+    path('api/account/', self_detail_api_view, name='self_uneditable_account_api'),
     path('api/event_list', EventListAPIView.as_view(), name ='events_list_api'),
     path('api/event_list_last', EventListLastAPIView.as_view(), name ='events_list_last_api'),
     path('api/ans_verif/<int:request_id>', AnsVerificationView.as_view(), name="ans_verify"),
@@ -170,4 +174,5 @@ urlpatterns = [
     ),
     path("cvautofill/", PDFUploadView.as_view(), name="cvautofill"),
     path("api/university/<int:university_id>", UniversityView.as_view(), name="university"),
+    path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces')
 ]

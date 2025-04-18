@@ -14,6 +14,7 @@ import { GorodComponent } from './components/gorod/gorod.component';
 import { CompanyGalleryComponent} from './components/company-gallery/company-gallery.component';
 import { UniversityComponent } from './components/university/university.component';
 import { UniversityGalleryComponent } from './components/university-gallery/university-gallery.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
@@ -25,7 +26,11 @@ export const routes: Routes = [
   { path: 'company/:id', component: CompanyComponent},
   { path: 'vacancy/:vacancy_id', component: VacancyComponent},
   { path: 'vacancies', component: VacancyGalleryComponent},
-  { path: 'gorod', component: GorodComponent},
+  {
+    path: 'gorod',
+    component: GorodComponent,
+    canActivate: [AuthGuard]
+  },
   { path: 'companies', component: CompanyGalleryComponent},
   { path: 'universities', component: UniversityGalleryComponent},
   { path: 'university/:id', component: UniversityComponent},
@@ -33,7 +38,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)], // Configure routes for the root module
-  exports: [RouterModule], // Export RouterModule so it can be used in the AppModule
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
