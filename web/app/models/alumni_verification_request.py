@@ -1,6 +1,5 @@
 import datetime
 from django.db import models
-from django.contrib.auth.models import User
 
 class AlumniVerificationRequest(models.Model):
     ANSWER_CHOICES = [
