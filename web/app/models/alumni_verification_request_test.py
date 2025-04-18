@@ -1,35 +1,38 @@
+import datetime
 from django.test import TestCase
-from django.contrib.auth.models import User
-from . import AlumniVerificationRequest
+from django.core.files.uploadedfile import SimpleUploadedFile
+from app.models.alumni_verification_request import AlumniVerificationRequest
 
-
-class AlumniVerificationRequestTest(TestCase):
+class AlumniVerificationRequestModelTest(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='testpass')
-
-    def test_create_request(self):
-        alumni_verification_request = AlumniVerificationRequest.objects.create(
-            user=self.user,
-            photo='alumni_verification_request_test/kitten.jpg'
+        self.request = AlumniVerificationRequest.objects.create(
+            surname="Smith",
+            first_name="John",
+            middle_name="Edward",
+            email="john.smith@example.com",
+            university="MIT"
         )
-        self.assertEqual(alumni_verification_request.user, self.user)
-        self.assertIsNotNone(alumni_verification_request.date)
-        self.assertEqual(alumni_verification_request.approved, 'NA')
 
-    def test_string_representation(self):
-        alumni_verification_request = AlumniVerificationRequest.objects.create(
-            user=self.user,
-            photo='alumni_verification_request_test/kitten.jpg'
-        )
-        expected_str = f'{alumni_verification_request.user.last_name}, {alumni_verification_request.get_approved_display()}'
-        self.assertEqual(str(alumni_verification_request), expected_str)
+    def test_instance_created(self):
+        self.assertEqual(self.request.surname, "Smith")
+        self.assertEqual(self.request.first_name, "John")
+        self.assertEqual(self.request.middle_name, "Edward")
+        self.assertEqual(self.request.email, "john.smith@example.com")
+        self.assertEqual(self.request.university, "MIT")
 
-    def test_request_user_relationship(self):
-        another_user = User.objects.create_user(username='anotheruser', password='anotherpass')
-        alumni_verification_request = AlumniVerificationRequest.objects.create(
-            user=self.user,
-            photo='alumni_verification_request_test/kitten.jpg'
-        )
-        self.assertEqual(alumni_verification_request.user.username, 'testuser')
-        self.assertNotEqual(alumni_verification_request.user.username, another_user.username)
+    def test_default_values(self):
+        today = datetime.date.today()
+        self.assertEqual(self.request.date, today)
+        self.assertEqual(self.request.approved, 'NA')
+        self.assertFalse(self.request.confirmation_sent)
+
+    def test_str_representation(self):
+        expected_str = "Smith John, Not answered"
+        self.assertEqual(str(self.request), expected_str)
+
+    def test_upload_photo(self):
+        image = SimpleUploadedFile("test.jpg", b"file_content", content_type="image/jpeg")
+        self.request.photo = image
+        self.request.save()
+        self.assertTrue(self.request.photo.name.startswith("verif/test.jpg"))
