@@ -49,6 +49,7 @@ from app.views.universitystudent_api import (
 from app.views.event_list_last_api import EventListLastAPIView
 from app.services.resume.views.pdf_api import PDFUploadView
 from .views.api_alumni_faces import AlumniFacesListView
+from app.views.skill_api import SkillView
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -122,6 +123,8 @@ urlpatterns = [
         SkillEndorsementView.as_view(),
         name="skill-endorsement",
     ),
+    path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
+    path("api/skill/", SkillView.as_view(), name="skill-list"),
     path(
         "api/verification_requests/",
         VerificationRequestView.as_view(),
