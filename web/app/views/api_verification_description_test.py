@@ -37,9 +37,9 @@ class VerificationRequestViewTests(APITestCase):
     def test_responses(self):
         with self.assertRaises(Http404):
             self.api.get(None, 536)
-        response1 = self.api.get(None, 1)
-        response2 = self.api.get(None, 2)
-        response3 = self.api.get(None, 3)
+        response1 = self.api.get(None, self.request1.id)
+        response2 = self.api.get(None, self.request2.id)
+        response3 = self.api.get(None, self.request3.id)
         self.assertEqual(response1.data, VerificationRequestSerializer(self.request1).data)
         self.assertEqual(response2.data, VerificationRequestSerializer(self.request2).data)
         self.assertEqual(response3.data, VerificationRequestSerializer(self.request3).data)
