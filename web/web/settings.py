@@ -169,6 +169,11 @@ CORS_ALLOWED_ORIGINS = os.environ.get(
     "http://localhost:4200",
 ).split(",")
 
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    "DJANGO_CSRF_TRUSTED_ORIGINS",
+    "https://linkedin.veconomics.ru",
+).split(",")
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "knox.auth.TokenAuthentication",
