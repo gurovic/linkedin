@@ -58,7 +58,7 @@ class AlumniVerificationRequestTest(TestCase):
             password="secret_password",
         )
 
-        request = AlumniVerificationRequest.objects.create(user=self.user)
+        request = AlumniVerificationRequest.objects.create(user=self.user, email=self.user.email)
         request.approved = "AC"
         request.save()
 
