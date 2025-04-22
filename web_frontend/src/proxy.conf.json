@@ -14,5 +14,9 @@
   "/static": {
     "target": "http://linkedin-django:8000",
     "secure": false
+  },
+  "/media": {
+    "target": "http://linkedin-django:8000",
+    "secure": false
   }
 }
