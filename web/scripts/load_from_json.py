@@ -17,7 +17,6 @@ Type "Yes, do as I say!" and press Enter in order to continue.
 # CONFIG
 alumni_path = "alumnus.json"
 universities_path = "universities.json"
-out_path = "users.json"
 
 transliteration = {
     "а": "a",
@@ -68,6 +67,7 @@ from app.models.university import University
 from app.models.universitystudent import UniversityStudent
 from app.models.school import School, MajorSubject
 from app.models.student_schools import StudentSchool
+from app.models.alumnipassword import AlumniPassword
 
 from .country_from_coords import get_country_from_coordinates
 
@@ -88,7 +88,7 @@ except FileNotFoundError:
 
 def transfer():
     print("THIS SCRIPT WILL DELETE ALL MAJORS, SCHOOLS AND STUDENTS.")
-    print("Additionally, the old password list will be replaced.")
+    print("Additionally, AlumniPassword objects will be created for new users.")
     print("Type \"Yes, do as I say!\" and press Enter in order to continue.")
     if input("> ") != "Yes, do as I say!":
         return 2
@@ -127,8 +127,7 @@ def transfer():
         )
         print("done")
     
-    # Creating users and linking them to universities and schools TODO
-    passwords = {}
+    # Creating users and linking them to universities and schools
     for alumni in alumnis:
         print(f"start creating user {alumni["name"]} {alumni["surname"]}...", end="", flush=True)
         password = secrets.token_urlsafe(32)
@@ -140,7 +139,11 @@ def transfer():
             print("already exists")
             continue
         user = User.objects.create_user(username=username, password=password, first_name=alumni["name"], last_name=alumni["surname"])
-        passwords[username] = password
+
+        AlumniPassword.objects.create(
+            user=user,
+            password=password
+        )
 
         UniversityStudent.objects.create(
             student=user,
@@ -156,7 +159,3 @@ def transfer():
             why_left="GR"
         )
         print("done")
-    
-    users_file = open(out_path, "w")
-    json.dump(passwords, users_file)
-    users_file.close()
