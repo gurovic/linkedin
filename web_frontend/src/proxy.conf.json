@@ -6,5 +6,9 @@
   "/angular": {
     "target": "http://linkedin-django:8000",
     "secure": false
+  },
+  "/admin": {
+    "target": "http://linkedin-django:8000",
+    "secure": false
   }
 }
