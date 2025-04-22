@@ -59,6 +59,7 @@ class AlumniVerificationRequestTest(TestCase):
         )
 
         request = AlumniVerificationRequest.objects.create(user=self.user, email=self.user.email)
+        request.save()
         request.approved = "AC"
         request.save()
 
@@ -66,14 +67,15 @@ class AlumniVerificationRequestTest(TestCase):
         email = mail.outbox[0]
 
         self.assertEqual(email.subject, "Ваш запрос на верификацию одобрен")
-        self.assertEqual(email.to, [self.user.email])
+        self.assertEqual(email.to, [request.email])
         self.assertIn(f"Уважаемый(ая) {self.user.first_name}", email.body)
         self.assertIn("Ваш запрос на верификацию был одобрен", email.body)
         self.assertIn("Имя пользователя: testuser", email.body)
         self.assertIn("Пароль: secret_password", email.body)
 
     def test_mail_sent_on_approved_request_without_password(self):
-        request = AlumniVerificationRequest.objects.create(user=self.user)
+        request = AlumniVerificationRequest.objects.create(user=self.user, email=self.user.email)
+        request.save()
         request.approved = "AC"
         request.save()
 
@@ -81,14 +83,14 @@ class AlumniVerificationRequestTest(TestCase):
         email = mail.outbox[0]
 
         self.assertEqual(email.subject, "Ваш запрос на верификацию одобрен")
-        self.assertEqual(email.to, [self.user.email])
+        self.assertEqual(email.to, [request.email])
         self.assertIn(f"Уважаемый(ая) {self.user.first_name}", email.body)
         self.assertIn("Ваш запрос на верификацию был одобрен", email.body)
         self.assertNotIn("Ваши учетные данные для входа", email.body)
         self.assertNotIn("Пароль:", email.body)
 
     def test_mail_sent_on_declined_request(self):
-        request = AlumniVerificationRequest.objects.create(user=self.user)
+        request = AlumniVerificationRequest.objects.create(user=self.user, email=self.user.email)
         request.approved = "DE"
         request.save()
 
@@ -96,7 +98,7 @@ class AlumniVerificationRequestTest(TestCase):
         email = mail.outbox[0]
 
         self.assertEqual(email.subject, "Ваш запрос на верификацию отклонен")
-        self.assertEqual(email.to, [self.user.email])
+        self.assertEqual(email.to, [request.email])
         self.assertIn(f"Уважаемый(ая) {self.user.first_name}", email.body)
         self.assertIn("ваш запрос на верификацию был отклонен", email.body)
 
