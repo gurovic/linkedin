@@ -10,5 +10,9 @@
   "/admin": {
     "target": "http://linkedin-django:8000",
     "secure": false
+  },
+  "/static": {
+    "target": "http://linkedin-django:8000",
+    "secure": false
   }
 }
