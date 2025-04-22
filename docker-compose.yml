@@ -23,7 +23,7 @@ services:
     env_file:
       - ./web/.env
     ports:
-        - "8000"
+        - "127.0.0.1:8081:8000"
     volumes:
       - web_media:/app/media
     restart: unless-stopped
