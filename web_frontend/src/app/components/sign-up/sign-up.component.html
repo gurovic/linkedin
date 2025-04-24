@@ -1,0 +1,44 @@
+<div class="container mt-5">
+  <div class="alert alert-primary" style="margin-bottom: 20px;">
+    <h3>Заявка на вход в Город</h3>
+    <p>
+      После отправки анкеты модератор её проверит.
+      <br/>
+      При одобрении вы получите данные для входа на почту.
+    </p>
+  </div>
+
+  <form [formGroup]="entryForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="surname" class="form-label">Фамилия:</label>
+      <input type="text" id="surname" formControlName="surname" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="firstName" class="form-label">Имя:</label>
+      <input type="text" id="firstName" formControlName="firstName" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="middleName" class="form-label">Отчество:</label>
+      <input type="text" id="middleName" formControlName="middleName" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Почта:</label>
+      <input type="email" id="email" formControlName="email" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="institution" class="form-label">ВУЗ:</label>
+      <input type="text" id="institution" formControlName="institution" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="photo" class="form-label">Фотография:</label>
+      <input type="file" id="photo" (change)="onFileSelected($event)" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="entryForm.invalid">Отправить</button>
+  </form>
+</div>

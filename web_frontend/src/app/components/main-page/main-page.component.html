@@ -1,13 +1,23 @@
 <h1>Добро пожаловать на Letovo LinkedIn!</h1>
 <div id="sign-in" *ngIf="!isAuthenticated">
-<button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
+  <button (click)="showSignup = true" class="btn btn-outline-primary">Sign up</button>
+  <button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
+
   <div class="popup" *ngIf="showLogin">
     <div class="popup-content">
       <button (click)="showLogin = false" class="close-btn">x</button>
       <app-login (closeLoginPopup)="isAuthenticated = true"></app-login>
     </div>
   </div>
+  <!-- Всплывающее окно регистрации -->
+  <div class="popup" *ngIf="showSignup">
+    <div class="popup-content">
+      <button (click)="showSignup = false" class="close-btn">x</button>
+      <app-sign-up></app-sign-up>
+    </div>
+  </div>
 </div>
+
 <!-- Main component -->
 <section class="container mt-5">
   <section class="text-center mb-5">
