@@ -14,15 +14,15 @@ class UserSearchAPIView(APIView):
 
         university_name = request.data.get("university", None)
         university = University.objects.filter(name=university_name).first()
-        if university is None and university_name:
+        if university is None and university_name != "":
             return Response({'error': 'Invalid university name.'}, status=status.HTTP_400_BAD_REQUEST)
 
         school_name = request.data.get("school", None)
         school = School.objects.filter(name=school_name).first()
-        if school is None and school_name:
+        if school is None and school_name != "":
             return Response({'error': 'Invalid school name.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        skills = request.data.get("skills", None)
+        skills = request.data.get("skills", [])
 
         users = User.objects.all().filter(is_superuser=False)
 
@@ -48,11 +48,11 @@ class UserSearchAPIView(APIView):
                 )
             )
 
-        if university:
-            users = users.filter(student__university=university.id)
-        if school:
-            users = users.filter(studentschool__school=school.id)
-        if skills[0]:
+        if university is not None and university_name != "":
+            users = users.filter(student__university=university)
+        if school is not None and school_name != "":
+            users = users.filter(studentschool__school=school)
+        if skills and len(skills) > 0 and skills[0]:
             for skill in skills:
                 users = users.filter(userskills__skill__name=skill)
 
