@@ -10,14 +10,15 @@ from app.models import (
     MajorSubject,
     Request,
     School,
+    Skill,
     SkillEndorsement,
     StudentSchool,
-    Skill,
     University,
     UniversityStudent,
     UserSkill,
     Vacancy,
 )
+from app.models.alumnipassword import AlumniPassword
 from app.models.language import Language
 from app.models.major import Major
 import secrets
@@ -80,3 +81,4 @@ admin.site.register(SkillEndorsement)
 admin.site.register(UserSkill)
 admin.site.register(Major)
 admin.site.register(Language)
+admin.site.register(AlumniPassword)

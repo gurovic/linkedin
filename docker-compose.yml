@@ -14,10 +14,16 @@ services:
       DJANGO_PG_PASSWORD: ${DJANGO_PG_PASSWORD:-code123}
       DJANGO_PG_HOST: ${DJANGO_PG_HOST:-linkedin-db}
       DJANGO_PG_PORT: ${DJANGO_PG_PORT:-5432}
+      DJANGO_EMAIL_HOST: ${DJANGO_EMAIL_HOST:-smtp.gmail.com}
+      DJANGO_EMAIL_PORT: ${DJANGO_EMAIL_PORT:-587}
+      DJANGO_EMAIL_HOST_USER: ${DJANGO_EMAIL_HOST_USER:-gmail}
+      DJANGO_EMAIL_HOST_PASSWORD: ${DJANGO_EMAIL_HOST_PASSWORD:-password}
+      DJANGO_EMAIL_USE_TLS: ${DJANGO_EMAIL_USE_TLS:-y}
+      DJANGO_EMAIL_USE_SSL: ${DJANGO_EMAIL_USE_SSL:-n}
     env_file:
       - ./web/.env
     ports:
-        - "8000"
+        - "127.0.0.1:8081:8000"
     volumes:
       - web_media:/app/media
     restart: unless-stopped

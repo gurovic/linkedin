@@ -35,7 +35,8 @@ class VerificationDescriptionView(APIView):
             middle_name=middle_name,
             email=email,
             university=university,
-            photo=photo
+            photo=photo,
+            #user=User.objects.filter(last_name=surname, first_name=first_name).first(),
         )
 
         return Response({'status': 'ok'}, status=status.HTTP_201_CREATED)
