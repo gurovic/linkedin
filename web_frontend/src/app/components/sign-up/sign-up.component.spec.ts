@@ -31,7 +31,7 @@ describe('SignupComponent', () => {
             firstName: 'Ivan',
             middleName: 'Ivanovich',
             email: 'test@example.com',
-            university: 'Test University',
+            institution: 'Test University',
             photo: new File([], 'photo.jpg')
         });
         expect(component.entryForm.valid).toBeTruthy();
