@@ -35,7 +35,7 @@ export const routes: Routes = [
   { path: 'companies', component: CompanyGalleryComponent},
   { path: '**', component: BlankComponent },
   { path: 'sign-up', component: SignupComponent},
-  { path: 'login', component: SignupComponent},
+  { path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
