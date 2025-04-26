@@ -22,7 +22,6 @@ export class UniversityComponent implements OnInit {
 
   ngOnInit(): void {
     const universityIdParam = this.route.snapshot.params['id'];
-    console.log(universityIdParam)
     if (universityIdParam) {
       this.university_id = Number(universityIdParam);
       if (!isNaN(this.university_id)) {
