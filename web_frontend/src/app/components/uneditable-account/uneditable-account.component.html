@@ -6,20 +6,15 @@
       <p><strong>Логин: {{ user.username }}</strong></p>
       <p><strong>Электронная почта: {{ user.email }}</strong></p>
 
-      <h3>Периоды обучения в школах</h3>
-      <ul *ngIf="studentSchools.length > 0; else noSchoolData">
-        <li *ngFor="let school of studentSchools">
-          {{ school.name }} - {{ school.start_year }}, {{ school.finish_year }}, ушёл, так как {{ school.leave_reason }}
-        </li>
-      </ul>
-      <ng-template #noSchoolData>
-        <p>Нет сведений о периодах обучения в школах.</p>
-      </ng-template>
-
       <h3>Периоды обучения в университетах</h3>
-      <ul *ngIf="studentUniversities.length > 0; else noUniversityData">
-        <li *ngFor="let university of studentUniversities">
-          {{ university.name }} - {{ university.start_year }}, {{ university.end_year }}, ушёл, так как {{ university.leave_reason }}
+      <ul *ngIf="universities.length > 0; else noUniversityData">
+        <li *ngFor="let university of universities">
+          {{ university.name }} -
+            <ng-container *ngIf="getStudentUniversity(university.id) as studentUni">
+              {{ studentUni.start_year }},
+              {{ studentUni.end_year }},
+              ушёл, так как {{ studentUni.leave_reason }}
+            </ng-container>
         </li>
       </ul>
       <ng-template #noUniversityData>

@@ -79,7 +79,7 @@ from app.models.universitystudent import UniversityStudent
 universities, alumnis = {}, {}
 
 try:
-    f_universities = open(universities_path)
+    f_universities = open(universities_path, encoding='utf-8')
     universities = json.load(f_universities)
     f_universities.close()
 except FileNotFoundError:
@@ -87,7 +87,7 @@ except FileNotFoundError:
         "universities.json not found! please save the file to /web/universities.json"
     )
 try:
-    f_alumnis = open(alumni_path)
+    f_alumnis = open(alumni_path, encoding='utf-8')
     alumnis = json.load(f_alumnis)
     f_alumnis.close()
 except FileNotFoundError:

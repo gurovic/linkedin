@@ -1,0 +1,12 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Доступные университеты</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let university of universities">
+            <app-university-card [university]="university"></app-university-card>
+        </div>
+    </div>
+
+    <div *ngIf="universities.length === 0" class="alert alert-warning text-center mt-4">
+        Нет доступных университетов.
+    </div>
+</div>
