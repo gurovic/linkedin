@@ -3,8 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app.models import University
-from app.models import School
+from app.models import School, University
 from app.serializers.user_serializer import UserDetailSerializer
 
 
@@ -14,15 +13,21 @@ class UserSearchAPIView(APIView):
 
         university_name = request.data.get("university", None)
         university = University.objects.filter(name=university_name).first()
-        if university is None and university_name:
-            return Response({'error': 'Invalid university name.'}, status=status.HTTP_400_BAD_REQUEST)
+        if university is None and university_name not in ["", None]:
+            return Response(
+                {"error": "Invalid university name."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         school_name = request.data.get("school", None)
         school = School.objects.filter(name=school_name).first()
-        if school is None and school_name:
-            return Response({'error': 'Invalid school name.'}, status=status.HTTP_400_BAD_REQUEST)
+        if school is None and school_name  not in ["", None]:
+            return Response(
+                {"error": "Invalid school name."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
-        skills = request.data.get("skills", None)
+        skills = request.data.get("skills", [])
 
         users = User.objects.all().filter(is_superuser=False)
 
@@ -48,11 +53,11 @@ class UserSearchAPIView(APIView):
                 )
             )
 
-        if university:
-            users = users.filter(student__university=university.id)
-        if school:
-            users = users.filter(studentschool__school=school.id)
-        if skills[0]:
+        if university is not None and university_name not in ["", None]:
+            users = users.filter(student__university=university)
+        if school is not None and school_name not in ["", None]:
+            users = users.filter(studentschool__school=school)
+        if skills and len(skills) > 0 and skills[0]:
             for skill in skills:
                 users = users.filter(userskills__skill__name=skill)
 

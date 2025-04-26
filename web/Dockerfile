@@ -21,9 +21,13 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
-USER appuser
-
 COPY --chown=appuser . .
+
+RUN python3 manage.py collectstatic --noinput
+
+RUN chown -R appuser:appuser /app
+
+USER appuser
 
 EXPOSE 8000
 
