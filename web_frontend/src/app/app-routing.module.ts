@@ -12,6 +12,8 @@ import { VacancyComponent } from './components/vacancy/vacancy.component';
 import { VacancyGalleryComponent } from './components/vacancy-gallery/vacancy-gallery.component';
 import { GorodComponent } from './components/gorod/gorod.component';
 import { CompanyGalleryComponent} from './components/company-gallery/company-gallery.component';
+import { UniversityComponent } from './components/university/university.component';
+import { UniversityGalleryComponent } from './components/university-gallery/university-gallery.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -31,6 +33,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'companies', component: CompanyGalleryComponent},
+  { path: 'universities', component: UniversityGalleryComponent},
+  { path: 'university/:id', component: UniversityComponent},
   { path: '**', component: BlankComponent },
 ];
 
