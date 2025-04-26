@@ -20,6 +20,10 @@ export class UneditableAccountComponent implements OnInit {
     private userService: UserService
   ) {}
 
+  getStudentUniversity(universityId: number): any {
+    return this.studentUniversities.find(su => su.university === universityId);
+  }
+
   ngOnInit(): void {
     if (!this.route.snapshot.params['id']) {
       this.userService.getOwnDetails().subscribe(
