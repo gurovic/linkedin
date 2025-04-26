@@ -1,5 +1,5 @@
-from django.contrib import admin, messages
-from django.core.mail import send_mail
+from django.contrib import admin
+
 from app.models import (
     AlumniVerificationRequest,
     Answer,
@@ -21,43 +21,26 @@ from app.models import (
 from app.models.alumnipassword import AlumniPassword
 from app.models.language import Language
 from app.models.major import Major
-import secrets
-import string
 
 
 @admin.action(description="Отклонить выбранные заявки")
 def decline_requests(modeladmin, request, queryset):
-    queryset.update(approved='DE')
+    for obj in queryset:
+        obj.approved = "DE"
+        obj.save()
 
 
 @admin.action(description="Подтвердить выбранные заявки")
 def confirm_and_send(modeladmin, request, queryset):
-    sent_count = 0
     for obj in queryset:
-        if not obj.confirmation_sent:
-            password = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(10))
-            send_mail(
-                subject="Добро пожаловать в Летово Linkedin!",
-                message=f"Ваш логин: {obj.email}\nПароль: {password}",
-                from_email="sue@letovo.ru",
-                recipient_list=[obj.email],
-                fail_silently=False,
-            )
-            obj.approved = 'AC'
-            obj.confirmation_sent = True
-            obj.save()
-            sent_count += 1
-    modeladmin.message_user(
-        request,
-        f"Подтверждено",
-        messages.SUCCESS
-    )
+        obj.approved = "AC"
+        obj.save()
 
 
 @admin.register(AlumniVerificationRequest)
 class AlumniVerificationRequestAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'university', 'approved', 'date')
-    list_filter = ('approved', 'university')
+    list_display = ("full_name", "email", "university", "approved", "date")
+    list_filter = ("approved", "university")
     actions = [decline_requests, confirm_and_send]
 
     @admin.display(description="ФИО")
