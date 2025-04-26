@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class UneditableAccountComponent implements OnInit {
   user: any = null; // Store user data
   studentSchools: any[] = [];
+  universities: any[] = [];
   studentUniversities: any[] = [];
 
   constructor(
@@ -27,6 +28,7 @@ export class UneditableAccountComponent implements OnInit {
           this.user = data;
           this.studentSchools = data.school || [];
           this.universities = data.university || [];
+          this.studentUniversities = data.university_student || [];
         },
         (error) => {
           console.error('Error fetching user details:', error);
@@ -39,7 +41,8 @@ export class UneditableAccountComponent implements OnInit {
       (data) => {
         this.user = data;
         this.studentSchools = data.school || [];
-        this.studentUniversities = data.university || [];
+        this.universities = data.university || [];
+        this.studentUniversities = data.university_student || [];
       },
       (error) => {
         console.error('Error fetching user details:', error);
