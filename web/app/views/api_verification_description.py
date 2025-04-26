@@ -11,7 +11,7 @@ from ..models import AlumniVerificationRequest
 from ..serializers.verification_serializer import VerificationRequestSerializer
 
 class VerificationDescriptionView(APIView):
-    parser_classes = (MultiPartParser, FormParser, JSONParser)
+    parser_classes = (MultiPartParser,)
 
     def get(self, request, request_id):
         verification = get_object_or_404(AlumniVerificationRequest, id=request_id)
