@@ -26,7 +26,7 @@ export class UneditableAccountComponent implements OnInit {
         (data) => {
           this.user = data;
           this.studentSchools = data.school || [];
-          this.studentUniversities = data.university || [];
+          this.universities = data.university || [];
         },
         (error) => {
           console.error('Error fetching user details:', error);

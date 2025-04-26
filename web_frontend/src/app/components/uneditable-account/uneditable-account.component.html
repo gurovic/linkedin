@@ -17,8 +17,8 @@
       </ng-template>
 
       <h3>Периоды обучения в университетах</h3>
-      <ul *ngIf="studentUniversities.length > 0; else noUniversityData">
-        <li *ngFor="let university of studentUniversities">
+      <ul *ngIf="universities.length > 0; else noUniversityData">
+        <li *ngFor="let university of universities">
           {{ university.name }} - {{ university.start_year }}, {{ university.end_year }}, ушёл, так как {{ university.leave_reason }}
         </li>
       </ul>
