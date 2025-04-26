@@ -49,7 +49,9 @@ from app.views.universitystudent_api import (
 )
 from app.views.event_list_last_api import EventListLastAPIView
 from app.services.resume.views.pdf_api import PDFUploadView
-from .views.skill_api import SkillView
+from .views.api_alumni_faces import AlumniFacesListView
+from app.views.skill_api import SkillView
+from .views.api_university import UniversityView
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -102,7 +104,6 @@ urlpatterns = [
         name="event_participants",
     ),
     path("api/universities/", university_list, name="university_list"),
-    path("api/universities/small", UniversityListView.as_view(), name="university_list_small"),
     path(
         "api/user/<int:user_id>/",
         UserDetailView.as_view(),
@@ -156,8 +157,6 @@ urlpatterns = [
     path("api/company/", CompanyView.as_view(), name="company"),
     path("api/company/<int:company_id>/", CompanyView.as_view(), name="company"),
     path("api/vacancy/<int:vacancy_id>", VacancyView.as_view(), name="vacancy"),
-    path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
-    path("api/skill/", SkillView.as_view(), name="skill-list"),
     path("api/vacancys/", AllVacanciesView.as_view(), name="all_vacancies"),
     path(
         "api/universitystudent/",
@@ -175,7 +174,8 @@ urlpatterns = [
         name="universitystudent_create",
     ),
     path("cvautofill/", PDFUploadView.as_view(), name="cvautofill"),
-    path("api/alumni-verification-request/", VerificationDescriptionView.as_view(), name="alumni_verification_request"),
-    path("api_verification_description/<int:request_id>/", VerificationDescriptionView.as_view(), name="verification_description"),
-    path("api/alumni_faces", AlumniFacesListView.as_view(), name="alumni_faces"),
+    path("api/university/<int:university_id>/", UniversityView.as_view(), name="university"),
+    path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces'),
+    path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
+    path("api/skill/", SkillView.as_view(), name="skill-list"),
 ]

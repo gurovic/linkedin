@@ -17,7 +17,6 @@ class UniversityStudentViewTests(APITestCase):
         self.university = University.objects.create(
             name="Test University",
             country="United States",
-            majors_availible=["CS", "MATH"],
         )
         self.student1 = User.objects.create(
             username="john_doe",
@@ -51,7 +50,6 @@ class CurrentUniversityStudentViewTests(APITestCase):
         self.university = University.objects.create(
             name="Test University",
             country="United States",
-            majors_availible=["CS", "MATH"],
         )
         self.student1 = User.objects.create(
             username="john_doe",
