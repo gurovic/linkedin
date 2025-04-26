@@ -174,5 +174,7 @@ urlpatterns = [
     ),
     path("cvautofill/", PDFUploadView.as_view(), name="cvautofill"),
     path("api/university/<int:university_id>", UniversityView.as_view(), name="university"),
-    path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces')
+    path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces'),
+    path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
+    path("api/skill/", SkillView.as_view(), name="skill-list"),
 ]
