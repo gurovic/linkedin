@@ -15,6 +15,9 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/companies" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Компании</a>
     </li>
+    <li class="nav_item">
+        <a class="nav-link" routerLink="/universities" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Университеты</a>
+    </li>
 
     <!-- Only visible if logged in -->
     <ng-container *ngIf="authService.isLoggedIn$ | async">

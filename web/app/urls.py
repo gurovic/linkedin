@@ -29,6 +29,7 @@ from app.views.userskill import (
 )
 from app.views.view_request import request_view
 from app.views.view_skills import add_skill_to_user, skills_view
+from .views.api_alumni_faces import AlumniFacesListView
 from .views.company_api import CompanyView
 from .views.search import user_search
 from .views.filters import search_by_skills
@@ -51,6 +52,7 @@ from app.services.resume.views.pdf_api import PDFUploadView
 from .views.api_alumni_faces import AlumniFacesListView
 from .views.api_job_experience import JobExperienceView
 from app.views.skill_api import SkillView
+from .views.api_university import UniversityView
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -103,7 +105,6 @@ urlpatterns = [
         name="event_participants",
     ),
     path("api/universities/", university_list, name="university_list"),
-    path("api/universities/small", UniversityListView.as_view(), name="university_list_small"),
     path(
         "api/user/<int:user_id>/",
         UserDetailView.as_view(),
@@ -124,8 +125,6 @@ urlpatterns = [
         SkillEndorsementView.as_view(),
         name="skill-endorsement",
     ),
-    path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
-    path("api/skill/", SkillView.as_view(), name="skill-list"),
     path(
         "api/verification_requests/",
         VerificationRequestView.as_view(),
@@ -176,6 +175,11 @@ urlpatterns = [
         name="universitystudent_create",
     ),
     path("cvautofill/", PDFUploadView.as_view(), name="cvautofill"),
-    path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces'),
+    path("api/university/<int:university_id>/", UniversityView.as_view(), name="university"),
     path("api/job_experience", JobExperienceView.as_view(), name='job_experience'),
+    path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces'),
+    path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
+    path("api/skill/", SkillView.as_view(), name="skill-list"),
+    path("api/alumni-verification-request/", VerificationDescriptionView.as_view(), name="alumni_verification_request"),
+    path("api_verification_description/<int:request_id>/", VerificationDescriptionView.as_view(), name="verification_description"),
 ]

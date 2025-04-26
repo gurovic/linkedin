@@ -1,27 +1,30 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .university_serializer import UniversitySerializer
+from .universitystudent_serializer import UniversityStudentSerializer
 from .school_serializer import SchoolSerializer
 from ..models import UniversityStudent, StudentSchool
 
 class AngularUserDetailSerializer(serializers.ModelSerializer):
-    school = serializers.SerializerMethodField()
     university = serializers.SerializerMethodField()
+    university_student = serializers.SerializerMethodField()
     first_name = User.first_name
     last_name = User.last_name
+    username = User.username
+    email = User.email
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'university', 'school']
+        fields = ['first_name', 'last_name', 'username', 'email', 'university', 'university_student']
 
     def get_university(self, obj):
         university_student = UniversityStudent.objects.filter(student=obj)
         if not university_student:
             return None
         return UniversitySerializer([us.university for us in university_student], many=True).data
-    
-    def get_school(self, obj):
-        student_school = StudentSchool.objects.filter(student=obj)
-        if not student_school:
+
+    def get_university_student(self, obj):
+        university_student = UniversityStudent.objects.filter(student=obj)
+        if not university_student:
             return None
-        return SchoolSerializer([us.school for us in student_school], many=True).data
+        return UniversityStudentSerializer(university_student, many=True).data

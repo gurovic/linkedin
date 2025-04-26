@@ -1,9 +1,8 @@
 import datetime
-
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
 from django.db import models
+from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.core.mail import send_mail
 from django.dispatch import receiver
 
 from app.models.alumnipassword import AlumniPassword
@@ -11,23 +10,24 @@ from app.models.alumnipassword import AlumniPassword
 
 class AlumniVerificationRequest(models.Model):
     ANSWER_CHOICES = [
-        ("NA", "Not answered"),
-        ("AC", "Accepted"),
-        ("DE", "Declined"),
+        ('NA', 'Not answered'),
+        ('AC', 'Accepted'),
+        ('DE', 'Declined')
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='verification_requests')
+    surname = models.CharField(max_length=255, blank=True)
+    first_name = models.CharField(max_length=255, blank=True)
+    middle_name = models.CharField(max_length=255, blank=True)
+    email = models.EmailField()
+    university = models.CharField(max_length=255)
     date = models.DateField(default=datetime.date.today)
     photo = models.ImageField(upload_to="verif/", blank=True)
-    email = models.EmailField(max_length=255)
-    approved = models.CharField(
-        max_length=120,
-        choices=ANSWER_CHOICES,
-        default="NA",
-    )
+    approved = models.CharField(max_length=120, choices=ANSWER_CHOICES, default='NA')
+    confirmation_sent = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.user.last_name}, {self.get_approved_display()}"
-
+        return f'{self.surname} {self.first_name}, {self.get_approved_display()}'
+        #return f'{self.user.last_name} {self.user.first_name}, {self.get_approved_display()}'
 
 @receiver(post_save, sender=AlumniVerificationRequest)
 def handle_approved_request(sender, instance, created, **kwargs):
@@ -67,3 +67,5 @@ def handle_cancelled_request(sender, instance, created, **kwargs):
             [instance.email],
             fail_silently=False,
         )
+
+

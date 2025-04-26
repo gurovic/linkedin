@@ -46,12 +46,10 @@ class AccountViewTestCase(TestCase):
         self.university1 = University.objects.create(
             name="Test University 1",
             country="RU",
-            majors_availible=["CS", "MATH"],
         )
         self.university2 = University.objects.create(
             name="Test University 2",
             country="US",
-            majors_availible=["MATH"],
         )
 
         self.student_school1 = StudentSchool.objects.create(
@@ -172,12 +170,10 @@ class EditableAccountViewTests(TestCase):
         self.university1 = University.objects.create(
             name="Test University 1",
             country="RU",
-            majors_availible=["CS", "MATH"],
         )
         self.university2 = University.objects.create(
             name="Test University 2",
             country="US",
-            majors_availible=["MATH"],
         )
 
         self.student_school1 = StudentSchool.objects.create(

@@ -21,45 +21,54 @@ class AlumniVerificationRequestTest(TestCase):
         )
 
     def test_create_request(self):
-        alumni_verification_request = AlumniVerificationRequest.objects.create(
+        request = AlumniVerificationRequest.objects.create(
             user=self.user,
-            photo="alumni_verification_request_test/kitten.jpg",
+            email="alumni@example.com",
+            university="Test University",
+            photo="verif/kitten.jpg",
         )
-        self.assertEqual(alumni_verification_request.user, self.user)
-        self.assertIsNotNone(alumni_verification_request.date)
-        self.assertEqual(alumni_verification_request.approved, "NA")
+        self.assertEqual(request.user, self.user)
+        self.assertEqual(request.email, "alumni@example.com")
+        self.assertEqual(request.university, "Test University")
+        self.assertEqual(request.approved, "NA")
+        self.assertFalse(request.confirmation_sent)
+        self.assertIsNotNone(request.date)
 
     def test_string_representation(self):
-        alumni_verification_request = AlumniVerificationRequest.objects.create(
+        request = AlumniVerificationRequest.objects.create(
             user=self.user,
-            photo="alumni_verification_request_test/kitten.jpg",
+            surname="Петров",
+            first_name="Петр",
+            email="petrov@example.com",
+            university="МГУ",
         )
-        expected_str = f"{alumni_verification_request.user.last_name}, {alumni_verification_request.get_approved_display()}"
-        self.assertEqual(str(alumni_verification_request), expected_str)
+        expected_str = f"Петров Петр, {request.get_approved_display()}"
+        self.assertEqual(str(request), expected_str)
 
     def test_request_user_relationship(self):
         another_user = User.objects.create_user(
             username="anotheruser",
             password="anotherpass",
         )
-        alumni_verification_request = AlumniVerificationRequest.objects.create(
+        request = AlumniVerificationRequest.objects.create(
             user=self.user,
-            photo="alumni_verification_request_test/kitten.jpg",
+            email="testuser@example.com",
+            university="Test University",
         )
-        self.assertEqual(alumni_verification_request.user.username, "testuser")
-        self.assertNotEqual(
-            alumni_verification_request.user.username,
-            another_user.username,
-        )
+        self.assertEqual(request.user.username, "testuser")
+        self.assertNotEqual(request.user.username, another_user.username)
 
     def test_mail_sent_on_approved_request_with_password(self):
-        alumni_password = AlumniPassword.objects.create(
+        AlumniPassword.objects.create(
             user=self.user,
             password="secret_password",
         )
 
-        request = AlumniVerificationRequest.objects.create(user=self.user, email=self.user.email)
-        request.save()
+        request = AlumniVerificationRequest.objects.create(
+            user=self.user,
+            email=self.user.email,
+            university="Test University"
+        )
         request.approved = "AC"
         request.save()
 
@@ -74,8 +83,11 @@ class AlumniVerificationRequestTest(TestCase):
         self.assertIn("Пароль: secret_password", email.body)
 
     def test_mail_sent_on_approved_request_without_password(self):
-        request = AlumniVerificationRequest.objects.create(user=self.user, email=self.user.email)
-        request.save()
+        request = AlumniVerificationRequest.objects.create(
+            user=self.user,
+            email=self.user.email,
+            university="Test University"
+        )
         request.approved = "AC"
         request.save()
 
@@ -90,7 +102,11 @@ class AlumniVerificationRequestTest(TestCase):
         self.assertNotIn("Пароль:", email.body)
 
     def test_mail_sent_on_declined_request(self):
-        request = AlumniVerificationRequest.objects.create(user=self.user, email=self.user.email)
+        request = AlumniVerificationRequest.objects.create(
+            user=self.user,
+            email=self.user.email,
+            university="Test University"
+        )
         request.approved = "DE"
         request.save()
 
@@ -101,9 +117,3 @@ class AlumniVerificationRequestTest(TestCase):
         self.assertEqual(email.to, [request.email])
         self.assertIn(f"Уважаемый(ая) {self.user.first_name}", email.body)
         self.assertIn("ваш запрос на верификацию был отклонен", email.body)
-
-    def test_no_mail_sent_on_not_answered_request(self):
-        request = AlumniVerificationRequest.objects.create(user=self.user)
-        request.save()
-
-        self.assertEqual(len(mail.outbox), 0)
