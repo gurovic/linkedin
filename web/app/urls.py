@@ -29,6 +29,7 @@ from app.views.userskill import (
 )
 from app.views.view_request import request_view
 from app.views.view_skills import add_skill_to_user, skills_view
+from .views.api_alumni_faces import AlumniFacesListView
 from .views.company_api import CompanyView
 from .views.search import user_search
 from .views.filters import search_by_skills
