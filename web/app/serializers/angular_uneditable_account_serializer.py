@@ -10,10 +10,12 @@ class AngularUserDetailSerializer(serializers.ModelSerializer):
     university_student = serializers.SerializerMethodField()
     first_name = User.first_name
     last_name = User.last_name
+    username = User.username
+    email = User.email
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'university', 'university_student']
+        fields = ['first_name', 'last_name', 'username', 'email', 'university', 'university_student']
 
     def get_university(self, obj):
         university_student = UniversityStudent.objects.filter(student=obj)
