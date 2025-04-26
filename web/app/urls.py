@@ -178,4 +178,6 @@ urlpatterns = [
     path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces'),
     path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
     path("api/skill/", SkillView.as_view(), name="skill-list"),
+    path("api/alumni-verification-request/", VerificationDescriptionView.as_view(), name="alumni_verification_request"),
+    path("api_verification_description/<int:request_id>/", VerificationDescriptionView.as_view(), name="verification_description"),
 ]
