@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UniversityService } from '../../services/university.service';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, RouterModule} from '@angular/router';
+import {UniversityService} from '../../services/university.service';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-university',
@@ -18,20 +17,20 @@ export class UniversityComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
-  constructor(private route: ActivatedRoute, private universityService: UniversityService) {}
+  constructor(private route: ActivatedRoute, private universityService: UniversityService) {
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const universityIdParam = params.get('university_id');
-      if (universityIdParam) {
-        this.university_id = Number(universityIdParam);
-        if (!isNaN(this.university_id)) {
-          this.getUniversityByID(this.university_id);
-        } else {
-          this.errorMessage = 'Invalid University ID';
-        }
+    const universityIdParam = this.route.snapshot.params['id'];
+    console.log(universityIdParam)
+    if (universityIdParam) {
+      this.university_id = Number(universityIdParam);
+      if (!isNaN(this.university_id)) {
+        this.getUniversityByID(this.university_id);
+      } else {
+        this.errorMessage = 'Invalid University ID';
       }
-    });
+    }
   }
 
   getUniversityByID(id: number): void {
