@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UneditableAccountComponent implements OnInit {
   user: any = null; // Store user data
-  studentSchools: any[] = [];
+  universities: any[] = [];
   studentUniversities: any[] = [];
 
   constructor(
@@ -20,13 +20,17 @@ export class UneditableAccountComponent implements OnInit {
     private userService: UserService
   ) {}
 
+  getStudentUniversity(universityId: number): any {
+    return this.studentUniversities.find(su => su.university === universityId);
+  }
+
   ngOnInit(): void {
     if (!this.route.snapshot.params['id']) {
       this.userService.getOwnDetails().subscribe(
         (data) => {
           this.user = data;
-          this.studentSchools = data.school || [];
-          this.studentUniversities = data.university || [];
+          this.universities = data.university || [];
+          this.studentUniversities = data.university_student || [];
         },
         (error) => {
           console.error('Error fetching user details:', error);
@@ -38,8 +42,8 @@ export class UneditableAccountComponent implements OnInit {
     this.userService.getUserDetails(userId).subscribe(
       (data) => {
         this.user = data;
-        this.studentSchools = data.school || [];
-        this.studentUniversities = data.university || [];
+        this.universities = data.university || [];
+        this.studentUniversities = data.university_student || [];
       },
       (error) => {
         console.error('Error fetching user details:', error);
