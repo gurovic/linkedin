@@ -18,6 +18,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
+  { path: 'account', component: UneditableAccountComponent },
   { path: 'event/:event_id', component: EventDetailComponent },
   { path: 'events', component: EventGalleryComponent },
   { path: '', component: MainPageComponent },

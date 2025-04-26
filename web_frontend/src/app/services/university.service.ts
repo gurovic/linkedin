@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class UniversityService {
-  private baseUrl = environment.apiUrl + 'api/university/'; // Use environment variable for API URL
+  private baseUrl = environment.apiUrl + 'api/university/';
 
   constructor(private http: HttpClient) {}
 
