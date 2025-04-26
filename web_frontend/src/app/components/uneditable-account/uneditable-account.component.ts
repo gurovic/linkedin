@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
 })
 export class UneditableAccountComponent implements OnInit {
   user: any = null; // Store user data
-  studentSchools: any[] = [];
   universities: any[] = [];
   studentUniversities: any[] = [];
 
@@ -26,7 +25,6 @@ export class UneditableAccountComponent implements OnInit {
       this.userService.getOwnDetails().subscribe(
         (data) => {
           this.user = data;
-          this.studentSchools = data.school || [];
           this.universities = data.university || [];
           this.studentUniversities = data.university_student || [];
         },
@@ -40,7 +38,6 @@ export class UneditableAccountComponent implements OnInit {
     this.userService.getUserDetails(userId).subscribe(
       (data) => {
         this.user = data;
-        this.studentSchools = data.school || [];
         this.universities = data.university || [];
         this.studentUniversities = data.university_student || [];
       },

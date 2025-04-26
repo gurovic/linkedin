@@ -6,7 +6,6 @@ from .school_serializer import SchoolSerializer
 from ..models import UniversityStudent, StudentSchool
 
 class AngularUserDetailSerializer(serializers.ModelSerializer):
-    school = serializers.SerializerMethodField()
     university = serializers.SerializerMethodField()
     university_student = serializers.SerializerMethodField()
     first_name = User.first_name
@@ -14,7 +13,7 @@ class AngularUserDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'university', 'university_student', 'school']
+        fields = ['first_name', 'last_name', 'university', 'university_student']
 
     def get_university(self, obj):
         university_student = UniversityStudent.objects.filter(student=obj)
@@ -27,9 +26,3 @@ class AngularUserDetailSerializer(serializers.ModelSerializer):
         if not university_student:
             return None
         return UniversityStudentSerializer(university_student, many=True).data
-    
-    def get_school(self, obj):
-        student_school = StudentSchool.objects.filter(student=obj)
-        if not student_school:
-            return None
-        return SchoolSerializer([us.school for us in student_school], many=True).data
