@@ -7,7 +7,13 @@ from rest_framework.permissions import IsAuthenticated
 
 class JobExperienceView(APIView):
     permission_classes = [IsAuthenticated]
-    def get(self, _request):
-        job_experiences = JobExperience.objects.all().order_by('-start_year')
-        serializer = JobExperienceSerializer(job_experiences, many=True)
+    def get(self, request):
+        user_id = request.query_params.get('user_id')
+
+        if user_id:
+            queryset = JobExperience.objects.filter(user_id=user_id)
+        else:
+            queryset = JobExperience.objects.filter(user=request.user)
+        queryset = queryset.order_by('-start_year')
+        serializer = JobExperienceSerializer(queryset, many=True)
         return Response(serializer.data)

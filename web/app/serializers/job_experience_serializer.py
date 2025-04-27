@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from ..models import JobExperience
 
+
 class JobExperienceSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = JobExperience
-        fields = ['id', 'company_name', 'start_year', 'end_year', 'position']
-        read_only_fields = ['id']
+        fields = ['id', 'user', 'company_name', 'position', 'start_year', 'end_year']
