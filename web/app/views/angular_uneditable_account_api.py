@@ -7,6 +7,7 @@ from ..serializers.angular_uneditable_account_serializer import AngularUserDetai
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def user_detail_api_view(request, user_id):
     try:
         user = User.objects.get(id=user_id)
