@@ -50,6 +50,7 @@ from app.views.universitystudent_api import (
 from app.views.event_list_last_api import EventListLastAPIView
 from app.services.resume.views.pdf_api import PDFUploadView
 from .views.api_alumni_faces import AlumniFacesListView
+from .views.api_job_experience import JobExperienceView
 from app.views.skill_api import SkillView
 from .views.api_university import UniversityView
 
@@ -175,6 +176,7 @@ urlpatterns = [
     ),
     path("cvautofill/", PDFUploadView.as_view(), name="cvautofill"),
     path("api/university/<int:university_id>/", UniversityView.as_view(), name="university"),
+    path("api/job_experience", JobExperienceView.as_view(), name='job_experience'),
     path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces'),
     path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
     path("api/skill/", SkillView.as_view(), name="skill-list"),
