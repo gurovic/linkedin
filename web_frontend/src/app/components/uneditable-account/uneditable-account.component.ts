@@ -5,14 +5,14 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-uneditable-account',
-  standalone: true, 
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './uneditable-account.component.html',
   styleUrls: ['./uneditable-account.component.css']
 })
 export class UneditableAccountComponent implements OnInit {
   user: any = null; // Store user data
-  studentSchools: any[] = [];
+  universities: any[] = [];
   studentUniversities: any[] = [];
 
   constructor(
@@ -20,13 +20,30 @@ export class UneditableAccountComponent implements OnInit {
     private userService: UserService
   ) {}
 
+  getStudentUniversity(universityId: number): any {
+    return this.studentUniversities.find(su => su.university === universityId);
+  }
+
   ngOnInit(): void {
+    if (!this.route.snapshot.params['id']) {
+      this.userService.getOwnDetails().subscribe(
+        (data) => {
+          this.user = data;
+          this.universities = data.university || [];
+          this.studentUniversities = data.university_student || [];
+        },
+        (error) => {
+          console.error('Error fetching user details:', error);
+        }
+      );
+      return;
+    }
     const userId = this.route.snapshot.params['id']; // Get user ID from route
     this.userService.getUserDetails(userId).subscribe(
       (data) => {
         this.user = data;
-        this.studentSchools = data.school || [];
-        this.studentUniversities = data.university || [];
+        this.universities = data.university || [];
+        this.studentUniversities = data.university_student || [];
       },
       (error) => {
         console.error('Error fetching user details:', error);

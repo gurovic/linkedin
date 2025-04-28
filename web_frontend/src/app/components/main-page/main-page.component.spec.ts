@@ -15,6 +15,7 @@ describe('MainPageComponent', () => {
 
     fixture = TestBed.createComponent(MainPageComponent);
     component = fixture.componentInstance;
+    component.isAuthenticated = false;
     fixture.detectChanges();
   });
 
