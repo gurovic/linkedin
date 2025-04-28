@@ -39,6 +39,7 @@ class SearchAPITestCase(APITestCase):
         UserSkill.objects.create(user=self.user1, skill=self.skill_python)
 
         self.url = reverse("user_search_api")
+        self.client.force_login(self.user1)
 
     def test_search_without_filters_returns_all_non_superusers(self):
         response = self.client.post(self.url, {}, format="json")
