@@ -106,3 +106,8 @@ class SearchAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         first_names = [user["first_name"] for user in response.data]
         self.assertEqual(first_names, [self.user1.first_name])
+
+    def test_unauthorized(self):
+        self.client.logout()
+        response = self.client.post(self.url, {}, format="json")
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
