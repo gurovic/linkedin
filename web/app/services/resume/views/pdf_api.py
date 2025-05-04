@@ -8,8 +8,9 @@ from app.services.resume.resume_analyzer import analyze_resume
 from app.models import UniversityStudent, University
 from app.models.job_experience import JobExperience
 from app.models.skill import Skill, UserSkill
-
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+@method_decorator(csrf_exempt, name='dispatch')
 class PDFUploadView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         uploaded_file = request.FILES.get("file")
