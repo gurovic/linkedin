@@ -35,7 +35,7 @@ export class UneditableAccountComponent {
   }
 
   getStudentUniversity(universityId: number): any {
-    return null;
+  return this.universities.find((u) => u.id === universityId) || null;
   }
 
   // 🔥 ДОБАВЛЕНО: метод для выбора файла
@@ -66,8 +66,16 @@ export class UneditableAccountComponent {
         this.uploadSuccessMessage = response.message || 'Резюме успешно загружено!';
       },
       error: (error: HttpErrorResponse) => {
-        this.uploadErrorMessage = error.error?.error || 'Ошибка при загрузке резюме.';
-        console.log(error)
+  if (error.status === 413) {
+    this.uploadErrorMessage = 'Файл слишком большой. Пожалуйста, выберите файл меньшего размера.';
+  } else if (error.status === 415) {
+    this.uploadErrorMessage = 'Неподдерживаемый формат файла. Допустимы PDF, DOC или DOCX.';
+  } else if (error.status === 400 && error.error?.error) {
+    this.uploadErrorMessage = `Ошибка: ${error.error.error}`;
+  } else {
+    this.uploadErrorMessage = 'Произошла ошибка при загрузке резюме. Попробуйте снова позже.';
+  }
+  console.log(error);
       }
     });
   }
