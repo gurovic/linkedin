@@ -2,7 +2,7 @@
     <div class="card shadow-sm h-100">
       <div class="card-body">
         <h5 class="card-title text-primary">{{ university.name }}</h5>
-        <p class="card-text text-muted">{{ university.description | slice:0:150 }}...</p>
+        <p class="card-text text-muted" [innerHTML]="university.description.slice(0, 150)+'...'"></p>
       </div>
     </div>
 </a>

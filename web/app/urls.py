@@ -42,16 +42,17 @@ from app.views.universitystudent_api import (
 from app.views.event_list_last_api import EventListLastAPIView
 from app.services.resume.views.pdf_api import PDFUploadView
 from app.views.resume_upload import upload_form
+from app.views.api_alumni_faces import AlumniFacesListView
+from app.views.api_job_experience import JobExperienceView
 from app.views.skill_api import SkillView
 from app.views.angular_uneditable_account_api import user_detail_api_view, self_detail_api_view
 from app.views.api_verification_list import VerificationRequestView
 from app.views.api_verification_description import VerificationDescriptionView
 from app.views.api_university_list import UniversityListView
-from .views.api_alumni_faces import AlumniFacesListView
-from .views.company_api import CompanyView
-from .views.search import user_search
-from .views.filters import search_by_skills
-from .views.api_university import UniversityView
+from app.views.company_api import CompanyView
+from app.views.search import user_search
+from app.views.filters import search_by_skills
+from app.views.api_university import UniversityView
 
 urlpatterns = [
     path("student_schools/", student_schools, name="student_schools"),
@@ -109,7 +110,8 @@ urlpatterns = [
     path('upload-resume/', PDFUploadView.as_view(), name='upload-resume'),
     path("upload-test/", upload_form, name="upload-form"),
     path("api/university/<int:university_id>/", UniversityView.as_view(), name="university"),
-    path("api/alumni_faces", AlumniFacesListView.as_view(), name="alumni_faces"),
+    path("api/job_experience", JobExperienceView.as_view(), name='job_experience'),
+    path("api/alumni_faces", AlumniFacesListView.as_view(), name='alumni_faces'),
     path("api/skill/<int:skill_id>/", SkillView.as_view(), name="skill-detail"),
     path("api/skill/", SkillView.as_view(), name="skill-list"),
     path("api/alumni-verification-request/", VerificationDescriptionView.as_view(), name="alumni_verification_request"),
