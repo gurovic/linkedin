@@ -1,4 +1,4 @@
-<h1>Добро пожаловать на Letovo LinkedIn!</h1>
+<h1 class="text-center">Добро пожаловать на Letovo LinkedIn!</h1>
 <div id="sign-in" *ngIf="!isAuthenticated">
   <button (click)="showSignup = true" class="btn btn-outline-primary">Sign up</button>
   <button (click)="showLogin = true" class="btn btn-primary">Sign in</button>
@@ -54,16 +54,4 @@
   <app-map *ngIf="isAuthenticated"></app-map>
   <app-values></app-values>
   <app-about-site></app-about-site>
-
-  <!-- Список компаний -->
-  <section class="text-center mb-4">
-    <h2>Список компаний</h2>
-    <div class="row justify-content-center fw-bold">
-      <div class="col-md-2">Название</div>
-      <div class="col-md-3">Описание</div>
-      <div class="col-md-2">Страна</div>
-      <div class="col-md-2">Вакансии</div>
-      <div class="col-md-3">Работники</div>
-    </div>
-  </section>
 </section>

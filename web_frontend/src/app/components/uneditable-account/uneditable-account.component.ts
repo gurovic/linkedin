@@ -67,6 +67,7 @@ export class UneditableAccountComponent {
       },
       error: (error: HttpErrorResponse) => {
         this.uploadErrorMessage = error.error?.error || 'Ошибка при загрузке резюме.';
+        console.log(error)
       }
     });
   }

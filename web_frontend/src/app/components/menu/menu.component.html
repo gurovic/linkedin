@@ -1,7 +1,10 @@
 <!-- Navigation bar -->
-<nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" routerLink="/" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
-  <ul class="nav">
+<nav class="navbar navbar-expand-lg w-100">
+  <ul class="nav w-100 justify-content-center">
+    <!-- Главная перенесена внутрь меню -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Главная</a>
+    </li>
     <!-- Always visible -->
     <li class="nav-item">
       <a class="nav-link" routerLink="/search" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Поиск</a>
@@ -15,8 +18,8 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/companies" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Компании</a>
     </li>
-    <li class="nav_item">
-        <a class="nav-link" routerLink="/universities" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Университеты</a>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/universities" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Университеты</a>
     </li>
 
     <!-- Only visible if logged in -->
@@ -27,6 +30,7 @@
     </ng-container>
   </ul>
 
+  <!-- Правая часть: аватарка и выход -->
   <ul class="navbar-nav ms-auto d-flex align-items-center" *ngIf="authService.isLoggedIn$ | async">
     <li class="nav-item">
       <a class="nav-link" routerLink="/account">
