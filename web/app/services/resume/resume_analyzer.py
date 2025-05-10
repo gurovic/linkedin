@@ -3,7 +3,7 @@ import json
 import os
 
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
-DEEPSEEK_API_KEY = "sk-daee63a7c2eb488282cf1869d125c480"
+DEEPSEEK_API_KEY = os.environ.get('DEEPSEEK_API_KEY')
 
 
 def analyze_resume(text):
