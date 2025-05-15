@@ -1,15 +1,11 @@
 {
   "/api": {
-    "target": "http://localhost:8000",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
+    "target": "http://linkedin-django:8000",
+    "secure": false
   },
   "/upload-resume": {
-    "target": "http://localhost:8000",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
+    "target": "http://linkedin-django:8000",
+    "secure": false
   },
   "/angular": {
     "target": "http://linkedin-django:8000",
