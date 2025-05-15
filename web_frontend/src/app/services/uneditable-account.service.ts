@@ -19,4 +19,10 @@ export class UserService {
   getOwnDetails(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
+
+  uploadResume(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(`/upload_resume/`, formData);
+  }
 }

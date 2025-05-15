@@ -3,7 +3,7 @@
     "target": "http://linkedin-django:8000",
     "secure": false
   },
-  "/upload-resume": {
+  "/upload_resume": {
     "target": "http://linkedin-django:8000",
     "secure": false
   },

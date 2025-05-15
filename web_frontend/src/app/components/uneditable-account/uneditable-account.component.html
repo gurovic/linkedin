@@ -20,5 +20,17 @@
     <ng-template #noUniversityData>
       <p>Нет сведений о периодах обучения в университетах.</p>
     </ng-template>
+
+    <div class="mt-4">
+      <h3>Загрузить резюме</h3>
+      <form (submit)="onResumeUpload()">
+        <input type="file" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" required>
+        <button type="submit" class="btn btn-primary mt-2">Загрузить</button>
+      </form>
+
+      <p *ngIf="uploadSuccessMessage" class="text-success">{{ uploadSuccessMessage }}</p>
+      <p *ngIf="uploadErrorMessage" class="text-danger">{{ uploadErrorMessage }}</p>
+    </div>
+
   </div>
 </div>

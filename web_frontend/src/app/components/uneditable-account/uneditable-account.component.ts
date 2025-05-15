@@ -11,9 +11,13 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./uneditable-account.component.css']
 })
 export class UneditableAccountComponent implements OnInit {
-  user: any = null; // Store user data
+  user: any = null;
   universities: any[] = [];
   studentUniversities: any[] = [];
+
+  selectedFile: File | null = null;
+  uploadSuccessMessage: string = '';
+  uploadErrorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +42,7 @@ export class UneditableAccountComponent implements OnInit {
       );
       return;
     }
-    const userId = this.route.snapshot.params['id']; // Get user ID from route
+    const userId = this.route.snapshot.params['id'];
     this.userService.getUserDetails(userId).subscribe(
       (data) => {
         this.user = data;
@@ -49,5 +53,31 @@ export class UneditableAccountComponent implements OnInit {
         console.error('Error fetching user details:', error);
       }
     );
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
+  onResumeUpload(): void {
+    if (this.selectedFile) {
+      this.userService.uploadResume(this.selectedFile).subscribe(
+        (response) => {
+          this.uploadSuccessMessage = 'Resume uploaded successfully!';
+          this.uploadErrorMessage = '';
+        },
+        (error) => {
+          this.uploadErrorMessage = 'Error uploading resume.';
+          this.uploadSuccessMessage = '';
+          console.error('Error uploading resume:', error);
+        }
+      );
+    } else {
+      this.uploadErrorMessage = 'Please select a file to upload.';
+      this.uploadSuccessMessage = '';
+    }
   }
 }
