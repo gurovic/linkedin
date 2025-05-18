@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {
+  "projects": {я
     "web_frontend": {
       "projectType": "application",
       "schematics": {},
@@ -107,7 +107,7 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "proxyConfig": "src/proxy.conf.json",
+            "proxyConfig": "proxy.conf.json",
             "buildTarget": "web_frontend:build"
           }
         },

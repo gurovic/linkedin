@@ -17,6 +17,7 @@ import { UniversityGalleryComponent } from './components/university-gallery/univ
 import { AuthGuard } from './guards/auth.guard';
 import {SignupComponent} from "./components/sign-up/sign-up.component";
 import {LoginComponent} from "./components/login/login.component";
+import {PhotosPageComponent} from './components/photos-page/photos-page.component';
 
 export const routes: Routes = [
   { path: 'account/:id', component: UneditableAccountComponent },
@@ -37,9 +38,10 @@ export const routes: Routes = [
   { path: 'companies', component: CompanyGalleryComponent},
   { path: 'universities', component: UniversityGalleryComponent},
   { path: 'university/:id', component: UniversityComponent},
-  { path: '**', component: BlankComponent },
   { path: 'sign-up', component: SignupComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'images/:id', component: PhotosPageComponent },
+  { path: '**', component: BlankComponent },
 ];
 
 @NgModule({
