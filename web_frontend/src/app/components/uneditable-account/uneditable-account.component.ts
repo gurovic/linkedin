@@ -14,6 +14,7 @@ export class UneditableAccountComponent implements OnInit {
   user: any = null;
   universities: any[] = [];
   studentUniversities: any[] = [];
+  isOwn: boolean = false;
 
   selectedFile: File | null = null;
   uploadSuccessMessage: string = '';
@@ -35,6 +36,7 @@ export class UneditableAccountComponent implements OnInit {
           this.user = data;
           this.universities = data.university || [];
           this.studentUniversities = data.university_student || [];
+          this.isOwn = true;
         },
         (error) => {
           console.error('Error fetching user details:', error);
