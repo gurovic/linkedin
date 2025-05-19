@@ -10,19 +10,18 @@
     <ul *ngIf="universities.length > 0; else noUniversityData">
       <li *ngFor="let university of universities">
         {{ university.name }} -
-        <ng-container *ngIf="getStudentUniversity(university.id) as studentUni">
-          {{ studentUni.start_year }},
-          {{ studentUni.end_year }},
-          ушёл, так как {{ studentUni.leave_reason }}
-        </ng-container>
+          <ng-container *ngIf="getStudentUniversity(university.id) as studentUni">
+            {{ studentUni.start_year }},
+            {{ studentUni.end_year }},
+            ушёл, так как {{ studentUni.leave_reason }}
+          </ng-container>
       </li>
     </ul>
     <ng-template #noUniversityData>
       <p>Нет сведений о периодах обучения в университетах.</p>
     </ng-template>
 
-    <!-- 🔥 ДОБАВЛЕН НОВЫЙ БЛОК: загрузка резюме -->
-    <div class="mt-4">
+    <ng-container class="mt-4" *ngIf="isOwn">
       <h3>Загрузить резюме</h3>
       <form (submit)="onResumeUpload($event)">
         <input type="file" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" required>
@@ -31,7 +30,7 @@
 
       <p *ngIf="uploadSuccessMessage" class="text-success">{{ uploadSuccessMessage }}</p>
       <p *ngIf="uploadErrorMessage" class="text-danger">{{ uploadErrorMessage }}</p>
-    </div>
-    <!-- 🔥 КОНЕЦ НОВОГО БЛОКА -->
+    </ng-container>
+
   </div>
 </div>
