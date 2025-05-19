@@ -23,7 +23,7 @@
 
     <div class="mt-4">
       <h3>Загрузить резюме</h3>
-      <form (submit)="onResumeUpload()">
+      <form (submit)="onResumeUpload($event)">
         <input type="file" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" required>
         <button type="submit" class="btn btn-primary mt-2">Загрузить</button>
       </form>

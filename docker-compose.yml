@@ -20,6 +20,7 @@ services:
       DJANGO_EMAIL_HOST_PASSWORD: ${DJANGO_EMAIL_HOST_PASSWORD:-password}
       DJANGO_EMAIL_USE_TLS: ${DJANGO_EMAIL_USE_TLS:-y}
       DJANGO_EMAIL_USE_SSL: ${DJANGO_EMAIL_USE_SSL:-n}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
     env_file:
       - ./web/.env
     ports:

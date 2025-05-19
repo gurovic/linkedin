@@ -62,7 +62,8 @@ export class UneditableAccountComponent implements OnInit {
     }
   }
 
-  onResumeUpload(): void {
+  onResumeUpload(event: Event): void {
+    event.preventDefault();
     if (this.selectedFile) {
       this.userService.uploadResume(this.selectedFile).subscribe(
         (response) => {
