@@ -5,9 +5,6 @@ from ..app.models.alumni_face import AlumniFace
 from .user_search import UserSearch
 from .load_from_json import transliterate
 
-import numpy as np
-
-
 def custom_rectangle(img, pt1, pt2, color, thickness=1, line_type=None):
     """
     Рисует прямоугольник на изображении аналогично cv2.rectangle()
@@ -58,11 +55,11 @@ class ImageUploader:
                  json_path: str = None
                  ):
         self.upload_dir = upload_dir or os.environ.get('UPLOAD_DIR',
-                                                       r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\media\faces")
+                                                       r"C:\Users\bushi\Downloads\ооо")
         self.photos_dir = photos_dir or os.environ.get('PHOTOS_DIR',
-                                                       r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\photos")
+                                                       r"C:\Users\bushi\Downloads\photos")
         self.json_path = json_path or os.environ.get('JSON_PATH',
-                                                     r"C:\Users\Alexander\PycharmProjects\newera4\linkedin\web\faces.json")
+                                                     r"C:\Users\bushi\Downloads\data (5).json")
 
 
     def image_from_json(self, json_path: str):
@@ -112,7 +109,7 @@ class ImageUploader:
                 continue
             output_filename = f"{base_name}_{english_username}.jpg"
             output_path = os.path.join(self.upload_dir,  output_filename)
-            Image.save(output_path, img_copy)
+            img_copy.save(output_path)
 
             AlumniFace.objects.create(
                 user=user,
