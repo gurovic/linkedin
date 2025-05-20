@@ -1,0 +1,26 @@
+<div class="p-4">
+  <h2 class="text-2xl font-semibold mb-4">Фотографии</h2>
+
+  <ng-container *ngIf="loading">
+    <p>Загрузка…</p>
+  </ng-container>
+
+  <ng-container *ngIf="unauthorized">
+    <p class="text-red-600">У вас нет доступа к этим фотографиям.</p>
+  </ng-container>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" *ngIf="!loading && !unauthorized">
+    <div *ngFor="let photo of photos; trackBy: trackById" class="relative">
+      <img [src]="photo.image" alt="Фотография пользователя" class="rounded-xl shadow" />
+
+      <div
+        *ngIf="photo.rect"
+        class="absolute border-2 border-amber-400 rounded-lg"
+        [style.left.px]="photo.rect.x"
+        [style.top.px]="photo.rect.y"
+        [style.width.px]="photo.rect.width"
+        [style.height.px]="photo.rect.height">
+      </div>
+    </div>
+  </div>
+</div>
