@@ -23,6 +23,6 @@ export class UserService {
   uploadResume(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<any>(`/upload_resume/`, formData);
+    return this.http.post<any>(environment.apiUrl + `upload_resume/`, formData);
   }
 }
