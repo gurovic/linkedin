@@ -27,6 +27,12 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/gorod" routerLinkActive="active disabled" [routerLinkActiveOptions]="{ exact: true }">Город</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link"
+           [routerLink]="['/images', authService.currentUserId()]"
+           routerLinkActive="active disabled"
+           [routerLinkActiveOptions]="{ exact: true }">Фотографии</a>
+      </li>
     </ng-container>
   </ul>
 

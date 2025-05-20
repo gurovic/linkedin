@@ -34,6 +34,7 @@ interface User {
 
 @Component({
   selector: 'app-map',
+  standalone: true,
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })

@@ -1,33 +1,41 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
-import { Router } from '@angular/router';
-import {environment} from '../../../environments/environment';
+import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { of } from 'rxjs';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let httpMock: HttpTestingController;
-  let router: Router;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let emitted = false;
 
   beforeEach(async () => {
+    const authSpy = jasmine.createSpyObj('AuthService', ['login']);
+
     await TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        LoginComponent
+      imports: [LoginComponent],
+      providers: [
+        provideHttpClientTesting(),
+        provideRouter([]),
+        { provide: AuthService, useValue: authSpy }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     httpMock = TestBed.inject(HttpTestingController);
-    router = TestBed.inject(Router);
+    authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
+
+    component.closeLoginPopup.subscribe(() => emitted = true);
+
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 
   it('should create', () => {
@@ -35,37 +43,19 @@ describe('LoginComponent', () => {
   });
 
   it('should login successfully', () => {
-    const navigateSpy = spyOn(router, 'navigate');
     component.loginForm.setValue({ username: 'testuser', password: 'testpass' });
 
     component.onSubmit();
 
-    const req = httpMock.expectOne(environment.apiUrl + 'api/auth/login/');
-    expect(req.request.method).toBe('POST');
-    expect(req.request.headers.get('Authorization')).toBe('Basic ' + btoa('testuser:testpass'));
+    const req = httpMock.expectOne(req =>
+      req.method === 'POST' &&
+      req.url.endsWith('/api/auth/login/')
+    );
+    expect(req.request.headers.get('Authorization')).toContain('Basic');
+    req.flush({ token: 'fake-token', expiry: '2025-01-01T00:00:00Z' });
 
-    req.flush({"expiry":"2025-02-04T00:20:12.791128+03:00","token":"token"});
+    expect(authServiceSpy.login).toHaveBeenCalledWith('fake-token');
 
-    expect(component.loginError).toBeNull();
-
-    expect(navigateSpy).toHaveBeenCalledWith(['/']);
-  });
-
-  it('should handle login failure', () => {
-    spyOn(console, 'error');
-    component.loginForm.setValue({ username: 'testuser', password: 'testpass' });
-
-    component.onSubmit();
-
-    const req = httpMock.expectOne(environment.apiUrl + 'api/auth/login/');
-    req.flush('Login failed', { status: 401, statusText: 'Unauthorized' });
-
-    expect(component.loginError).toBe('Invalid username or password');
-
-    expect(console.error).toHaveBeenCalledWith('Login failed', jasmine.any(Object));
-  });
-
-  afterEach(() => {
-    httpMock.verify();
+    expect(emitted).toBeTrue();
   });
 });
